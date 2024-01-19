@@ -44,7 +44,4 @@ void GameLoop()
 			balls[i].vel.y *= -1.0;
 		}
 	}
-
-	SYS_Pump();	// Process Windows messages.
-	SYS_Sleep(17);	// To force 60 fps
 }

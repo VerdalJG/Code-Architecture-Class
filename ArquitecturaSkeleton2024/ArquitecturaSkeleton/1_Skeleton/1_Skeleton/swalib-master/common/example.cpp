@@ -15,6 +15,9 @@ int Main(void)
 
 		// Game Logic
 		GameLoop();
+
+		SYS_Pump();	// Process Windows messages.
+		SYS_Sleep(17);	// To force 60 fps
 	}
 
 	// End app.
