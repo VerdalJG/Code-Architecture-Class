@@ -7,7 +7,7 @@ void ShutDown();
 int Main(void)
 {
 	Init();
-  
+
 	while (!SYS_GottaQuit()) // Controlling a request to terminate an application.
 	{
 		// Render

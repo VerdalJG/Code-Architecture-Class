@@ -10,7 +10,7 @@ void Render()
 
 	RenderBackground();
 	RenderBalls();
-	
+
 	// Text
 	FONT_DrawString(vec2(SCR_WIDTH / 2 - 6 * 16, 16), "HELLO WORLD!");
 

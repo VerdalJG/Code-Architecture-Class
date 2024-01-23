@@ -53,10 +53,10 @@
     <ClInclude Include="..\..\common\vector2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameUpdate.h">
+    <ClInclude Include="Ball.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h">
+    <ClInclude Include="GameUpdate.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Init.h">
