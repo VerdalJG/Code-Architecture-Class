@@ -1,8 +1,3 @@
-﻿  core.cpp
-  example.cpp
-  font.cpp
-  lodepng.cpp
-  stdafx.cpp
-  sys_win.cpp
-  Generating Code...
+﻿  example.cpp
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(32,7): warning C4101: 'logicTime': unreferenced local variable
   swalib_example.vcxproj -> C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\Debug\swalib_example.exe

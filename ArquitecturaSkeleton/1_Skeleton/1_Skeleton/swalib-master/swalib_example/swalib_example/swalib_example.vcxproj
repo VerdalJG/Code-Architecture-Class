@@ -134,9 +134,8 @@
     <ClInclude Include="..\..\common\stdafx.h" />
     <ClInclude Include="..\..\common\sys.h" />
     <ClInclude Include="..\..\common\vector2d.h" />
-    <ClInclude Include="GameUpdate.h" />
+    <ClInclude Include="GameLogic.h" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="Init.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="Time.h" />
   </ItemGroup>

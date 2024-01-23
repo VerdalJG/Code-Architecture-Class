@@ -1,5 +1,5 @@
 #pragma once
-#include "GameUpdate.h"
+#include "GameLogic.h"
 
 // Logic Info.
 struct Ball	// Info Ball
@@ -25,4 +25,15 @@ const float MAX_BALL_SPEED = 8.f;	// Max vel. of ball. (pixels/?).
 GLuint texbkg;
 GLuint texsmallball;
 
-unsigned int previousTime, currentTime, elapsed;
+double startTime;
+
+double previousTime, currentTime, elapsed;
+double PCFrequency; // PC's tick rate
+double frameRate = static_cast<double>(1) / 60; // Cast first value or else the result is truncated -> you get 0
+
+// FPS variables
+int framesElapsed = 0;
+double time1 = 0;
+double time2 = 0;
+double diffTime = 0;
+double FPS = 0;
