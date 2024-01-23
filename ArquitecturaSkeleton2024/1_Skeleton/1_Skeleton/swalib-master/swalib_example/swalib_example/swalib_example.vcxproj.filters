@@ -53,7 +53,7 @@
     <ClInclude Include="..\..\common\vector2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.h">
+    <ClInclude Include="Globals.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="GameUpdate.h">
@@ -63,6 +63,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Render.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

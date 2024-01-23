@@ -1,6 +1,7 @@
 #include "../swalib_example/swalib_example/GameUpdate.h"
 #include "../swalib_example/swalib_example/Render.h"
 #include "../swalib_example/swalib_example/Init.h"
+#include "../swalib_example/swalib_example/Time.h"
 
 void ShutDown();
 
@@ -15,6 +16,9 @@ int Main(void)
 
 		// Game Logic
 		GameLoop();
+
+		GetTime();
+		
 
 		SYS_Pump();	// Process Windows messages.
 		SYS_Sleep(17);	// To force 60 fps

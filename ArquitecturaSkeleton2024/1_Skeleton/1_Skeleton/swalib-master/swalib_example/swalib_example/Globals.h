@@ -24,3 +24,5 @@ const float MAX_BALL_SPEED = 8.f;	// Max vel. of ball. (pixels/?).
 // Textures
 GLuint texbkg;
 GLuint texsmallball;
+
+unsigned int previousTime, currentTime, elapsed;

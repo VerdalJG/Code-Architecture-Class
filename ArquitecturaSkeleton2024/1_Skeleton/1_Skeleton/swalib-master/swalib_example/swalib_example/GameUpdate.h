@@ -4,7 +4,7 @@
 #include "../../common/sys.h"
 #include "../../common/font.h"
 #include "../../common/vector2d.h"
-#include "Ball.h"
+#include "Globals.h"
 
 void GameLoop()
 {
