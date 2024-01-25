@@ -3,7 +3,7 @@
 #include "../swalib_example/swalib_example/Time.h"
 
 void Init();
-void Update();
+//void Update();
 void ShutDown();
 
 int Main(void)
@@ -12,8 +12,25 @@ int Main(void)
 
 	while (!SYS_GottaQuit()) // Controlling a request to terminate an application.
 	{
+		currentTime = GetTime(); // Get timestamp of current frame
+		elapsed = currentTime - previousTime; // Calculate time elapsed from previous frame to this frame
+		previousTime = currentTime; // Record a timestamp of current frame
 
-		Update();
+		accumulatedTime += elapsed;
+
+		while (accumulatedTime >= frameRate) // When 0.017s passes
+		{
+			
+			// Game Logic
+			UpdateGame(frameRate);
+			accumulatedTime -= frameRate; // Reset the 'wait' value
+			
+			if (accumulatedTime >= MAX_ACCUMULATED_TIME) accumulatedTime = 0;
+		}
+		UpdateTime();
+		// Render
+		Render();
+		
 	}
 
 	// End app.
@@ -27,26 +44,7 @@ void Init()
 	InitTime();
 	InitGame();
 	InitRender();
-}
-
-void Update()
-{
-	currentTime = GetTime(); // Get timestamp of current frame
-	elapsed = currentTime - previousTime; // Calculate time elapsed from previous frame to this frame
-	previousTime = currentTime; // Record a timestamp of current frame
-
-	while (elapsed >= frameRate) // When 0.017s passes
-	{
-		UpdateTime();
-		// Game Logic
-		UpdateGame(elapsed);
-		elapsed -= frameRate; // Reset the 'wait' value
-		// Render
-		Render();
-		SYS_Pump();	// Process Windows messages.
-		//SYS_Sleep(17);	// To force 60 fps
-	}
-	
+	SetLogicTime();
 }
 
 void ShutDown()

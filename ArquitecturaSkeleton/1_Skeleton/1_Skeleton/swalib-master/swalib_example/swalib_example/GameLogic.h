@@ -20,12 +20,12 @@ void InitGame()
 	}
 }
 
-void UpdateGame(double elapsed)
+void UpdateGame(float deltaTime)
 {
 	// Run balls
 	for (int i = 0; i < NUM_BALLS; i++) {
 		// New Pos.
-		vec2 newpos = balls[i].pos + balls[i].vel;
+		vec2 newpos = balls[i].pos + balls[i].vel * deltaTime;
 
 		// Collision detection.
 		bool collision = false;
@@ -58,4 +58,6 @@ void UpdateGame(double elapsed)
 			balls[i].vel.y *= -1.0;
 		}
 	}
+	SYS_Pump();	// Process Windows messages.
+	//SYS_Sleep(17); // To force 60 fps
 }
