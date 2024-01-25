@@ -15,8 +15,12 @@ int Main(void)
 		elapsed = currentTime - previousTime; // Calculate time elapsed from previous frame to this frame
 		previousTime = currentTime; // Record a timestamp of current frame
 
-		elapsed *= TIME_SCALE;
-		accumulatedTime += elapsed;
+		accumulatedTime += elapsed * TIME_SCALE;
+
+		if (accumulatedTime >= MAX_ACCUMULATED_TIME)
+		{
+			accumulatedTime = MAX_ACCUMULATED_TIME;
+		}
 
 		while (accumulatedTime >= frameRate) // When 0.017s passes
 		{
@@ -28,8 +32,6 @@ int Main(void)
 
 			// Reset the 'wait' value
 			accumulatedTime -= frameRate; 
-			
-			if (accumulatedTime >= MAX_ACCUMULATED_TIME) accumulatedTime = MAX_ACCUMULATED_TIME;
 
 			//SYS_Sleep(17); // To force 60 fps
 		}

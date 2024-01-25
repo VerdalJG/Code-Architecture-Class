@@ -18,14 +18,16 @@ struct Ball	// Info Ball
 };
 const unsigned int NUM_BALLS = 10;	// Max. num balls.
 Ball balls[NUM_BALLS];	// Array of balls.
-
 const float MAX_BALL_SPEED = 8.f;	// Max vel. of ball. (pixels/?).
 
 // Textures
 GLuint texbkg;
 GLuint texsmallball;
 
-const float TIME_SCALE = 4.f;
+/// <summary>
+/// Logic Time Scale
+/// </summary>
+const float TIME_SCALE = 16.f;
 const double MAX_ACCUMULATED_TIME = static_cast<double>(1) / 15;
 
 double previousTime, currentTime, elapsed, accumulatedTime = 0;
