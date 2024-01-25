@@ -29,21 +29,19 @@ void Render()
 	RenderBalls();
 
 	// Buffers for strings below
-	char cFPS[50];
-	char realTime[50];
-	char logicTime[50];
-	char lst[50];
+	char FPSBuffer[50];
+	char realTimeBuffer[50];
+	char logicTimeBuffer[50];
 	
 	// Concatenate string with numbers
-	snprintf(cFPS, 50, "FPS: %f", FPS);
-	snprintf(realTime, 50, "RT: %f", GetTime());
-	snprintf(logicTime, 50, "LT: %f", GetTime() - logicStartTime);
-	snprintf(lst, 50, "LST: %f",  logicStartTime);
+	snprintf(FPSBuffer, 50, "FPS: %f", FPS);
+	snprintf(realTimeBuffer, 50, "RT: %f", currentTime);
+	snprintf(logicTimeBuffer, 50, "LT: %f", logicTime);
+
 	// Text
-	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 50), cFPS);
-	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 70), realTime);
-	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 90), logicTime);
-	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 110), lst);
+	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 50), FPSBuffer);
+	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 70), realTimeBuffer);
+	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 90), logicTimeBuffer);
 
 
 	// Exchanges the front and back buffers

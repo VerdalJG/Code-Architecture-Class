@@ -16,18 +16,14 @@ void InitTime()
 	// Record timestamp for when logic starts calculating 
 	QueryPerformanceCounter(&liStart);
 	timestampStart = liStart.QuadPart; // Amount of ticks / frequency of ticks
-	previousTime = GetTime();
+	
 }
 
-void SetLogicTime()
-{
-	logicStartTime = GetTime();
-}
 
 /// <summary>
 /// 
 /// </summary>
-/// <returns>Time in seconds</returns>
+/// <returns>Time in seconds since the start of the program</returns>
 double GetTime()
 {
 	LARGE_INTEGER li;
@@ -37,7 +33,7 @@ double GetTime()
 
 
 // Call when you call to render
-void UpdateTime()
+void UpdateFPS()
 {
 	// Increase frames by 1
 	framesElapsed++;

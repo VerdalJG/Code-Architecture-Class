@@ -3,7 +3,6 @@
 #include "../swalib_example/swalib_example/Time.h"
 
 void Init();
-//void Update();
 void ShutDown();
 
 int Main(void)
@@ -16,21 +15,31 @@ int Main(void)
 		elapsed = currentTime - previousTime; // Calculate time elapsed from previous frame to this frame
 		previousTime = currentTime; // Record a timestamp of current frame
 
+		elapsed *= TIME_SCALE;
 		accumulatedTime += elapsed;
 
 		while (accumulatedTime >= frameRate) // When 0.017s passes
 		{
-			
+			// Advance logic timer
+			logicTime += frameRate;
+
 			// Game Logic
 			UpdateGame(frameRate);
-			accumulatedTime -= frameRate; // Reset the 'wait' value
+
+			// Reset the 'wait' value
+			accumulatedTime -= frameRate; 
 			
-			if (accumulatedTime >= MAX_ACCUMULATED_TIME) accumulatedTime = 0;
+			if (accumulatedTime >= MAX_ACCUMULATED_TIME) accumulatedTime = MAX_ACCUMULATED_TIME;
+
+			//SYS_Sleep(17); // To force 60 fps
 		}
-		UpdateTime();
+
+		UpdateFPS();
 		// Render
 		Render();
-		
+
+		SYS_Pump();	// Process Windows messages.
+		//SYS_Sleep(17); // To force 60 fps
 	}
 
 	// End app.
@@ -44,7 +53,6 @@ void Init()
 	InitTime();
 	InitGame();
 	InitRender();
-	SetLogicTime();
 }
 
 void ShutDown()
