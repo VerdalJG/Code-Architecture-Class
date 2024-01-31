@@ -1,4 +1,4 @@
-#include "../swalib_example/swalib_example/GameLogic.h"
+#include "../swalib_example/swalib_example/GameManager.h"
 #include "../swalib_example/swalib_example/Render.h"
 #include "../swalib_example/swalib_example/Time.h"
 

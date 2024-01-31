@@ -1,10 +1,15 @@
 #pragma once
-#include "GameLogic.h"
+#include "Globals.h"
 
 class Ball
 {
 public:
 	Ball();
+	~Ball();
+
+	void Slot(float deltaTime);
+	bool CollisionCheck(vec2 newPos);
+	void OnCollide();
 
 	vec2 GetPosition() { return _pos; }
 	void SetPosition(vec2 pos) { _pos = pos; }
@@ -26,7 +31,6 @@ private:
 };
 
 const unsigned int NUM_BALLS = 10;	// Max. num balls.
-Ball balls[NUM_BALLS];	// Array of balls.
 const float MAX_BALL_SPEED = 8.f;	// Max vel. of ball. (pixels/?).
 
 // Textures
