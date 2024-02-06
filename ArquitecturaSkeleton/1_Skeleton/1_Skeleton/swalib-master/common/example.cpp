@@ -11,34 +11,34 @@ int Main(void)
 
 	while (!SYS_GottaQuit()) // Controlling a request to terminate an application.
 	{
-		currentTime = GetTime(); // Get timestamp of current frame
-		elapsed = currentTime - previousTime; // Calculate time elapsed from previous frame to this frame
-		previousTime = currentTime; // Record a timestamp of current frame
+		//currentTime = GetTime(); // Get timestamp of current frame
+		//elapsed = currentTime - previousTime; // Calculate time elapsed from previous frame to this frame
+		//previousTime = currentTime; // Record a timestamp of current frame
 
-		accumulatedTime += elapsed * TIME_SCALE;
+		//accumulatedTime += elapsed * TIME_SCALE;
 
-		if (accumulatedTime >= MAX_ACCUMULATED_TIME)
-		{
-			accumulatedTime = MAX_ACCUMULATED_TIME;
-		}
+		//if (accumulatedTime >= MAX_ACCUMULATED_TIME)
+		//{
+		//	accumulatedTime = MAX_ACCUMULATED_TIME;
+		//}
 
-		while (accumulatedTime >= frameRate) // When 0.017s passes
-		{
-			// Advance logic timer
-			logicTime += frameRate;
+		//while (accumulatedTime >= frameRate) // When 0.017s passes
+		//{
+		//	// Advance logic timer
+		//	logicTime += frameRate;
 
-			// Game Logic
-			UpdateGame(frameRate);
+		//	// Game Logic
+		//	UpdateGame(frameRate);
 
-			// Reset the 'wait' value
-			accumulatedTime -= frameRate; 
+		//	// Reset the 'wait' value
+		//	accumulatedTime -= frameRate; 
 
-			//SYS_Sleep(17); // To force 60 fps
-		}
+		//	//SYS_Sleep(17); // To force 60 fps
+		//}
 
-		UpdateFPS();
-		// Render
-		Render();
+		//UpdateFPS();
+		//// Render
+		//Render();
 
 		SYS_Pump();	// Process Windows messages.
 		//SYS_Sleep(17); // To force 60 fps
@@ -52,7 +52,7 @@ int Main(void)
 
 void Init()
 {
-	InitTime();
+	InitT	ime();
 	InitGame();
 	InitRender();
 }

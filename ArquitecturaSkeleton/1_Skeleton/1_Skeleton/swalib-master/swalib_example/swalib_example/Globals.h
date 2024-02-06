@@ -16,14 +16,9 @@ GLuint texsmallball;
 /// <summary>
 /// Logic Time Scale
 /// </summary>
-const float TIME_SCALE = 16.f;
-const double MAX_ACCUMULATED_TIME = static_cast<double>(1) / 15;
-
-double previousTime, currentTime, elapsed, accumulatedTime = 0;
+const float TIME_SCALE = 1.f;
 float logicTime = 0;
-__int64 timestampStart = 0;
-__int64 TickFrequency; // PC's tick rate
-const float frameRate = static_cast<float>(1) / 60; // Cast first value or else the result is truncated -> you get 0
+
 
 // FPS variables
 int framesElapsed = 0;
