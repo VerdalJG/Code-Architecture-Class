@@ -1,5 +1,45 @@
 ﻿  example.cpp
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(48,37): error C2065: 'FPS': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(49,41): error C2065: 'currentTime': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(50,42): error C2065: 'logicTime': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(67,92): error C2065: 'texbkg': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(75,22): error C2065: 'NUM_BALLS': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,29): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,48): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,71): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,95): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,3): error C2660: 'CORE_RenderCenteredSprite': function does not take 2 arguments
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\common\core.h(61,8): message : see declaration of 'CORE_RenderCenteredSprite'
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,3): message : while trying to match the argument list '()'
   Ball.cpp
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(34,13): error C2374: 'MAX_BALL_SPEED': redefinition; multiple initialization
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Globals.h(10,13): message : see declaration of 'MAX_BALL_SPEED'
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(37,8): error C2086: 'GLuint texbkg': redefinition
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Globals.h(13,8): message : see declaration of 'texbkg'
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(38,8): error C2086: 'GLuint texsmallball': redefinition
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Globals.h(14,8): message : see declaration of 'texsmallball'
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(49,15): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(51,36): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(51,67): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(52,23): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(54,5): error C2065: 'balls': undeclared identifier
+  GameManager.cpp
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(22,7): error C2027: use of undefined type 'Ball'
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.h(9,7): message : see declaration of 'Ball'
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(32,2): error C2065: 'texbkg': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(33,2): error C2065: 'texsmallball': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(36,20): warning C4018: '<': signed/unsigned mismatch
   Render.cpp
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(48,37): error C2065: 'FPS': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(49,41): error C2065: 'currentTime': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(50,42): error C2065: 'logicTime': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(67,92): error C2065: 'texbkg': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(75,22): error C2065: 'NUM_BALLS': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,29): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,48): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,71): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,95): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,3): error C2660: 'CORE_RenderCenteredSprite': function does not take 2 arguments
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\common\core.h(61,8): message : see declaration of 'CORE_RenderCenteredSprite'
+C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(76,3): message : while trying to match the argument list '()'
   Generating Code...
-  swalib_example.vcxproj -> C:\Users\vicente.cupello\Documents\vicente.c\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\Debug\swalib_example.exe

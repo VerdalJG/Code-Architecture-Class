@@ -1,6 +1,17 @@
 #pragma once
-#include "GameLogic.h"
+#include "GameManager.h"
 #include "Time.h"
+
+class Renderer
+{
+public:
+	static Renderer& GetInstance();
+	void Initialize();
+	void Slot();
+	void Terminate();
+
+};
+
 
 void RenderBackground();
 void RenderBalls();

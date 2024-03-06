@@ -5,7 +5,7 @@ Timer::Timer() :
 	currentTime(0),
 	elapsed(0),
 	accumulatedTime(0),
-	LOGIC_TICK_RATE(static_cast<float>(1) / 60),
+	TICK_RATE(static_cast<float>(1) / 60),
 	TIME_SCALE(1),
 	MAX_ACCUMULATED_TIME(static_cast<double>(1) / 15)
 {
@@ -14,7 +14,7 @@ Timer::Timer() :
 	QueryPerformanceFrequency(&liFrequency);
 
 	// Get the frequency of ticks of the PC per second
-	TickFrequency = liFrequency.QuadPart;
+	tickFrequency = liFrequency.QuadPart;
 
 	// Record timestamp for when logic starts calculating 
 	QueryPerformanceCounter(&liStart);
@@ -25,7 +25,12 @@ Timer::~Timer()
 {
 }
 
-void Timer::InitSlotsToProcess()
+float Timer::GetFixedTickRate()
+{
+	return TICK_RATE;
+}
+
+void Timer::UpdateTime()
 {
 	// Get timestamp of current frame
 	currentTime = GetTime();
@@ -49,12 +54,12 @@ void Timer::InitSlotsToProcess()
 	}
 }
 
-bool Timer::ProcessSlots()
+bool Timer::Tick()
 {
-	if (accumulatedTime >= frameRate)
+	if (accumulatedTime >= TICK_RATE)
 	{
 		// Reset the 'wait' value
-		accumulatedTime -= frameRate;
+		accumulatedTime -= TICK_RATE;
 		return true;
 	}
 	else
@@ -71,7 +76,7 @@ double Timer::GetTime()
 {
 	LARGE_INTEGER li;
 	QueryPerformanceCounter(&li);
-	return static_cast<double>(li.QuadPart - timestampStart) / TickFrequency;
+	return static_cast<double>(li.QuadPart - timestampStart) / tickFrequency;
 }
 
 

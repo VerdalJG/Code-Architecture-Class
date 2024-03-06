@@ -6,12 +6,25 @@ GameManager& GameManager::GetInstance()
 	return instance;
 }
 
+void GameManager::Slot()
+{
+	_timer.UpdateTime();
+	while (_timer.Tick())
+	{
+		LogicSlot(_timer.GetFixedTickRate());
+	}
+}
+
 void GameManager::LogicSlot(float deltaTime)
 {
 	for (Ball* ball : balls)
 	{
 		ball->Slot(deltaTime);
 	}
+}
+
+void GameManager::Terminate()
+{
 }
 
 void GameManager::Initialize()

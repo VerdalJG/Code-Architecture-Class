@@ -30,7 +30,7 @@ private:
 	float  _radius;	// Radius.
 };
 
-const unsigned int NUM_BALLS = 10;	// Max. num balls.
+
 const float MAX_BALL_SPEED = 8.f;	// Max vel. of ball. (pixels/?).
 
 // Textures
