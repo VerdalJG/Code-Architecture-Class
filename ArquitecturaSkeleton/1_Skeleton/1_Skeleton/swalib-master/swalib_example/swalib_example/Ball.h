@@ -7,8 +7,7 @@ public:
 	Ball();
 	~Ball();
 
-	void Slot(float deltaTime);
-	bool CollisionCheck(vec2 newPos);
+	void Tick(float deltaTime);
 	void OnCollide();
 
 	vec2 GetPosition() { return _pos; }

@@ -9,7 +9,6 @@ public:
 	void Initialize();
 	void Slot();
 	void Terminate();
-
 };
 
 

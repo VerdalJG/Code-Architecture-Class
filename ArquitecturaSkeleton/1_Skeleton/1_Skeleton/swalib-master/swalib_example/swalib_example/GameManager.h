@@ -17,13 +17,14 @@ public:
 	void Slot();
 	void LogicSlot(float deltaTime);
 	void Terminate();
+	void CollisionCheck();
 
 public:
-	std::vector<Ball*> balls;
+	std::vector<Ball*> Balls;
 	const unsigned int NUM_BALLS = 10;	// Max. num balls.
 
 private:
-	Timer _timer;
+	Timer Timer;
 };
 
 

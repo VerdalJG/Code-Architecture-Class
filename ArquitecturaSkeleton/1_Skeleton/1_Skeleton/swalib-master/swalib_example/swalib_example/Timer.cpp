@@ -1,6 +1,7 @@
 #include "Timer.h"
 
 Timer::Timer() :
+	FPS(0),
 	previousTime(0),
 	currentTime(0),
 	elapsed(0),
@@ -79,22 +80,3 @@ double Timer::GetTime()
 	return static_cast<double>(li.QuadPart - timestampStart) / tickFrequency;
 }
 
-
-//void UpdateFPS()
-//{
-	// THE CODE BELOW DOES THE SAME THING BUT EVERY 5 FRAMES
-	//// Increase frames by 1
-	//framesElapsed++;
-	//// Calculate FPS for every 5 frames
-	//if (framesElapsed % 5 == 1)
-	//{
-	//	time1 = GetTime();
-	//}
-	//else if (framesElapsed % 5 == 0)
-	//{
-	//	time1 = time2;
-	//	time2 = GetTime();
-	//	diffTime = fabs(time2 - time1);
-	//}
-	//FPS = 5 / diffTime;
-//}

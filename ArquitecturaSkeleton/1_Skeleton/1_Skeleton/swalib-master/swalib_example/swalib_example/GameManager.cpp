@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "Ball.h"
 
 GameManager& GameManager::GetInstance()
 {
@@ -8,23 +9,46 @@ GameManager& GameManager::GetInstance()
 
 void GameManager::Slot()
 {
-	_timer.UpdateTime();
-	while (_timer.Tick())
+	Timer.UpdateTime();
+	while (Timer.Tick())
 	{
-		LogicSlot(_timer.GetFixedTickRate());
+		LogicSlot(Timer.GetFixedTickRate());
 	}
 }
 
 void GameManager::LogicSlot(float deltaTime)
 {
-	for (Ball* ball : balls)
+	for (Ball* Ball : Balls)
 	{
-		ball->Slot(deltaTime);
+		Ball->Tick(deltaTime);
 	}
 }
 
 void GameManager::Terminate()
 {
+	// End of game logic if needed
+}
+
+void GameManager::CollisionCheck()
+{
+	for (int i = 0; i < NUM_BALLS; i++)
+	{
+		// Collision detection.
+		for (int j = 0; j < NUM_BALLS; j++) 
+		{
+			Ball* EntityA = Balls[i];
+			Ball* EntityB = Balls[j];
+			if (EntityA != EntityB) {
+				float limitSquared = (Balls[i]->GetRadius() + Balls[j]->GetRadius()) * (Balls[i]->GetRadius() + Balls[j]->GetRadius());
+				if (vlen2(Balls[i]->GetPosition() - Balls[j]->GetPosition()) <= limitSquared) 
+				{
+					EntityA->OnCollide();
+					EntityB->OnCollide();
+					break;
+				}
+			}
+		}
+	}
 }
 
 void GameManager::Initialize()
@@ -35,9 +59,9 @@ void GameManager::Initialize()
 	// Init game state.
 	for (int i = 0; i < NUM_BALLS; i++) 
 	{
-		/*balls[i].pos = vec2(CORE_FRand(0.0, SCR_WIDTH), CORE_FRand(0.0, SCR_HEIGHT));
-		balls[i].vel = vec2(CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED), CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED));
-		balls[i].radius = 16.f;
-		balls[i].gfx = texsmallball;*/
+		Balls[i]->SetPosition(vec2(CORE_FRand(0.0, SCR_WIDTH), CORE_FRand(0.0, SCR_HEIGHT)));
+		Balls[i]->SetVelocity(vec2(CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED), CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED)));
+		Balls[i]->SetRadius(16.f);
+		Balls[i]->SetSprite(texsmallball);
 	}
 }
