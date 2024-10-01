@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# matches any files and directories with the name test
+Debug/
+x64/
+.vs/
+*.log

@@ -7,21 +7,27 @@ public:
 	Timer();
 	~Timer();
 
-	void UpdateTime();
-	bool Tick();
-	double GetTime();
+	bool ShouldTick();
 	float GetFixedTickRate();
+	void UpdateTime();
+	double GetFPS() { return FPS; }
+	double GetTime();
+	double GetLogicTime() { return logicTime; }
+	
 
 private:
+	
+	void HandleDeathSpiral();
+
 	double FPS;
-	double previousTime;
-	double currentTime;
-	double elapsed;
+	double deltaTime;
 	double accumulatedTime;
-	__int64 timestampStart;
-	__int64 tickFrequency; // PC's tick rate
-	const float TICK_RATE; // Cast first value or else the result is truncated -> you get 0
-	const float TIME_SCALE = 1.f;
-	const double MAX_ACCUMULATED_TIME = static_cast<double>(1) / 15;
+	double logicTime;
+	LARGE_INTEGER currentTickCount;
+	LARGE_INTEGER previousTickCount;
+	__int64 ticksPerSecond; // PC's tick rate
+	const float TICK_RATE; 
+	const float TIME_SCALE = 1.0f;
+	const double MAX_ACCUMULATED_TIME = 1.0f / 15.0f;
 
 };

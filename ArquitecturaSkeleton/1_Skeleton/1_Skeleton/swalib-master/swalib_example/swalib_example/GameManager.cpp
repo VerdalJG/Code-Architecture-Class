@@ -10,13 +10,13 @@ GameManager& GameManager::GetInstance()
 void GameManager::Slot()
 {
 	Timer.UpdateTime();
-	while (Timer.Tick())
+	while (Timer.ShouldTick())
 	{
-		LogicSlot(Timer.GetFixedTickRate());
+		Tick(Timer.GetFixedTickRate());
 	}
 }
 
-void GameManager::LogicSlot(float deltaTime)
+void GameManager::Tick(float deltaTime)
 {
 	for (Ball* Ball : Balls)
 	{
@@ -31,10 +31,10 @@ void GameManager::Terminate()
 
 void GameManager::CollisionCheck()
 {
-	for (int i = 0; i < NUM_BALLS; i++)
+	for (uint i = 0; i < NUM_BALLS; i++)
 	{
 		// Collision detection.
-		for (int j = 0; j < NUM_BALLS; j++) 
+		for (uint j = 0; j < NUM_BALLS; j++) 
 		{
 			Ball* EntityA = Balls[i];
 			Ball* EntityB = Balls[j];
@@ -53,15 +53,6 @@ void GameManager::CollisionCheck()
 
 void GameManager::Initialize()
 {
-	texbkg = CORE_LoadPNG("data/circle-bkg-128.png", true);
-	texsmallball = CORE_LoadPNG("data/tyrian_ball.png", false);
-
 	// Init game state.
-	for (int i = 0; i < NUM_BALLS; i++) 
-	{
-		Balls[i]->SetPosition(vec2(CORE_FRand(0.0, SCR_WIDTH), CORE_FRand(0.0, SCR_HEIGHT)));
-		Balls[i]->SetVelocity(vec2(CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED), CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED)));
-		Balls[i]->SetRadius(16.f);
-		Balls[i]->SetSprite(texsmallball);
-	}
+
 }

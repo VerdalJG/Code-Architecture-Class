@@ -6,8 +6,7 @@
 #include "../../common/vector2d.h"
 
 
-const unsigned int NUM_BALLS = 10;	// Max. num balls.
-const float MAX_BALL_SPEED = 8.f;	// Max vel. of ball. (pixels/?).
+//const unsigned int NUM_BALLS = 10;	// Max num balls
 
 // Textures
 GLuint texbkg;

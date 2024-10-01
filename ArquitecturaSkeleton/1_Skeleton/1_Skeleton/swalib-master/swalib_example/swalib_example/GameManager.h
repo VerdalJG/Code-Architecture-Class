@@ -15,7 +15,7 @@ public:
 	static GameManager& GetInstance();
 	void Initialize();
 	void Slot();
-	void LogicSlot(float deltaTime);
+	void Tick(float deltaTime);
 	void Terminate();
 	void CollisionCheck();
 
