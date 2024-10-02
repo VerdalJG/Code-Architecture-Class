@@ -1,65 +1,132 @@
-﻿  Ball.cpp
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(14,9): error C3646: '_pos': unknown override specifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(14,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(15,9): error C3646: '_vel': unknown override specifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(15,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(16,9): error C3646: '_gfx': unknown override specifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(16,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(21,7): error C3646: 'GetPosition': unknown override specifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(21,18): error C2059: syntax error: '('
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(21,21): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(22,19): error C2061: syntax error: identifier 'vec2'
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(24,7): error C3646: 'GetVelocity': unknown override specifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(24,18): error C2059: syntax error: '('
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(24,21): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(25,19): error C2061: syntax error: identifier 'vec2'
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(27,9): error C3646: 'GetSprite': unknown override specifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(27,18): error C2059: syntax error: '('
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(27,21): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(28,17): error C2061: syntax error: identifier 'GLuint'
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(22,31): error C2065: '_pos': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(22,38): error C2065: 'pos': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(25,36): error C2065: '_vel': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(25,43): error C2065: 'velocity': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(28,34): error C2065: '_gfx': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(28,41): error C2065: 'sprite': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(5,2): error C2614: 'Ball': illegal member initialization: '_pos' is not a base or member
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(6,2): error C2614: 'Ball': illegal member initialization: '_vel' is not a base or member
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(7,2): error C2614: 'Ball': illegal member initialization: '_gfx' is not a base or member
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(21,16): error C2065: '_pos': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(21,23): error C2065: '_vel': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(24,6): error C2065: '_pos': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(24,28): error C2065: '_pos': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(26,3): error C2065: '_vel': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(28,6): error C2065: '_pos': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(28,29): error C2065: '_pos': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(30,3): error C2065: '_vel': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(38,2): error C2065: '_vel': undeclared identifier
+﻿  core.cpp
+  example.cpp
+  font.cpp
+  lodepng.cpp
+  stdafx.cpp
+  sys_win.cpp
+  Background.cpp
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(12,63): error C2061: syntax error: identifier 'vec2'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(14,7): error C3646: 'Position': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(14,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(15,7): error C3646: 'Scale': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(15,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,7): error C3646: 'GetPosition': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,18): error C2059: syntax error: '('
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,21): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(19,19): error C2061: syntax error: identifier 'vec2'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(21,7): error C3646: 'GetScale': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(21,15): error C2059: syntax error: '('
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(21,18): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(22,16): error C2061: syntax error: identifier 'vec2'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(22,33): error C2065: 'Scale': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(22,41): error C2065: 'NewScale': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Background.cpp(8,2): error C2660: 'Entity::CreateSprite': function does not take 3 arguments
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(12,7): message : see declaration of 'Entity::CreateSprite'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Background.cpp(8,2): message : while trying to match the argument list '(const char [24], bool, vec2)'
+  Ball.cpp
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(12,63): error C2061: syntax error: identifier 'vec2'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(14,7): error C3646: 'Position': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(14,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(15,7): error C3646: 'Scale': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(15,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,7): error C3646: 'GetPosition': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,18): error C2059: syntax error: '('
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,21): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(19,19): error C2061: syntax error: identifier 'vec2'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(21,7): error C3646: 'GetScale': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(21,15): error C2059: syntax error: '('
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(21,18): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(22,16): error C2061: syntax error: identifier 'vec2'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(22,33): error C2065: 'Scale': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(22,41): error C2065: 'NewScale': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(15,9): error C3646: 'Velocity': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(15,17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(20,7): error C3646: 'GetVelocity': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(20,18): error C2059: syntax error: '('
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(20,21): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(21,19): error C2061: syntax error: identifier 'vec2'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(21,36): error C2065: 'Velocity': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(21,47): error C2065: 'velocity': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(10,2): error C2660: 'Entity::CreateSprite': function does not take 3 arguments
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(12,7): message : see declaration of 'Entity::CreateSprite'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(10,2): message : while trying to match the argument list '(const char [21], bool, vec2)'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(13,2): error C2660: 'Entity::SetPosition': function does not take 1 arguments
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(19,7): message : see declaration of 'Entity::SetPosition'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(13,2): message : while trying to match the argument list '(vec2)'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(14,2): error C2660: 'Ball::SetVelocity': function does not take 1 arguments
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(21,7): message : see declaration of 'Ball::SetVelocity'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(14,2): message : while trying to match the argument list '(vec2)'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(26,21): error C2065: 'Position': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(26,32): error C2065: 'Velocity': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(27,2): error C2660: 'Entity::SetPosition': function does not take 1 arguments
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(19,7): message : see declaration of 'Entity::SetPosition'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(27,2): message : while trying to match the argument list '(vec2)'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(30,6): error C2065: 'Position': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(30,41): error C2065: 'Position': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(32,3): error C2065: 'Velocity': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(34,6): error C2065: 'Position': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(34,42): error C2065: 'Position': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(36,3): error C2065: 'Velocity': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(44,2): error C2065: 'Velocity': undeclared identifier
+  Entity.cpp
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(12,63): error C2061: syntax error: identifier 'vec2'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(14,7): error C3646: 'Position': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(14,15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(15,7): error C3646: 'Scale': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(15,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,7): error C3646: 'GetPosition': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,18): error C2059: syntax error: '('
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,21): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(19,19): error C2061: syntax error: identifier 'vec2'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(21,7): error C3646: 'GetScale': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(21,15): error C2059: syntax error: '('
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(21,18): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(22,16): error C2061: syntax error: identifier 'vec2'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(22,33): error C2065: 'Scale': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(22,41): error C2065: 'NewScale': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.cpp(7,2): error C2614: 'Entity': illegal member initialization: 'Scale' is not a base or member
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.cpp(8,2): error C2614: 'Entity': illegal member initialization: 'Position' is not a base or member
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.cpp(21,14): error C2511: 'void Entity::CreateSprite(const char *,bool,vec2)': overloaded member function not found in 'Entity'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.h(4,7): message : see declaration of 'Entity'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.cpp(23,2): error C2597: illegal reference to non-static member 'Entity::MySprite'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(27,10): message : see declaration of 'Entity::MySprite'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.cpp(26,14): error C2511: 'void Entity::SetPosition(vec2)': overloaded member function not found in 'Entity'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.h(4,7): message : see declaration of 'Entity'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.cpp(28,2): error C2065: 'Position': undeclared identifier
   GameManager.cpp
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Timer.h(14,54): warning C4244: 'return': conversion from '__int64' to 'double', possible loss of data
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(34,20): warning C4018: '<': signed/unsigned mismatch
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(37,21): warning C4018: '<': signed/unsigned mismatch
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(56,2): error C2065: 'texbkg': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(57,2): error C2065: 'texsmallball': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(60,20): warning C4018: '<': signed/unsigned mismatch
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(63,42): error C2065: 'MAX_BALL_SPEED': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(63,59): error C2065: 'MAX_BALL_SPEED': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(63,88): error C2065: 'MAX_BALL_SPEED': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(63,105): error C2065: 'MAX_BALL_SPEED': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(65,23): error C2065: 'texsmallball': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(46,8): error C2247: 'Entity::GetPosition' not accessible because 'Ball' uses 'private' to inherit from 'Entity'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,7): message : see declaration of 'Entity::GetPosition'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(4,7): message : see declaration of 'Ball'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(4,7): message : see declaration of 'Entity'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(46,8): error C2248: 'Entity::GetPosition': cannot access private member declared in class 'Ball'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Entity.h(18,7): message : see declaration of 'Entity::GetPosition'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.h(4,7): message : see declaration of 'Ball'
   Render.cpp
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Timer.h(14,54): warning C4244: 'return': conversion from '__int64' to 'double', possible loss of data
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(65,17): error C2065: 'texbkg': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(66,17): error C2065: 'texsmallball': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(77,92): error C2065: 'texbkg': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(85,22): error C2065: 'NUM_BALLS': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(87,29): error C2065: 'balls': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(87,48): error C2065: 'balls': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(87,71): error C2065: 'balls': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(87,95): error C2065: 'balls': undeclared identifier
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(87,3): error C2660: 'CORE_RenderCenteredSprite': function does not take 2 arguments
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\common\core.h(61,8): message : see declaration of 'CORE_RenderCenteredSprite'
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(87,3): message : while trying to match the argument list '()'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(18,9): error C3646: 'LoadSprite': unknown override specifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(18,19): error C2059: syntax error: '('
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(18,62): error C2238: unexpected token(s) preceding ';'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(19,20): error C2061: syntax error: identifier 'GLuint'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(21,7): error C2039: 'vector': is not a member of 'std'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\predefined C++ types (compiler internal)(341,11): message : see declaration of 'std'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(21,13): error C2143: syntax error: missing ';' before '<'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(21,13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(21,31): error C2238: unexpected token(s) preceding ';'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(43,2): error C3861: 'RenderBackground': identifier not found
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(95,29): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(95,48): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(95,71): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(95,95): error C2065: 'balls': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(95,3): error C2660: 'CORE_RenderCenteredSprite': function does not take 2 arguments
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\common\core.h(61,8): message : see declaration of 'CORE_RenderCenteredSprite'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(95,3): message : while trying to match the argument list '()'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(101,24): error C2065: 'Entities': undeclared identifier
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(101,22): error C2143: syntax error: missing ';' before ':'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(101,32): error C2143: syntax error: missing ';' before ')'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(110,18): error C2039: 'LoadSprite': is not a member of 'Renderer'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(7,7): message : see declaration of 'Renderer'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(115,16): error C2511: 'void Renderer::UnloadSprite(GLuint)': overloaded member function not found in 'Renderer'
+C:\Users\vicente.cupello\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.h(7,7): message : see declaration of 'Renderer'
+  Sprite.cpp
   Timer.cpp
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Timer.h(14,54): warning C4244: 'return': conversion from '__int64' to 'double', possible loss of data
+  World.cpp
   Generating Code...

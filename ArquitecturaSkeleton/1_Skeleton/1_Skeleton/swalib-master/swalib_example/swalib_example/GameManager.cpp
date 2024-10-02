@@ -2,6 +2,7 @@
 #include "Ball.h"
 #include "Timer.h"
 
+
 GameManager& GameManager::GetInstance()
 {
 	static GameManager instance;
@@ -39,9 +40,10 @@ void GameManager::CollisionCheck()
 		{
 			Ball* EntityA = Balls[i];
 			Ball* EntityB = Balls[j];
-			if (EntityA != EntityB) {
+			if (EntityA != EntityB) 
+			{
 				float LimitSquared = (Balls[i]->GetRadius() + Balls[j]->GetRadius()) * (Balls[i]->GetRadius() + Balls[j]->GetRadius());
-				if (vlen2(Balls[i]->GetPosition() - Balls[j]->GetPosition()) <= LimitSquared) 
+				if (vlen2(Balls[i]->GetPosition() - Balls[j]->GetPosition()) <= LimitSquared)
 				{
 					EntityA->OnCollide();
 					EntityB->OnCollide();

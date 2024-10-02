@@ -1,32 +1,27 @@
 #pragma once
 #include "Entity.h"
 
-class Ball : Entity
+class Ball : public Entity
 {
 public:
 	Ball();
 	~Ball();
 
-	void Tick(float deltaTime);
+	virtual void Tick(float DeltaTime) override;
 	void OnCollide();
 
 
 private:
-	vec2   _pos;	// Position.
-	vec2   _vel;	// Velocity.
-	GLuint _gfx;	// OpenGL for id. for visualization purposes. 
-	float  _radius;	// Radius.
-	const float MAX_BALL_SPEED = 8.f;	// Max vel. of ball. (pixels/?).
+	vec2   Velocity;	// Velocity.
+	float  Radius;	// Radius.
+	const float MAX_BALL_SPEED = 80.0f;	// Max vel. of ball. (pixels/?).
 
-public: 
-	vec2 GetPosition() { return _pos; }
-	void SetPosition(vec2 pos) { _pos = pos; }
+public:
+	vec2 GetVelocity() { return Velocity; }
+	void SetVelocity(vec2 velocity) { Velocity = velocity; }
 
-	vec2 GetVelocity() { return _vel; }
-	void SetVelocity(vec2 velocity) { _vel = velocity; }
-
-	float GetRadius() { return _radius; }
-	void SetRadius(float radius) { _radius = radius; }
+	float GetRadius() { return Radius; }
+	void SetRadius(float radius) { Radius = radius; }
 };
 
 

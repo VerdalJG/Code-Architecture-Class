@@ -2,6 +2,7 @@
 #include "Globals.h"
 #include "Timer.h"
 #include "Sprite.h"
+#include "Entity.h"
 //#include "Time.h"
 
 Renderer& Renderer::GetInstance()
@@ -12,9 +13,7 @@ Renderer& Renderer::GetInstance()
 
 void Renderer::Initialize()
 {
-	FONT_Init();	// Characters and symbols inicialization to draw on screen.
-
-	Sprite* Background = CORE_LoadPNG("data/circle-bkg-128.png", true);
+	FONT_Init();	// Characters and symbols inicialization to draw on screen."data/circle-bkg-128.png", true
 
 	// Set up rendering.
 	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); // Sets up clipping.
@@ -41,8 +40,8 @@ void Renderer::Tick(float deltaTime)
 {
 	glClear(GL_COLOR_BUFFER_BIT);	// Clear color buffer to preset values.
 
-	RenderBackground();
-	RenderBalls();
+	//RenderBackground();
+	//RenderBalls();
 	
 	RenderSprites();
 
@@ -77,7 +76,7 @@ void Renderer::Terminate()
 
 }
 
-void Renderer::RenderBackground()
+void Renderer::RenderTiled()
 {
 	// Render backgground
 	for (int i = 0; i <= SCR_WIDTH / 128; i++) 
@@ -99,17 +98,23 @@ void Renderer::RenderBalls()
 
 void Renderer::RenderSprites()
 {
-	for (Sprite* Sprite : Sprites)
+	for (Entity* Entity : Entities)
 	{
-		CORE_RenderCenteredSprite(Sprite->GetPosition(), Sprite->GetSize(), Sprite->GetTexture());
+		Sprite* Sprite = Entity->GetSprite();
+		vec2 Position = Entity->GetPosition() + Sprite->GetOffset();
+		vec2 Size = Sprite->GetSize() * Entity->GetScale();
+		CORE_RenderCenteredSprite(Position, Size, Sprite->GetTexture());
 	}
 }
 
 GLuint Renderer::LoadSprite(const char* FilePath, bool ScreenWrapping)
 {
 	return CORE_LoadPNG(FilePath, ScreenWrapping);
+}
 
-	// texsmallball = CORE_LoadPNG("data/tyrian_ball.png", false);
+void Renderer::UnloadSprite(GLuint TextureID)
+{
+	CORE_UnloadPNG(TextureID);
 }
 
 

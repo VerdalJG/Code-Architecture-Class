@@ -4,12 +4,14 @@
 
 Ball::Ball()
 {
-	Renderer::GetInstance().LoadSprite("data/tyrian_ball.png", false);
+	// Set initial sprite and collision values
+	SetRadius(16.0f);
+	vec2 SpriteSize = vec2(Radius * 2.0f, Radius * 2.0f);
+	CreateSprite("data/tyrian_ball.png", false, SpriteSize);
 
+	// Randomize initial position and velocity
 	SetPosition(vec2(CORE_FRand(0.0, SCR_WIDTH), CORE_FRand(0.0, SCR_HEIGHT)));
 	SetVelocity(vec2(CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED), CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED)));
-	SetRadius(16.f);
-	//SetSprite(texsmallball); // should call the renderer or smth
 }
 
 Ball::~Ball()
@@ -20,18 +22,18 @@ Ball::~Ball()
 void Ball::Tick(const float deltaTime)
 {
 	// Run ball
-
 	// New Pos.
-	vec2 newPos = _pos + _vel * deltaTime;
+	vec2 NewPosition = Position + Velocity * deltaTime;
+	SetPosition(NewPosition);
 
 	// Rebound on margins.
-	if (_pos.x > SCR_WIDTH || _pos.x < 0) 
+	if (Position.x > SCR_WIDTH - Radius || Position.x < 0 + Radius)
 	{
-		_vel.x *= -1.0;
+		Velocity.x *= -1.0;
 	}
-	if (_pos.y > SCR_HEIGHT || _pos.y < 0)
+	if (Position.y > SCR_HEIGHT - Radius || Position.y < 0 + Radius)
 	{
-		_vel.y *= -1.0;
+		Velocity.y *= -1.0;
 	}
 	
 }
@@ -39,5 +41,5 @@ void Ball::Tick(const float deltaTime)
 void Ball::OnCollide()
 {
 	// Rebound!
-	_vel *= -1.f;
+	Velocity *= -1.f;
 }

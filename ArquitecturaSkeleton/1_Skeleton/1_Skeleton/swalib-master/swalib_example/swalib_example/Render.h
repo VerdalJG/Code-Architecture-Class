@@ -2,6 +2,7 @@
 
 class Timer;
 class Sprite;
+class Entity;
 
 class Renderer
 {
@@ -11,12 +12,13 @@ public:
 	void Slot();
 	void Tick(float deltaTime);
 	void Terminate();
-	void RenderBackground();
+	void RenderTiled();
 	void RenderBalls();
 	void RenderSprites();
 	GLuint LoadSprite(const char* FilePath, bool ScreenWrapping);
+	void UnloadSprite(GLuint TextureID);
 
-	std::vector<Sprite*> Sprites;
+	std::vector<Entity*> Entities;
 
 private:
 	Timer* Timer;
