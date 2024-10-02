@@ -1,6 +1,7 @@
 #pragma once
-#include "GameManager.h"
-#include "Time.h"
+
+class Timer;
+class Sprite;
 
 class Renderer
 {
@@ -12,7 +13,11 @@ public:
 	void Terminate();
 	void RenderBackground();
 	void RenderBalls();
+	void RenderSprites();
+	GLuint LoadSprite(const char* FilePath, bool ScreenWrapping);
 
-private: 
-	Timer Timer;
+	std::vector<Sprite*> Sprites;
+
+private:
+	Timer* Timer;
 };

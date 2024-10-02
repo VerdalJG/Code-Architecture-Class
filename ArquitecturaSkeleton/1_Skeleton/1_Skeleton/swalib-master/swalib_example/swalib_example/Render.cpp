@@ -1,4 +1,8 @@
 #include "Render.h"
+#include "Globals.h"
+#include "Timer.h"
+#include "Sprite.h"
+//#include "Time.h"
 
 Renderer& Renderer::GetInstance()
 {
@@ -9,6 +13,8 @@ Renderer& Renderer::GetInstance()
 void Renderer::Initialize()
 {
 	FONT_Init();	// Characters and symbols inicialization to draw on screen.
+
+	Sprite* Background = CORE_LoadPNG("data/circle-bkg-128.png", true);
 
 	// Set up rendering.
 	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); // Sets up clipping.
@@ -24,10 +30,10 @@ void Renderer::Initialize()
 
 void Renderer::Slot()
 {
-	Timer.UpdateTime();
-	while (Timer.ShouldTick())
+	Timer->UpdateTime();
+	while (Timer->ShouldTick())
 	{
-		Tick(Timer.GetFixedTickRate());
+		Tick(Timer->GetFixedTickRate());
 	}
 }
 
@@ -37,6 +43,8 @@ void Renderer::Tick(float deltaTime)
 
 	RenderBackground();
 	RenderBalls();
+	
+	RenderSprites();
 
 	// Buffers for strings below
 	char FPSBuffer[50];
@@ -44,9 +52,9 @@ void Renderer::Tick(float deltaTime)
 	char logicTimeBuffer[50];
 
 	// Concatenate string with numbers
-	snprintf(FPSBuffer, 50, "FPS: %f", Timer.GetFPS());
-	snprintf(realTimeBuffer, 50, "RT: %f", Timer.GetTime());
-	snprintf(logicTimeBuffer, 50, "LT: %f", Timer.GetLogicTime());
+	snprintf(FPSBuffer, 50, "FPS: %f", Timer->GetFPS());
+	snprintf(realTimeBuffer, 50, "RT: %f", Timer->GetTime());
+	snprintf(logicTimeBuffer, 50, "LT: %f", Timer->GetLogicTime());
 
 	// Text
 	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 50), FPSBuffer);
@@ -88,5 +96,22 @@ void Renderer::RenderBalls()
 		CORE_RenderCenteredSprite(balls[i].pos, vec2(balls[i].radius * 2.f, balls[i].radius * 2.f), balls[i].gfx);
 	}
 }
+
+void Renderer::RenderSprites()
+{
+	for (Sprite* Sprite : Sprites)
+	{
+		CORE_RenderCenteredSprite(Sprite->GetPosition(), Sprite->GetSize(), Sprite->GetTexture());
+	}
+}
+
+GLuint Renderer::LoadSprite(const char* FilePath, bool ScreenWrapping)
+{
+	return CORE_LoadPNG(FilePath, ScreenWrapping);
+
+	// texsmallball = CORE_LoadPNG("data/tyrian_ball.png", false);
+}
+
+
 
 

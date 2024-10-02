@@ -1,6 +1,7 @@
 #pragma once
+#include "Entity.h"
 
-class Ball
+class Ball : Entity
 {
 public:
 	Ball();
@@ -23,9 +24,6 @@ public:
 
 	vec2 GetVelocity() { return _vel; }
 	void SetVelocity(vec2 velocity) { _vel = velocity; }
-
-	GLuint GetSprite() { return _gfx; }
-	void SetSprite(GLuint sprite) { _gfx = sprite; }
 
 	float GetRadius() { return _radius; }
 	void SetRadius(float radius) { _radius = radius; }

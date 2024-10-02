@@ -4,6 +4,7 @@ Timer::Timer() :
 	FPS(0),
 	deltaTime(0),
 	accumulatedTime(0),
+	logicTime(0),
 	TICK_RATE(1.0f / 60.0f),
 	TIME_SCALE(1),
 	MAX_ACCUMULATED_TIME(1.0f / 15.0f)
@@ -15,7 +16,7 @@ Timer::Timer() :
 	// Get the frequency of ticks of the PC per second
 	ticksPerSecond = liFrequency.QuadPart;
 
-	// Record timestamp for when logic starts calculating 
+	// Get initial tick count since the program started
 	QueryPerformanceCounter(&previousTickCount);
 	currentTickCount = previousTickCount;
 }
@@ -31,9 +32,6 @@ float Timer::GetFixedTickRate()
 
 void Timer::HandleDeathSpiral()
 {
-	// Accumulate time elapsed with timescale multiplier
-	accumulatedTime += deltaTime * TIME_SCALE;
-
 	// Ensure accumulated time doesn't get out of hand so we dont get too many physics steps
 	if (accumulatedTime >= MAX_ACCUMULATED_TIME)
 	{
@@ -55,6 +53,9 @@ void Timer::UpdateTime()
 
 	// Cast to double and convert back to seconds
 	deltaTime = static_cast<double>(elapsedTimeMicroSeconds) / 1000000.0;
+
+	// Accumulate time elapsed with timescale multiplier
+	accumulatedTime += deltaTime * TIME_SCALE;
 
 	HandleDeathSpiral();
 

@@ -1,16 +1,15 @@
 #include "Ball.h"
 #include "Globals.h"
+#include "Render.h"
 
 Ball::Ball()
 {
-	// renderer 
-	texbkg = CORE_LoadPNG("data/circle-bkg-128.png", true);
-	texsmallball = CORE_LoadPNG("data/tyrian_ball.png", false);
+	Renderer::GetInstance().LoadSprite("data/tyrian_ball.png", false);
 
 	SetPosition(vec2(CORE_FRand(0.0, SCR_WIDTH), CORE_FRand(0.0, SCR_HEIGHT)));
 	SetVelocity(vec2(CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED), CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED)));
 	SetRadius(16.f);
-	SetSprite(texsmallball); // should call the renderer or smth
+	//SetSprite(texsmallball); // should call the renderer or smth
 }
 
 Ball::~Ball()

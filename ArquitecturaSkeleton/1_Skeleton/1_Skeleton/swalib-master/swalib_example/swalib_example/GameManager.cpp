@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "Ball.h"
+#include "Timer.h"
 
 GameManager& GameManager::GetInstance()
 {
@@ -9,10 +10,10 @@ GameManager& GameManager::GetInstance()
 
 void GameManager::Slot()
 {
-	Timer.UpdateTime();
-	while (Timer.ShouldTick())
+	Timer->UpdateTime();
+	while (Timer->ShouldTick())
 	{
-		Tick(Timer.GetFixedTickRate());
+		Tick(Timer->GetFixedTickRate());
 	}
 }
 
@@ -39,8 +40,8 @@ void GameManager::CollisionCheck()
 			Ball* EntityA = Balls[i];
 			Ball* EntityB = Balls[j];
 			if (EntityA != EntityB) {
-				float limitSquared = (Balls[i]->GetRadius() + Balls[j]->GetRadius()) * (Balls[i]->GetRadius() + Balls[j]->GetRadius());
-				if (vlen2(Balls[i]->GetPosition() - Balls[j]->GetPosition()) <= limitSquared) 
+				float LimitSquared = (Balls[i]->GetRadius() + Balls[j]->GetRadius()) * (Balls[i]->GetRadius() + Balls[j]->GetRadius());
+				if (vlen2(Balls[i]->GetPosition() - Balls[j]->GetPosition()) <= LimitSquared) 
 				{
 					EntityA->OnCollide();
 					EntityB->OnCollide();
@@ -49,6 +50,11 @@ void GameManager::CollisionCheck()
 			}
 		}
 	}
+}
+
+void GameManager::RegisterEntity(Entity* Entity)
+{
+	Entities.push_back(Entity);
 }
 
 void GameManager::Initialize()
