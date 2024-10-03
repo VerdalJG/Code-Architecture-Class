@@ -1,6 +1,8 @@
 #include "World.h"
 #include "Timer.h"
 #include "Sprite.h"
+#include "Render.h"
+#include "Entity.h"
 
 
 World::World()
@@ -13,20 +15,21 @@ void World::Terminate()
 
 }
 
-void World::AddEntity(Entity* Entity)
+void World::AddEntity(Entity* _entity)
 {
-	Entities.push_back(Entity);
+	entities.push_back(_entity);
+	RenderEngine::GetInstance().RegisterEntity(_entity);
 }
 
-void World::RemoveEntity(Entity* Entity)
+void World::RemoveEntity(Entity* _entity)
 {
-	Entities.erase(std::remove(Entities.begin(), Entities.end(), Entity), Entities.end());
+	entities.erase(std::remove(entities.begin(), entities.end(), _entity), entities.end());
 }
 
-void World::Tick(float DeltaTime)
+void World::Tick(float _deltaTime)
 {
-	for (Entity* Entity : Entities)
+	for (Entity* entity : entities)
 	{
-
+		entity->Tick(_deltaTime);
 	}
 }

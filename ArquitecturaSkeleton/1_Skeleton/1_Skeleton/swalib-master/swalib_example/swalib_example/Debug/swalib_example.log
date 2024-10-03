@@ -1,14 +1,6 @@
 ﻿  example.cpp
+  Entity.cpp
   GameManager.cpp
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(70,20): warning C4018: '<': signed/unsigned mismatch
-  Render.cpp
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(76,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(77,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(82,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(82,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(82,90): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(82,83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  Timer.cpp
-  World.cpp
+C:\Users\vicente.cupello\Documents\GitHub\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(67,20): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
-  swalib_example.vcxproj -> D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\Debug\swalib_example.exe
+  swalib_example.vcxproj -> C:\Users\vicente.cupello\Documents\GitHub\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\Debug\swalib_example.exe

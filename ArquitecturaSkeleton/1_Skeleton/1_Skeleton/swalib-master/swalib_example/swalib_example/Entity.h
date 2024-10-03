@@ -7,10 +7,10 @@ class Entity
 {
 public:
 	Entity();
+	virtual void Tick(float _deltaTime) {};
 
 protected:
 	~Entity();
-	virtual void Tick(float deltaTime) {};
 	void CreateSprite(const char* FilePath, bool ScreenWrapping, vec2 SpriteSize);
 
 	vec2 Position;

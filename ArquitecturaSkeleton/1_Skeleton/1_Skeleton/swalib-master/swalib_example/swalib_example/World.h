@@ -15,9 +15,9 @@ public:
 	void Tick(float DeltaTime);
 
 private:
-	std::vector<Entity*> Entities;
+	std::vector<Entity*> entities;
 
 public:
-	std::vector<Entity*> GetEntities() { return Entities; }
+	std::vector<Entity*> GetEntities() { return entities; }
 };
 

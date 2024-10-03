@@ -26,7 +26,7 @@ void RenderEngine::Initialize(TimeManager* _Timer)
 	glEnable(GL_BLEND);	// Blend the incoming RGBA color values with the values in the color buffers.
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// Blend func. for alpha color.
 
-	Timer = _Timer;
+	timer = _Timer;
 	vec2 SpriteSize = vec2(128.0f, 128.0f);
 	background = new Background();
 	background->sprite = new Sprite("data/circle-bkg-128.png", true, SpriteSize);
@@ -53,9 +53,9 @@ void RenderEngine::DisplayTimerValues()
 	char logicTimeBuffer[50];
 
 	// Concatenate string with numbers
-	snprintf(FPSBuffer, 50, "FPS: %f", Timer->GetFPS());
-	snprintf(realTimeBuffer, 50, "RT: %f", Timer->GetTime());
-	snprintf(logicTimeBuffer, 50, "LT: %f", Timer->GetLogicTime());
+	snprintf(FPSBuffer, 50, "FPS: %f", timer->GetFPS());
+	snprintf(realTimeBuffer, 50, "RT: %f", timer->GetTime());
+	snprintf(logicTimeBuffer, 50, "LT: %f", timer->GetLogicTime());
 
 	// Text
 	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 50), FPSBuffer);
@@ -70,29 +70,34 @@ void RenderEngine::Terminate()
 	delete(background);
 }
 
-void RenderEngine::RenderTiled(Sprite* Sprite)
+void RenderEngine::RenderTiled(Sprite* _sprite)
 {
 	// Render tiled image
-	int SizeX = Sprite->GetSize().x;
-	int SizeY = Sprite->GetSize().y;
+	int SizeX = _sprite->GetSize().x;
+	int SizeY = _sprite->GetSize().y;
 
 	for (int i = 0; i <= SCR_WIDTH / SizeX; i++)
 	{
 		for (int j = 0; j <= SCR_HEIGHT / SizeY; j++) {
-			CORE_RenderCenteredSprite(vec2(i * SizeX + SizeX/2, j * SizeY + SizeY/2), vec2(SizeX, SizeY), Sprite->GetTexture());
+			CORE_RenderCenteredSprite(vec2(i * SizeX + SizeX/2, j * SizeY + SizeY/2), vec2(SizeX, SizeY), _sprite->GetTexture());
 		}
 	}
 }
 
 void RenderEngine::RenderSprites()
 {
-	for (Entity* Entity : Entities)
+	for (Entity* Entity : entities)
 	{
 		Sprite* Sprite = Entity->GetSprite();
 		vec2 Position = Entity->GetPosition() + Sprite->GetOffset();
 		vec2 Size = Sprite->GetSize() * Entity->GetScale();
 		CORE_RenderCenteredSprite(Position, Size, Sprite->GetTexture());
 	}
+}
+
+void RenderEngine::RegisterEntity(Entity* _entity)
+{
+	entities.push_back(_entity);
 }
 
 GLuint RenderEngine::LoadSprite(const char* FilePath, bool ScreenWrapping)

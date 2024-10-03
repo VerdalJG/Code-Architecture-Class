@@ -13,19 +13,16 @@ GameManager& GameManager::GetInstance()
 
 void GameManager::Slot()
 {
-	Timer->UpdateTime();
-	while (Timer->ShouldTick())
+	timer->UpdateTime();
+	while (timer->ShouldTick())
 	{
-		Tick(Timer->GetFixedTickRate());
+		world->Tick(timer->GetFixedTickRate());
 	}
 }
 
 void GameManager::Tick(float deltaTime)
 {
-	for (Ball* Ball : Balls)
-	{
-		Ball->Tick(deltaTime);
-	}
+	
 }
 
 void GameManager::Terminate()
@@ -64,11 +61,11 @@ void GameManager::RegisterEntity(Entity* Entity)
 void GameManager::Initialize(TimeManager* _Timer)
 {
 	// Init game state.
-	Scene = new World();
-	Timer = _Timer;
+	world = new World();
+	timer = _Timer;
 
 	for (int i = 0; i < NUM_BALLS; i++)
 	{
-		Scene->AddEntity(new Ball());
+		world->AddEntity(new Ball());
 	}
 }

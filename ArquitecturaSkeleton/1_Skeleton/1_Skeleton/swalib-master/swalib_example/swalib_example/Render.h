@@ -15,15 +15,17 @@ public:
 	void Terminate();
 
 	void DisplayTimerValues();
-	void RenderTiled(Sprite* Sprite);
+	void RenderTiled(Sprite* _sprite);
 	void RenderSprites();
 
+	void RegisterEntity(Entity* _entity);
 	GLuint LoadSprite(const char* FilePath, bool ScreenWrapping);
 	void UnloadSprite(GLuint TextureID);
 
-	std::vector<Entity*> Entities;
+
 
 private:
-	TimeManager* Timer;
+	std::vector<Entity*> entities;
+	TimeManager* timer;
 	Background* background;
 };

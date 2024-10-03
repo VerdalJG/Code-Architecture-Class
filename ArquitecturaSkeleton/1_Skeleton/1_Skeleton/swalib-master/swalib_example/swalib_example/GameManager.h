@@ -18,13 +18,13 @@ public:
 	void RegisterEntity(Entity* Entity);
 
 public:
-	World* Scene;
+	World* world;
 	std::vector<Entity*> Entities;
 	std::vector<Ball*> Balls;
 	const unsigned int NUM_BALLS = 10;	// Max. num balls.
 
 private:
-	TimeManager* Timer;
+	TimeManager* timer;
 };
 
 
