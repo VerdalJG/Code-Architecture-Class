@@ -3,18 +3,18 @@
 #include "Timer.h"
 #include "Sprite.h"
 #include "Entity.h"
-//#include "Time.h"
+#include "Background.h"
 
-Renderer& Renderer::GetInstance()
+RenderEngine& RenderEngine::GetInstance()
 {
-	static Renderer instance;
+	static RenderEngine instance;
 	return instance;
 }
 
-void Renderer::Initialize()
+void RenderEngine::Initialize(TimeManager* _Timer)
 {
 	FONT_Init();	// Characters and symbols inicialization to draw on screen."data/circle-bkg-128.png", true
-
+	
 	// Set up rendering.
 	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); // Sets up clipping.
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);	// Specifies clear values for the color buffers.
@@ -25,26 +25,28 @@ void Renderer::Initialize()
 	// NOTA: Mirar diferencias comentando las 2 siguientes funciones.
 	glEnable(GL_BLEND);	// Blend the incoming RGBA color values with the values in the color buffers.
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// Blend func. for alpha color.
+
+	Timer = _Timer;
+	vec2 SpriteSize = vec2(128.0f, 128.0f);
+	background = new Background();
+	background->sprite = new Sprite("data/circle-bkg-128.png", true, SpriteSize);
 }
 
-void Renderer::Slot()
-{
-	Timer->UpdateTime();
-	while (Timer->ShouldTick())
-	{
-		Tick(Timer->GetFixedTickRate());
-	}
-}
-
-void Renderer::Tick(float deltaTime)
+void RenderEngine::Update()
 {
 	glClear(GL_COLOR_BUFFER_BIT);	// Clear color buffer to preset values.
-
-	//RenderBackground();
-	//RenderBalls();
 	
+	RenderTiled(background->sprite);
+	DisplayTimerValues();
+
 	RenderSprites();
 
+	// Exchanges the front and back buffers
+	SYS_Show();
+}
+
+void RenderEngine::DisplayTimerValues()
+{
 	// Buffers for strings below
 	char FPSBuffer[50];
 	char realTimeBuffer[50];
@@ -59,44 +61,30 @@ void Renderer::Tick(float deltaTime)
 	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 50), FPSBuffer);
 	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 70), realTimeBuffer);
 	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 90), logicTimeBuffer);
-
-
-	// Exchanges the front and back buffers
-	SYS_Show();
-
 }
 
-void Renderer::Terminate()
+void RenderEngine::Terminate()
 {
-	// function should be -> gamemanager.terminate -> entities.terminate -> renderer.terminate
-	// Unload textures.
-	CORE_UnloadPNG(texbkg);
-	CORE_UnloadPNG(texsmallball);
+	// Unload font.
 	FONT_End();
-
+	delete(background);
 }
 
-void Renderer::RenderTiled()
+void RenderEngine::RenderTiled(Sprite* Sprite)
 {
-	// Render backgground
-	for (int i = 0; i <= SCR_WIDTH / 128; i++) 
+	// Render tiled image
+	int SizeX = Sprite->GetSize().x;
+	int SizeY = Sprite->GetSize().y;
+
+	for (int i = 0; i <= SCR_WIDTH / SizeX; i++)
 	{
-		for (int j = 0; j <= SCR_HEIGHT / 128; j++) {
-			CORE_RenderCenteredSprite(vec2(i * 128.f + 64.f, j * 128.f + 64.f), vec2(128.f, 128.f), texbkg);
+		for (int j = 0; j <= SCR_HEIGHT / SizeY; j++) {
+			CORE_RenderCenteredSprite(vec2(i * SizeX + SizeX/2, j * SizeY + SizeY/2), vec2(SizeX, SizeY), Sprite->GetTexture());
 		}
 	}
 }
 
-void Renderer::RenderBalls()
-{
-	// Render balls
-	for (int i = 0; i < NUM_BALLS; i++) 
-	{
-		CORE_RenderCenteredSprite(balls[i].pos, vec2(balls[i].radius * 2.f, balls[i].radius * 2.f), balls[i].gfx);
-	}
-}
-
-void Renderer::RenderSprites()
+void RenderEngine::RenderSprites()
 {
 	for (Entity* Entity : Entities)
 	{
@@ -107,12 +95,12 @@ void Renderer::RenderSprites()
 	}
 }
 
-GLuint Renderer::LoadSprite(const char* FilePath, bool ScreenWrapping)
+GLuint RenderEngine::LoadSprite(const char* FilePath, bool ScreenWrapping)
 {
 	return CORE_LoadPNG(FilePath, ScreenWrapping);
 }
 
-void Renderer::UnloadSprite(GLuint TextureID)
+void RenderEngine::UnloadSprite(GLuint TextureID)
 {
 	CORE_UnloadPNG(TextureID);
 }

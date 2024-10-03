@@ -1,6 +1,6 @@
 #include "Timer.h"
 
-Timer::Timer() :
+TimeManager::TimeManager() :
 	FPS(0),
 	deltaTime(0),
 	accumulatedTime(0),
@@ -17,20 +17,21 @@ Timer::Timer() :
 	ticksPerSecond = liFrequency.QuadPart;
 
 	// Get initial tick count since the program started
-	QueryPerformanceCounter(&previousTickCount);
-	currentTickCount = previousTickCount;
+	QueryPerformanceCounter(&initialTickCount);
+	previousTickCount = initialTickCount;
+	currentTickCount = initialTickCount;
 }
 
-Timer::~Timer()
+TimeManager::~TimeManager()
 {
 }
 
-float Timer::GetFixedTickRate()
+float TimeManager::GetFixedTickRate()
 {
 	return TICK_RATE;
 }
 
-void Timer::HandleDeathSpiral()
+void TimeManager::HandleDeathSpiral()
 {
 	// Ensure accumulated time doesn't get out of hand so we dont get too many physics steps
 	if (accumulatedTime >= MAX_ACCUMULATED_TIME)
@@ -40,7 +41,7 @@ void Timer::HandleDeathSpiral()
 }
 
 
-void Timer::UpdateTime()
+void TimeManager::UpdateTime()
 {
 	// Current timestamp
 	QueryPerformanceCounter(&currentTickCount);
@@ -66,16 +67,19 @@ void Timer::UpdateTime()
 	previousTickCount = currentTickCount;
 }
 
-double Timer::GetTime()
+double TimeManager::GetTime()
 {
+	// Get total elapsed ticks
+	UINT64 totalElapsedTicks = currentTickCount.QuadPart - initialTickCount.QuadPart;
+
 	// Get current time in microseconds
-	UINT64 currentTimeMicroSeconds = (currentTickCount.QuadPart * 1000000) / ticksPerSecond;
+	UINT64 currentTimeMicroSeconds = (totalElapsedTicks * 1000000) / ticksPerSecond;
 
 	// Cast to double and convert back to seconds
 	return static_cast<double>(currentTimeMicroSeconds) / 1000000.0;
 }
 
-bool Timer::ShouldTick()
+bool TimeManager::ShouldTick()
 {
 	if (accumulatedTime >= TICK_RATE)
 	{

@@ -1,10 +1,13 @@
 #pragma once
-#include "Entity.h"
 
-class Background : Entity
+class Sprite;
+
+class Background
 {
 public:
 	Background();
 	~Background();
+
+	Sprite* sprite;
 };
 

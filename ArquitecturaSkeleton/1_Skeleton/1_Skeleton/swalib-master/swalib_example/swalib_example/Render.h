@@ -1,25 +1,29 @@
 #pragma once
+#include "Globals.h"
 
-class Timer;
+class TimeManager;
 class Sprite;
 class Entity;
+class Background;
 
-class Renderer
+class RenderEngine
 {
 public:
-	static Renderer& GetInstance();
-	void Initialize();
-	void Slot();
-	void Tick(float deltaTime);
+	static RenderEngine& GetInstance();
+	void Initialize(TimeManager* Timer);
+	void Update();
 	void Terminate();
-	void RenderTiled();
-	void RenderBalls();
+
+	void DisplayTimerValues();
+	void RenderTiled(Sprite* Sprite);
 	void RenderSprites();
+
 	GLuint LoadSprite(const char* FilePath, bool ScreenWrapping);
 	void UnloadSprite(GLuint TextureID);
 
 	std::vector<Entity*> Entities;
 
 private:
-	Timer* Timer;
+	TimeManager* Timer;
+	Background* background;
 };

@@ -1,6 +1,8 @@
 #include "GameManager.h"
 #include "Ball.h"
 #include "Timer.h"
+#include "World.h"
+#include "Sprite.h"
 
 
 GameManager& GameManager::GetInstance()
@@ -59,8 +61,14 @@ void GameManager::RegisterEntity(Entity* Entity)
 	Entities.push_back(Entity);
 }
 
-void GameManager::Initialize()
+void GameManager::Initialize(TimeManager* _Timer)
 {
 	// Init game state.
+	Scene = new World();
+	Timer = _Timer;
 
+	for (int i = 0; i < NUM_BALLS; i++)
+	{
+		Scene->AddEntity(new Ball());
+	}
 }

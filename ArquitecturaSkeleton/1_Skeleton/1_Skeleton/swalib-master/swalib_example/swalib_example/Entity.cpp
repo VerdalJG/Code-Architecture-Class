@@ -1,6 +1,7 @@
 #include "Entity.h"
 #include "GameManager.h"
 #include "Sprite.h"
+#include "Globals.h"
 
 Entity::Entity() :
 	MySprite(nullptr),

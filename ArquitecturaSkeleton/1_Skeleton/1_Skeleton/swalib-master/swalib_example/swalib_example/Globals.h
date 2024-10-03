@@ -6,8 +6,8 @@
 #include "../../common/vector2d.h"
 
 
-const unsigned int NUM_BALLS = 10;	// Max num balls
+const unsigned int MAX_NUM_BALLS = 10;	// Max num balls
 
 // Textures
-GLuint texbkg;
-GLuint texsmallball;
+//GLuint texbkg;
+//GLuint texsmallball;

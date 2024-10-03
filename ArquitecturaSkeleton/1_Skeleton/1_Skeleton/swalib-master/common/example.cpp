@@ -4,13 +4,14 @@
 
 int Main(void)
 {
-	Renderer::GetInstance().Initialize();
-	GameManager::GetInstance().Initialize();
+	TimeManager* Timer = new TimeManager();
+	RenderEngine::GetInstance().Initialize(Timer);
+	GameManager::GetInstance().Initialize(Timer);
 
 	while (!SYS_GottaQuit()) // Controlling a request to terminate an application.
 	{
 		GameManager::GetInstance().Slot();
-		Renderer::GetInstance().Slot();
+		RenderEngine::GetInstance().Update();
 
 		SYS_Pump();	// Process Windows messages.
 		
@@ -18,8 +19,7 @@ int Main(void)
 
 	// End app. Done in reverse order vs initialization
 	GameManager::GetInstance().Terminate();
-	Renderer::GetInstance().Terminate();
-
+	RenderEngine::GetInstance().Terminate();
 
 	return 0;
 }
