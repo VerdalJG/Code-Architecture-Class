@@ -28,8 +28,11 @@ void RenderEngine::Initialize(TimeManager* _Timer)
 
 	timer = _Timer;
 	vec2 spriteSize = vec2(128.0f, 128.0f);
+
+	backgroundTexture = LoadSprite("data/circle-bkg-128.png", true);
+	ballTexture = LoadSprite("data/tyrian_ball.png", false);
+
 	background = new Background();
-	background->sprite = new Sprite("data/circle-bkg-128.png", true, spriteSize);
 }
 
 void RenderEngine::Update()
@@ -39,8 +42,6 @@ void RenderEngine::Update()
 	RenderTiled(background->sprite);
 	RenderSprites();
 	DisplayTimerValues();
-
-
 
 	// Exchanges the front and back buffers
 	SYS_Show();
@@ -67,6 +68,7 @@ void RenderEngine::DisplayTimerValues()
 void RenderEngine::Terminate()
 {
 	// Unload font.
+	UnloadSprites();
 	FONT_End();
 	delete(background);
 }
@@ -106,9 +108,10 @@ GLuint RenderEngine::LoadSprite(const char* filePath, bool screenWrapping)
 	return CORE_LoadPNG(filePath, screenWrapping);
 }
 
-void RenderEngine::UnloadSprite(GLuint textureID)
+void RenderEngine::UnloadSprites()
 {
-	CORE_UnloadPNG(textureID);
+	CORE_UnloadPNG(ballTexture);
+	CORE_UnloadPNG(backgroundTexture);
 }
 
 

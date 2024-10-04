@@ -13,7 +13,7 @@ public:
 
 protected:
 
-	void CreateSprite(const char* filePath, bool screenWrapping, vec2 spriteSize);
+	void CreateSprite(GLuint textureID, vec2 spriteSize);
 	World* GetWorld();
 
 	vec2 position;

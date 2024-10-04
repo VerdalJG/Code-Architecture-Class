@@ -4,7 +4,7 @@
 class Sprite
 {
 public:
-	Sprite(const char* filePath, bool screenWrapping, vec2 spriteSize);
+	Sprite(GLuint texture, vec2 spriteSize);
 	~Sprite();
 
 private:

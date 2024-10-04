@@ -8,7 +8,7 @@ Ball::Ball()
 	// Set initial sprite and collision values
 	SetRadius(16.0f);
 	vec2 spriteSize = vec2(radius * 2.0f, radius * 2.0f);
-	CreateSprite("data/tyrian_ball.png", false, spriteSize);
+	CreateSprite(RenderEngine::GetInstance().ballTexture, spriteSize);
 
 	// Randomize initial position and velocity
 	SetPosition(vec2(CORE_FRand(0.0 + radius, SCR_WIDTH - radius), CORE_FRand(0.0 + radius, SCR_HEIGHT - radius)));

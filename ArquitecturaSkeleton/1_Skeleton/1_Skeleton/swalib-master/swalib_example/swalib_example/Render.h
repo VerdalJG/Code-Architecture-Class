@@ -1,4 +1,6 @@
 #pragma once
+#include <unordered_map>
+#include <functional>
 #include "Globals.h"
 
 class TimeManager;
@@ -20,12 +22,16 @@ public:
 
 	void RegisterEntity(Entity* entity);
 	GLuint LoadSprite(const char* filePath, bool screenWrapping);
-	void UnloadSprite(GLuint textureID);
+	void UnloadSprites();
 
-
+	GLuint ballTexture;
+	GLuint backgroundTexture;
 
 private:
+
 	std::vector<Entity*> entities;
 	TimeManager* timer;
 	Background* background;
 };
+
+
