@@ -17,6 +17,7 @@ void GameManager::Slot()
 	while (timer->ShouldTick())
 	{
 		world->Tick(timer->GetFixedTickRate());
+		CollisionCheck();
 	}
 }
 
@@ -27,7 +28,14 @@ void GameManager::Tick(float deltaTime)
 
 void GameManager::Terminate()
 {
-	// End of game logic if needed
+	if (world)
+	{
+		for (Entity* entity : world->GetEntities())
+		{
+			delete(entity);
+		}
+		delete(world);
+	}
 }
 
 void GameManager::CollisionCheck()
@@ -37,15 +45,15 @@ void GameManager::CollisionCheck()
 		// Collision detection.
 		for (uint j = 0; j < NUM_BALLS; j++) 
 		{
-			Ball* EntityA = Balls[i];
-			Ball* EntityB = Balls[j];
-			if (EntityA != EntityB) 
+			Ball* ballA = static_cast<Ball*>(world->GetEntities()[i]);
+			Ball* ballB = static_cast<Ball*>(world->GetEntities()[j]);
+			if (ballA != ballB) 
 			{
-				float LimitSquared = (Balls[i]->GetRadius() + Balls[j]->GetRadius()) * (Balls[i]->GetRadius() + Balls[j]->GetRadius());
-				if (vlen2(Balls[i]->GetPosition() - Balls[j]->GetPosition()) <= LimitSquared)
+				float LimitSquared = (ballA->GetRadius() + ballB->GetRadius()) * (ballA->GetRadius() + ballB->GetRadius());
+				if (vlen2(ballA->GetPosition() - ballB->GetPosition()) <= LimitSquared)
 				{
-					EntityA->OnCollide();
-					EntityB->OnCollide();
+					ballA->OnCollide();
+					ballB->OnCollide();
 					break;
 				}
 			}
@@ -53,10 +61,6 @@ void GameManager::CollisionCheck()
 	}
 }
 
-void GameManager::RegisterEntity(Entity* Entity)
-{
-	Entities.push_back(Entity);
-}
 
 void GameManager::Initialize(TimeManager* _Timer)
 {

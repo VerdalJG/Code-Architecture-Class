@@ -1,16 +1,17 @@
 #include "Ball.h"
 #include "Globals.h"
 #include "Render.h"
+#include "World.h"
 
 Ball::Ball()
 {
 	// Set initial sprite and collision values
 	SetRadius(16.0f);
-	vec2 SpriteSize = vec2(Radius * 2.0f, Radius * 2.0f);
-	CreateSprite("data/tyrian_ball.png", false, SpriteSize);
+	vec2 spriteSize = vec2(radius * 2.0f, radius * 2.0f);
+	CreateSprite("data/tyrian_ball.png", false, spriteSize);
 
 	// Randomize initial position and velocity
-	SetPosition(vec2(CORE_FRand(0.0, SCR_WIDTH), CORE_FRand(0.0, SCR_HEIGHT)));
+	SetPosition(vec2(CORE_FRand(0.0 + radius, SCR_WIDTH - radius), CORE_FRand(0.0 + radius, SCR_HEIGHT - radius)));
 	SetVelocity(vec2(CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED), CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED)));
 }
 
@@ -21,25 +22,53 @@ Ball::~Ball()
 
 void Ball::Tick(const float deltaTime)
 {
+	RunPhysics(deltaTime);
+}
+
+void Ball::RunPhysics(const float deltaTime)
+{
 	// Run ball
 	// New Pos.
-	vec2 NewPosition = Position + Velocity * deltaTime;
-	SetPosition(NewPosition);
+	vec2 newPosition = position + velocity * deltaTime;
+	if (!CollisionCheck(newPosition))
+	{
+		SetPosition(newPosition);
+	}
 
 	// Rebound on margins.
-	if (Position.x > SCR_WIDTH - Radius || Position.x < 0 + Radius)
+	if (position.x > SCR_WIDTH - radius || position.x < 0 + radius)
 	{
-		Velocity.x *= -1.0;
+		velocity.x *= -1.0;
 	}
-	if (Position.y > SCR_HEIGHT - Radius || Position.y < 0 + Radius)
+	if (position.y > SCR_HEIGHT - radius || position.y < 0 + radius)
 	{
-		Velocity.y *= -1.0;
+		velocity.y *= -1.0;
 	}
-	
+}
+
+bool Ball::CollisionCheck(vec2 newPosition)
+{
+	// Collision detection.
+	World* world = GetWorld();
+	for (Entity* entity : world->GetEntities())
+	{
+		Ball* ballB = static_cast<Ball*>(entity);
+		if (ballB && this != ballB)
+		{
+			float LimitSquared = (this->GetRadius() + ballB->GetRadius()) * (this->GetRadius() + ballB->GetRadius());
+			if (vlen2(newPosition - ballB->GetPosition()) <= LimitSquared)
+			{
+				OnCollide();
+				ballB->OnCollide();
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 void Ball::OnCollide()
 {
 	// Rebound!
-	Velocity *= -1.f;
+	velocity *= -1.0f;
 }

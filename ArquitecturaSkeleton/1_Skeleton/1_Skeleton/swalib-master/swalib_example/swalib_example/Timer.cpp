@@ -4,10 +4,7 @@ TimeManager::TimeManager() :
 	FPS(0),
 	deltaTime(0),
 	accumulatedTime(0),
-	logicTime(0),
-	TICK_RATE(1.0f / 60.0f),
-	TIME_SCALE(1),
-	MAX_ACCUMULATED_TIME(1.0f / 15.0f)
+	logicTime(0)
 {
 	// Initialize PC Frequency
 	LARGE_INTEGER liFrequency;

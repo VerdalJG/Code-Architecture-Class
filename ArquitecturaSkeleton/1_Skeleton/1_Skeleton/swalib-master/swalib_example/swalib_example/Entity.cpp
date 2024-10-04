@@ -4,27 +4,31 @@
 #include "Globals.h"
 
 Entity::Entity() :
-	MySprite(nullptr),
-	Scale(vec2(1, 1)),
-	Position(vec2(0,0))
+	sprite(nullptr),
+	scale(vec2(1, 1)),
+	position(vec2(0,0))
 {
-	GameManager::GetInstance().RegisterEntity(this);
 }
 
 Entity::~Entity()
 {
-	if (MySprite)
+	if (sprite)
 	{
-		delete(MySprite);
+		delete(sprite);
 	}
 }
 
 void Entity::CreateSprite(const char* FilePath, bool ScreenWrapping, vec2 SpriteSize)
 {
-	MySprite = new Sprite(FilePath, ScreenWrapping, SpriteSize);
+	sprite = new Sprite(FilePath, ScreenWrapping, SpriteSize);
+}
+
+World* Entity::GetWorld()
+{
+	return GameManager::GetInstance().world;
 }
 
 void Entity::SetPosition(vec2 NewPosition)
 {
-	Position = NewPosition;
+	position = NewPosition;
 }

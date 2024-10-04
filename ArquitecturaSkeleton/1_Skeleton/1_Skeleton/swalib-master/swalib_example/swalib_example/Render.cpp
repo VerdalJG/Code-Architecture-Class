@@ -37,9 +37,10 @@ void RenderEngine::Update()
 	glClear(GL_COLOR_BUFFER_BIT);	// Clear color buffer to preset values.
 	
 	RenderTiled(background->sprite);
+	RenderSprites();
 	DisplayTimerValues();
 
-	RenderSprites();
+
 
 	// Exchanges the front and back buffers
 	SYS_Show();
@@ -86,12 +87,12 @@ void RenderEngine::RenderTiled(Sprite* _sprite)
 
 void RenderEngine::RenderSprites()
 {
-	for (Entity* Entity : entities)
+	for (Entity* entity : entities)
 	{
-		Sprite* Sprite = Entity->GetSprite();
-		vec2 Position = Entity->GetPosition() + Sprite->GetOffset();
-		vec2 Size = Sprite->GetSize() * Entity->GetScale();
-		CORE_RenderCenteredSprite(Position, Size, Sprite->GetTexture());
+		Sprite* sprite = entity->GetSprite();
+		vec2 position = entity->GetPosition() + sprite->GetOffset();
+		vec2 size = sprite->GetSize() * entity->GetScale();
+		CORE_RenderCenteredSprite(position, size, sprite->GetTexture());
 	}
 }
 
