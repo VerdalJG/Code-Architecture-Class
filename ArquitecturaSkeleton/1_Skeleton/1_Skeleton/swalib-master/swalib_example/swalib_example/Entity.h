@@ -9,11 +9,11 @@ class Entity
 public:
 	Entity();
 	~Entity();
-	virtual void Tick(float _deltaTime) {};
+	virtual void Tick(float deltaTime) {};
 
 protected:
 
-	void CreateSprite(const char* FilePath, bool ScreenWrapping, vec2 SpriteSize);
+	void CreateSprite(const char* filePath, bool screenWrapping, vec2 spriteSize);
 	World* GetWorld();
 
 	vec2 position;

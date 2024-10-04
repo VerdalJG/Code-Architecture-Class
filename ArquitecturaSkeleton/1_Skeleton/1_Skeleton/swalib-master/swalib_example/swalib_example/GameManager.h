@@ -10,9 +10,9 @@ class GameManager
 {
 public:
 	static GameManager& GetInstance();
-	void Initialize(TimeManager* _Timer);
+	void Initialize(TimeManager* timer);
 	void Slot();
-	void Tick(float DeltaTime);
+	void Tick(float deltaTime);
 	void Terminate();
 	void CollisionCheck();
 

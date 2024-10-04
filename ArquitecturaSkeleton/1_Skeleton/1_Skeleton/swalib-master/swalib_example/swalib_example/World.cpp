@@ -15,21 +15,22 @@ void World::Terminate()
 
 }
 
-void World::AddEntity(Entity* _entity)
+void World::AddEntity(Entity* entity)
 {
-	entities.push_back(_entity);
-	RenderEngine::GetInstance().RegisterEntity(_entity);
+	entities.push_back(entity);
+	RenderEngine::GetInstance().RegisterEntity(entity);
 }
 
-void World::RemoveEntity(Entity* _entity)
+void World::RemoveEntity(Entity* entity)
 {
-	entities.erase(std::remove(entities.begin(), entities.end(), _entity), entities.end());
+	entities.erase(std::remove(entities.begin(), entities.end(), entity), entities.end());
+	delete(entity);
 }
 
-void World::Tick(float _deltaTime)
+void World::Tick(float deltaTime)
 {
 	for (Entity* entity : entities)
 	{
-		entity->Tick(_deltaTime);
+		entity->Tick(deltaTime);
 	}
 }

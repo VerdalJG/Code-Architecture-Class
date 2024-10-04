@@ -18,9 +18,9 @@ Entity::~Entity()
 	}
 }
 
-void Entity::CreateSprite(const char* FilePath, bool ScreenWrapping, vec2 SpriteSize)
+void Entity::CreateSprite(const char* filePath, bool screenWrapping, vec2 spriteSize)
 {
-	sprite = new Sprite(FilePath, ScreenWrapping, SpriteSize);
+	sprite = new Sprite(filePath, screenWrapping, spriteSize);
 }
 
 World* Entity::GetWorld()

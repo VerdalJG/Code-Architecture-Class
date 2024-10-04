@@ -3,19 +3,19 @@
 
 Sprite::Sprite(const char* FilePath, bool ScreenWrapping, vec2 SpriteSize)
 {
-	Texture = RenderEngine::GetInstance().LoadSprite(FilePath, ScreenWrapping);
+	texture = RenderEngine::GetInstance().LoadSprite(FilePath, ScreenWrapping);
 	SetSize(SpriteSize);
-	Offset = vec2(0, 0);
+	offset = vec2(0, 0);
 }
 
 Sprite::~Sprite()
 {
-	RenderEngine::GetInstance().UnloadSprite(Texture);
+	RenderEngine::GetInstance().UnloadSprite(texture);
 }
 
 void Sprite::SetTexture(const char* FilePath, bool ScreenWrapping)
 {
-	RenderEngine::GetInstance().UnloadSprite(Texture);
+	RenderEngine::GetInstance().UnloadSprite(texture);
 	GLuint NewTexture = RenderEngine::GetInstance().LoadSprite(FilePath, ScreenWrapping);
-	Texture = NewTexture;
+	texture = NewTexture;
 }

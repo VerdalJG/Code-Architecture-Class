@@ -27,9 +27,9 @@ void RenderEngine::Initialize(TimeManager* _Timer)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// Blend func. for alpha color.
 
 	timer = _Timer;
-	vec2 SpriteSize = vec2(128.0f, 128.0f);
+	vec2 spriteSize = vec2(128.0f, 128.0f);
 	background = new Background();
-	background->sprite = new Sprite("data/circle-bkg-128.png", true, SpriteSize);
+	background->sprite = new Sprite("data/circle-bkg-128.png", true, spriteSize);
 }
 
 void RenderEngine::Update()
@@ -49,17 +49,17 @@ void RenderEngine::Update()
 void RenderEngine::DisplayTimerValues()
 {
 	// Buffers for strings below
-	char FPSBuffer[50];
+	char fpsBuffer[50];
 	char realTimeBuffer[50];
 	char logicTimeBuffer[50];
 
 	// Concatenate string with numbers
-	snprintf(FPSBuffer, 50, "FPS: %f", timer->GetFPS());
+	snprintf(fpsBuffer, 50, "FPS: %f", timer->GetFPS());
 	snprintf(realTimeBuffer, 50, "RT: %f", timer->GetTime());
 	snprintf(logicTimeBuffer, 50, "LT: %f", timer->GetLogicTime());
 
 	// Text
-	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 50), FPSBuffer);
+	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 50), fpsBuffer);
 	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 70), realTimeBuffer);
 	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 90), logicTimeBuffer);
 }
@@ -71,16 +71,16 @@ void RenderEngine::Terminate()
 	delete(background);
 }
 
-void RenderEngine::RenderTiled(Sprite* _sprite)
+void RenderEngine::RenderTiled(Sprite* sprite)
 {
 	// Render tiled image
-	int SizeX = _sprite->GetSize().x;
-	int SizeY = _sprite->GetSize().y;
+	int sizeX = sprite->GetSize().x;
+	int sizeY = sprite->GetSize().y;
 
-	for (int i = 0; i <= SCR_WIDTH / SizeX; i++)
+	for (int i = 0; i <= SCR_WIDTH / sizeX; i++)
 	{
-		for (int j = 0; j <= SCR_HEIGHT / SizeY; j++) {
-			CORE_RenderCenteredSprite(vec2(i * SizeX + SizeX/2, j * SizeY + SizeY/2), vec2(SizeX, SizeY), _sprite->GetTexture());
+		for (int j = 0; j <= SCR_HEIGHT / sizeY; j++) {
+			CORE_RenderCenteredSprite(vec2(i * sizeX + sizeX/2, j * sizeY + sizeY/2), vec2(sizeX, sizeY), sprite->GetTexture());
 		}
 	}
 }
@@ -96,19 +96,19 @@ void RenderEngine::RenderSprites()
 	}
 }
 
-void RenderEngine::RegisterEntity(Entity* _entity)
+void RenderEngine::RegisterEntity(Entity* entity)
 {
-	entities.push_back(_entity);
+	entities.push_back(entity);
 }
 
-GLuint RenderEngine::LoadSprite(const char* FilePath, bool ScreenWrapping)
+GLuint RenderEngine::LoadSprite(const char* filePath, bool screenWrapping)
 {
-	return CORE_LoadPNG(FilePath, ScreenWrapping);
+	return CORE_LoadPNG(filePath, screenWrapping);
 }
 
-void RenderEngine::UnloadSprite(GLuint TextureID)
+void RenderEngine::UnloadSprite(GLuint textureID)
 {
-	CORE_UnloadPNG(TextureID);
+	CORE_UnloadPNG(textureID);
 }
 
 

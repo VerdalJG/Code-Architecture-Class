@@ -10,17 +10,17 @@ class RenderEngine
 {
 public:
 	static RenderEngine& GetInstance();
-	void Initialize(TimeManager* Timer);
+	void Initialize(TimeManager* timer);
 	void Update();
 	void Terminate();
 
 	void DisplayTimerValues();
-	void RenderTiled(Sprite* _sprite);
+	void RenderTiled(Sprite* sprite);
 	void RenderSprites();
 
-	void RegisterEntity(Entity* _entity);
-	GLuint LoadSprite(const char* FilePath, bool ScreenWrapping);
-	void UnloadSprite(GLuint TextureID);
+	void RegisterEntity(Entity* entity);
+	GLuint LoadSprite(const char* filePath, bool screenWrapping);
+	void UnloadSprite(GLuint textureID);
 
 
 

@@ -1,7 +1,7 @@
 #include "Timer.h"
 
 TimeManager::TimeManager() :
-	FPS(0),
+	fps(0),
 	deltaTime(0),
 	accumulatedTime(0),
 	logicTime(0)
@@ -58,7 +58,7 @@ void TimeManager::UpdateTime()
 	HandleDeathSpiral();
 
 	// Get framerate every frame
-	FPS = 1 / deltaTime;
+	fps = 1 / deltaTime;
 
 	// Record the current timestamp as the previous timestamp for the next frame
 	previousTickCount = currentTickCount;

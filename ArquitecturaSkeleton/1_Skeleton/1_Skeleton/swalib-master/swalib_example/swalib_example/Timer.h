@@ -10,7 +10,7 @@ public:
 	bool ShouldTick();
 	float GetFixedTickRate();
 	void UpdateTime();
-	double GetFPS() { return FPS; }
+	double GetFPS() { return fps; }
 	double GetTime();
 	double GetLogicTime() { return logicTime; }
 	
@@ -19,7 +19,7 @@ private:
 	
 	void HandleDeathSpiral();
 
-	double FPS;
+	double fps;
 	double deltaTime;
 	double accumulatedTime;
 	double logicTime;

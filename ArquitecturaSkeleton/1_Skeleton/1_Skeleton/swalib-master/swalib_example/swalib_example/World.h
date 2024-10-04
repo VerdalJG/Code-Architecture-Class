@@ -10,9 +10,9 @@ class World
 public:
 	World();
 	void Terminate();
-	void AddEntity(Entity* Entity);
-	void RemoveEntity(Entity* Entity);
-	void Tick(float DeltaTime);
+	void AddEntity(Entity* entity);
+	void RemoveEntity(Entity* entity);
+	void Tick(float deltaTime);
 
 private:
 	std::vector<Entity*> entities;

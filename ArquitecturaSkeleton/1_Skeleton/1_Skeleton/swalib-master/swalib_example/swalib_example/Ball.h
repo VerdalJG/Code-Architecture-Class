@@ -8,7 +8,7 @@ public:
 	Ball();
 	~Ball();
 
-	virtual void Tick(const float DeltaTime) override;
+	virtual void Tick(const float deltaTime) override;
 	void RunPhysics(const float deltaTime);
 	bool CollisionCheck(vec2 newPosition);
 	void OnCollide();
@@ -21,10 +21,10 @@ private:
 
 public:
 	vec2 GetVelocity() { return velocity; }
-	void SetVelocity(vec2 velocity) { velocity = velocity; }
+	void SetVelocity(vec2 newVelocity) { velocity = newVelocity; }
 
 	float GetRadius() { return radius; }
-	void SetRadius(float radius) { radius = radius; }
+	void SetRadius(float newRadius) { radius = newRadius; }
 };
 
 

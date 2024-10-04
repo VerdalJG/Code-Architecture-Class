@@ -52,14 +52,14 @@ bool Ball::CollisionCheck(vec2 newPosition)
 	World* world = GetWorld();
 	for (Entity* entity : world->GetEntities())
 	{
-		Ball* ballB = static_cast<Ball*>(entity);
-		if (ballB && this != ballB)
+		Ball* collidingBall = static_cast<Ball*>(entity);
+		if (collidingBall && this != collidingBall)
 		{
-			float LimitSquared = (this->GetRadius() + ballB->GetRadius()) * (this->GetRadius() + ballB->GetRadius());
-			if (vlen2(newPosition - ballB->GetPosition()) <= LimitSquared)
+			float limitSquared = (this->GetRadius() + collidingBall->GetRadius()) * (this->GetRadius() + collidingBall->GetRadius());
+			if (vlen2(newPosition - collidingBall->GetPosition()) <= limitSquared)
 			{
 				OnCollide();
-				ballB->OnCollide();
+				collidingBall->OnCollide();
 				return true;
 			}
 		}

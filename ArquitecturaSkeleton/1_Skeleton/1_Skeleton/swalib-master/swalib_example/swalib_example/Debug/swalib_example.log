@@ -1,1 +1,19 @@
-﻿  swalib_example.vcxproj -> D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\Debug\swalib_example.exe
+﻿  example.cpp
+  Background.cpp
+  Ball.cpp
+D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(14,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Ball.cpp(14,80): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Entity.cpp
+  GameManager.cpp
+D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\GameManager.cpp(71,20): warning C4018: '<': signed/unsigned mismatch
+  Render.cpp
+D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(77,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(78,12): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(83,66): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(83,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(83,90): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\swalib_example\Render.cpp(83,83): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Sprite.cpp
+  World.cpp
+  Generating Code...
+  swalib_example.vcxproj -> D:\WorkUni\UNI\Code-Architecture-Class\ArquitecturaSkeleton\1_Skeleton\1_Skeleton\swalib-master\swalib_example\Debug\swalib_example.exe

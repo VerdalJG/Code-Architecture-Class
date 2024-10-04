@@ -4,9 +4,9 @@
 
 int Main(void)
 {
-	TimeManager* Timer = new TimeManager();
-	RenderEngine::GetInstance().Initialize(Timer);
-	GameManager::GetInstance().Initialize(Timer);
+	TimeManager* timer = new TimeManager();
+	RenderEngine::GetInstance().Initialize(timer);
+	GameManager::GetInstance().Initialize(timer);
 
 	while (!SYS_GottaQuit()) // Controlling a request to terminate an application.
 	{

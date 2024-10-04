@@ -4,22 +4,22 @@
 class Sprite
 {
 public:
-	Sprite(const char* FilePath, bool ScreenWrapping, vec2 SpriteSize);
+	Sprite(const char* filePath, bool screenWrapping, vec2 spriteSize);
 	~Sprite();
 
 private:
-	GLuint Texture;
-	vec2 Size;
-	vec2 Offset;
+	GLuint texture;
+	vec2 size;
+	vec2 offset;
 
 public:
-	GLuint GetTexture() { return Texture; }
-	void SetTexture(const char* FilePath, bool ScreenWrapping);
+	GLuint GetTexture() { return texture; }
+	void SetTexture(const char* filePath, bool screenWrapping);
 
-	vec2 GetSize() { return Size; }
-	void SetSize(vec2 NewSize) { Size = NewSize; }
+	vec2 GetSize() { return size; }
+	void SetSize(vec2 newSize) { size = newSize; }
 
-	vec2 GetOffset() { return Offset; }
-	void SetOffset(vec2 NewOffset) { Offset = NewOffset; }
+	vec2 GetOffset() { return offset; }
+	void SetOffset(vec2 newOffset) { offset = newOffset; }
 };
 
