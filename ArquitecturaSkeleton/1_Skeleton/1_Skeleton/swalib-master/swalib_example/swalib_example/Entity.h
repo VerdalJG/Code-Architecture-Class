@@ -3,13 +3,20 @@
 
 class Sprite;
 class World;
+class Component;
+class Message;
 
 class Entity
 {
 public:
 	Entity();
 	~Entity();
-	virtual void Tick(float deltaTime) {};
+	virtual void Tick(float deltaTime);
+	void AddComponent(Component* component);
+	
+	template<typename T>
+	T* GetComponent();
+	void BroadcastMessage(Message* message);
 
 protected:
 
@@ -30,6 +37,7 @@ public:
 
 private:
 	Sprite* sprite;
+	std::vector<Component*> components;
 
 
 };
