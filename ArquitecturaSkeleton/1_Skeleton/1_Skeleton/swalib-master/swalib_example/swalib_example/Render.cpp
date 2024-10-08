@@ -5,6 +5,15 @@
 #include "Entity.h"
 #include "Background.h"
 
+#include <include/rapidjson/rapidjson.h>
+#include <include/rapidjson/document.h>
+#include <include/rapidjson/writer.h>
+#include <include/rapidjson/filereadstream.h>
+#include <include/rapidjson/stringbuffer.h>
+#include <iostream>
+#include <cctype>
+using namespace rapidjson;
+
 RenderEngine& RenderEngine::GetInstance()
 {
 	static RenderEngine instance;
@@ -42,6 +51,7 @@ void RenderEngine::Update()
 	RenderTiled(background->sprite);
 	RenderSprites();
 	DisplayTimerValues();
+	RenderJSONData();
 
 	// Exchanges the front and back buffers
 	SYS_Show();
@@ -65,6 +75,84 @@ void RenderEngine::DisplayTimerValues()
 	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 90), logicTimeBuffer);
 }
 
+void RenderEngine::RenderJSONData()
+{
+	//Print JSON content
+	FILE* file = fopen("data/Test.json", "rb");
+	char buffer[65536];
+	FileReadStream stream(file, buffer, sizeof(buffer));
+	Document document;
+	document.ParseStream(stream);
+	fclose(file);
+
+	int line = 8;
+	for (Value::ConstMemberIterator iterator = document.MemberBegin(); iterator != document.MemberEnd(); ++iterator)
+	{
+		char documentString[50] = { 0 };
+
+		// Convert keys/names of JSON members to uppercase
+		std::string str = iterator->name.GetString();
+		for (char& c : str) 
+		{
+			c = std::toupper(c);
+		}
+
+		// Get the value and value type
+		Type valueType = iterator->value.GetType();
+		const Value& value = document[iterator->name];
+
+		// Handle different value types
+		std::string valueString;
+		switch (valueType)
+		{
+			case Type::kStringType:
+				valueString = iterator->value.GetString();
+				for (char& c : valueString) 
+				{
+					c = std::toupper(c);
+				}
+				snprintf(documentString, 50, "%s : %s", str.c_str(), valueString.c_str());
+				break;
+			case Type::kTrueType:
+				valueString = "TRUE";
+				break;
+			case Type::kFalseType:
+				valueString = "FALSE";
+				break;
+			case Type::kNullType:
+				valueString = "NULL";
+				break;
+			case Type::kNumberType:
+				if (iterator->value.IsInt()) 
+				{ 
+					valueString = std::to_string(iterator->value.GetInt()); 
+				}
+				else if (iterator->value.IsFloat()) 
+				{ 
+					valueString = std::to_string(iterator->value.GetFloat()); 
+				}
+				else if (iterator->value.IsDouble()) 
+				{
+					valueString = std::to_string(iterator->value.GetDouble());
+				}
+				break;
+			case Type::kArrayType:
+				for (int i = 0; i < value.Size(); i++)
+				{
+					valueString += std::to_string(value[i].GetInt());
+				}
+				break;
+			default:
+				break;
+		}
+
+		// Print strings on the right of the screen, use 'line' to perform this for every string so they don't overlap
+		snprintf(documentString, 50, "%s : %s", str.c_str(), valueString.c_str());
+		FONT_DrawString(vec2(SCR_WIDTH - 256, SCR_HEIGHT - 16 * line), documentString);
+		line++;
+	}
+}
+
 void RenderEngine::Terminate()
 {
 	// Unload font.
@@ -81,7 +169,8 @@ void RenderEngine::RenderTiled(Sprite* sprite)
 
 	for (int i = 0; i <= SCR_WIDTH / sizeX; i++)
 	{
-		for (int j = 0; j <= SCR_HEIGHT / sizeY; j++) {
+		for (int j = 0; j <= SCR_HEIGHT / sizeY; j++) 
+		{
 			CORE_RenderCenteredSprite(vec2(i * sizeX + sizeX/2, j * sizeY + sizeY/2), vec2(sizeX, sizeY), sprite->GetTexture());
 		}
 	}
@@ -103,7 +192,6 @@ void RenderEngine::RenderSprites()
 			vec2 size = sprite->GetSize() * entity->GetScale();
 			CORE_RenderCenteredSprite(position, size, sprite->GetTexture());
 		}
-
 	}
 }
 

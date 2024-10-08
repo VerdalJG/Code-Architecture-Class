@@ -5,7 +5,7 @@
 class Ball : public Entity
 {
 public:
-	Ball();
+	Ball(const char* jsonFilePath);
 	~Ball();
 
 	virtual void Tick(const float deltaTime) override;

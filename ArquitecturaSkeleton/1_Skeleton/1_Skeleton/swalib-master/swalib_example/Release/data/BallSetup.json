@@ -1,0 +1,40 @@
+{
+    "Entity": "Ball",
+    "pos": 
+    {
+        "x": 640,
+        "y": 480
+    },
+    "vel": 400,
+    "radius": 16,
+    "CollisionComponent": 
+    {
+        "pos": 
+        {
+            "$ref": "#/position"
+        },
+        "radius": 
+        {
+            "$ref": "#/radius"
+        }
+    },
+    "DisplacementComponent": 
+    {
+        "pos": 
+        {
+            "$ref": "#/position"
+        },
+        "vel": 
+        {
+            "$ref": "#/velocity"
+        }
+    },
+    "RenderComponent": 
+    {
+        "radius": 
+        {
+            "$ref": "#/radius"
+        },
+        "gfx": "data/tyrian_ball.png"
+    }
+}

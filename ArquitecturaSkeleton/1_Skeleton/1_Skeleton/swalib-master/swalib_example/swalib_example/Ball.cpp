@@ -7,8 +7,23 @@
 #include "RenderComponent.h"
 #include "Sprite.h"
 
-Ball::Ball()
+Ball::Ball(const char* jsonFilePath)
 {
+	FILE* fp = fopen(jsonFilePath, "rb");
+	char readBuffer[65536];
+	FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+	Document document;
+	document.ParseStream(is);
+	fclose(fp);
+	vec2 maxPos = vec2(document["pos"].FindMember("x")->value.GetFloat(), document["pos"].FindMember("y")->value.GetFloat());
+	float maxVel = document["vel"].GetFloat();
+	float radius = document["radius"].GetFloat();
+	//vec2 pos = vec2(CORE_FRand(0.0, SCR_WIDTH), CORE_FRand(0.0, SCR_HEIGHT));
+	//vec2 vel = vec2(CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED), CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED));
+	vec2 pos = vec2(CORE_FRand(0.0, maxPos.x), CORE_FRand(0.0, maxPos.y));
+	vec2 vel = vec2(CORE_FRand(-maxVel, +maxVel), CORE_FRand(-maxVel, +maxVel));
+
+
 	// Set initial movement values
 	MovementComponent* movementComponent = new MovementComponent();
 	vec2 intialPosition = vec2(CORE_FRand(0.0 + radius, SCR_WIDTH - radius), CORE_FRand(0.0 + radius, SCR_HEIGHT - radius));

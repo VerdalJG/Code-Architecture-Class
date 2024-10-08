@@ -16,6 +16,7 @@ public:
 	void Terminate();
 
 	void DisplayTimerValues();
+	void RenderJSONData();
 	void RenderTiled(Sprite* sprite);
 	void RenderSprites();
 
