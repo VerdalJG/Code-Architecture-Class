@@ -29,8 +29,8 @@ void RenderEngine::Initialize(TimeManager* _Timer)
 	timer = _Timer;
 	vec2 spriteSize = vec2(128.0f, 128.0f);
 
-	backgroundTexture = LoadSprite("data/circle-bkg-128.png", true);
-	ballTexture = LoadSprite("data/tyrian_ball.png", false);
+	backgroundTexture = LoadTexture("data/circle-bkg-128.png", true);
+	ballTexture = LoadTexture("data/tyrian_ball.png", false);
 
 	background = new Background();
 }
@@ -68,7 +68,7 @@ void RenderEngine::DisplayTimerValues()
 void RenderEngine::Terminate()
 {
 	// Unload font.
-	UnloadSprites();
+	UnloadTextures();
 	FONT_End();
 	delete(background);
 }
@@ -91,10 +91,19 @@ void RenderEngine::RenderSprites()
 {
 	for (Entity* entity : entities)
 	{
-		Sprite* sprite = entity->GetSprite();
-		vec2 position = entity->GetPosition() + sprite->GetOffset();
-		vec2 size = sprite->GetSize() * entity->GetScale();
-		CORE_RenderCenteredSprite(position, size, sprite->GetTexture());
+		RenderComponent* renderComponent = entity->GetComponent<RenderComponent>();
+		if (!renderComponent)
+		{
+			continue;
+		}
+		Sprite* sprite = renderComponent->GetSprite();
+		if (sprite)
+		{
+			vec2 position = entity->GetPosition() + renderComponent->GetPositionOffset();
+			vec2 size = sprite->GetSize() * entity->GetScale();
+			CORE_RenderCenteredSprite(position, size, sprite->GetTexture());
+		}
+
 	}
 }
 
@@ -103,12 +112,12 @@ void RenderEngine::RegisterEntity(Entity* entity)
 	entities.push_back(entity);
 }
 
-GLuint RenderEngine::LoadSprite(const char* filePath, bool screenWrapping)
+GLuint RenderEngine::LoadTexture(const char* filePath, bool screenWrapping)
 {
 	return CORE_LoadPNG(filePath, screenWrapping);
 }
 
-void RenderEngine::UnloadSprites()
+void RenderEngine::UnloadTextures()
 {
 	CORE_UnloadPNG(ballTexture);
 	CORE_UnloadPNG(backgroundTexture);

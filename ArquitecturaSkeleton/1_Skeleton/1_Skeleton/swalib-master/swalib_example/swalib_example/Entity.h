@@ -1,5 +1,7 @@
 #pragma once
 #include "Globals.h"
+#include "Component.h"
+
 
 class Sprite;
 class World;
@@ -14,15 +16,26 @@ public:
 	virtual void Tick(float deltaTime);
 	void AddComponent(Component* component);
 	
+	// Normally game engines do not use RTTI, should use different methods other than dynamic_cast for performance
 	template<typename T>
-	T* GetComponent();
+	T* GetComponent()
+	{
+		for (Component* component : components)
+		{
+			if (T* derivedComponent = dynamic_cast<T*>(component))
+			{
+				return derivedComponent;
+			}
+		}
+		return nullptr;
+	}
+
 	void BroadcastMessage(Message* message);
 
 protected:
-
-	void CreateSprite(GLuint textureID, vec2 spriteSize);
 	World* GetWorld();
 
+	std::vector<Component*> components;
 	vec2 position;
 	vec2 scale;
 	
@@ -33,11 +46,9 @@ public:
 	vec2 GetScale() { return scale; }
 	void SetScale(vec2 newScale) { scale = newScale; }
 
-	Sprite* GetSprite() { return sprite; }
-
 private:
-	Sprite* sprite;
-	std::vector<Component*> components;
+
+
 
 
 };

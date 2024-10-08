@@ -17,7 +17,6 @@ void GameManager::Slot()
 	while (timer->ShouldTick())
 	{
 		world->Tick(timer->GetFixedTickRate());
-		CollisionCheck();
 	}
 }
 
@@ -35,29 +34,6 @@ void GameManager::Terminate()
 			delete(entity);
 		}
 		delete(world);
-	}
-}
-
-void GameManager::CollisionCheck()
-{
-	for (uint i = 0; i < NUM_BALLS; i++)
-	{
-		// Collision detection.
-		for (uint j = 0; j < NUM_BALLS; j++) 
-		{
-			Ball* ballA = static_cast<Ball*>(world->GetEntities()[i]);
-			Ball* ballB = static_cast<Ball*>(world->GetEntities()[j]);
-			if (ballA != ballB) 
-			{
-				float LimitSquared = (ballA->GetRadius() + ballB->GetRadius()) * (ballA->GetRadius() + ballB->GetRadius());
-				if (vlen2(ballA->GetPosition() - ballB->GetPosition()) <= LimitSquared)
-				{
-					ballA->OnCollide();
-					ballB->OnCollide();
-					break;
-				}
-			}
-		}
 	}
 }
 

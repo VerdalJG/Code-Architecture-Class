@@ -14,7 +14,6 @@ public:
 	void Slot();
 	void Tick(float deltaTime);
 	void Terminate();
-	void CollisionCheck();
 
 public:
 	World* world;

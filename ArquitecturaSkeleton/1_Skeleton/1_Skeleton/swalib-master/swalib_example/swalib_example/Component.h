@@ -1,7 +1,7 @@
 #pragma once
 class Entity;
 class Message;
-class World();
+class World;
 
 class Component
 {

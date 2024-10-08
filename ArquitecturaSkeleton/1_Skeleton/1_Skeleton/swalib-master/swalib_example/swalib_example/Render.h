@@ -1,7 +1,6 @@
 #pragma once
-#include <unordered_map>
-#include <functional>
 #include "Globals.h"
+#include "RenderComponent.h"
 
 class TimeManager;
 class Sprite;
@@ -21,8 +20,8 @@ public:
 	void RenderSprites();
 
 	void RegisterEntity(Entity* entity);
-	GLuint LoadSprite(const char* filePath, bool screenWrapping);
-	void UnloadSprites();
+	GLuint LoadTexture(const char* filePath, bool screenWrapping);
+	void UnloadTextures();
 
 	GLuint ballTexture;
 	GLuint backgroundTexture;

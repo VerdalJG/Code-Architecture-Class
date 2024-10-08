@@ -1,9 +1,10 @@
 #pragma once
-#include "Globals.h"
+#include "Message.h"
 
-class MovementMessage
+class MovementMessage : public Message
 {
 public:
+	MovementMessage(vec2 newPosition);
 	vec2 newPosition;
 };
 

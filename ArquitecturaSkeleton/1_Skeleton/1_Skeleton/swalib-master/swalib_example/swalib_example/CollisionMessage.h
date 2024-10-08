@@ -1,5 +1,6 @@
 #pragma once
 #include "Message.h"
+#include "Globals.h"
 
 class CollisionComponent;
 
@@ -28,5 +29,6 @@ public:
 	CollisionComponent* collidingComponent;
 	CollisionType collisionType;
 	CollisionDirection collisionDirection; // Only relevant if type is ScreenEdgeCollision
+	vec2 resolvedPosition;
 };
 

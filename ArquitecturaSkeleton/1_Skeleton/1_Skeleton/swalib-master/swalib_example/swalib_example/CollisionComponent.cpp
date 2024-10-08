@@ -29,12 +29,9 @@ void CollisionComponent::CollisionCheck()
 			{
 				CollisionMessage message = CollisionMessage(otherComponent);
 				owner->BroadcastMessage(&message);
-				otherComponent->owner->BroadcastMessage(&message);
 			}
 		}
 	}
-
-
 }
 
 void CollisionComponent::ScreenLimitCheck()

@@ -4,14 +4,16 @@
 class MovementComponent : public Component
 {
 public:
-	MovementComponent(Entity* entity);
+	MovementComponent();
 	void Tick(float deltaTime) override;
 	virtual void ReceiveMessage(Message* message) override;
 
 
 private:
 	vec2 position;	// Position.
+	vec2 previousMovement;// Used to reverse the movement that occurred in this frame to resolve collision
 	vec2 velocity;	// Velocity.
+
 
 public:
 	vec2 GetPosition() { return position; }
@@ -19,7 +21,5 @@ public:
 
 	vec2 GetVelocity() { return velocity; }
 	void SetVelocity(vec2 velocity) { this->velocity = velocity; }
-
-
 };
 
