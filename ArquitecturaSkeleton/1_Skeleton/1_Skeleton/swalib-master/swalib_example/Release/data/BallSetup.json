@@ -31,10 +31,6 @@
     },
     "RenderComponent": 
     {
-        "spriteSize": 
-        {
-            "$ref": "#/radius"
-        },
         "texture": "data/tyrian_ball.png"
     }
 }
