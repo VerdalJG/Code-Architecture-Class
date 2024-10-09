@@ -14,20 +14,15 @@ Ball::Ball(const char* jsonFilePath)
 	FileReadStream is(fp, readBuffer, sizeof(readBuffer));
 	Document document;
 	document.ParseStream(is);
-	fclose(fp);
-	vec2 maxPos = vec2(document["pos"].FindMember("x")->value.GetFloat(), document["pos"].FindMember("y")->value.GetFloat());
-	float maxVel = document["vel"].GetFloat();
+	vec2 maxPosition = vec2(document["position"].FindMember("x")->value.GetFloat(), document["position"].FindMember("y")->value.GetFloat());
+	float maxVelocity = document["velocity"].GetFloat();
 	float radius = document["radius"].GetFloat();
-	//vec2 pos = vec2(CORE_FRand(0.0, SCR_WIDTH), CORE_FRand(0.0, SCR_HEIGHT));
-	//vec2 vel = vec2(CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED), CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED));
-	vec2 pos = vec2(CORE_FRand(0.0, maxPos.x), CORE_FRand(0.0, maxPos.y));
-	vec2 vel = vec2(CORE_FRand(-maxVel, +maxVel), CORE_FRand(-maxVel, +maxVel));
-
+	fclose(fp);
 
 	// Set initial movement values
 	MovementComponent* movementComponent = new MovementComponent();
-	vec2 intialPosition = vec2(CORE_FRand(0.0 + radius, SCR_WIDTH - radius), CORE_FRand(0.0 + radius, SCR_HEIGHT - radius));
-	vec2 initialVelocity = vec2(CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED), CORE_FRand(-MAX_BALL_SPEED, +MAX_BALL_SPEED));
+	vec2 intialPosition = vec2(CORE_FRand(0.0 + radius, maxPosition.x - radius), CORE_FRand(0.0 + radius, maxPosition.y - radius));
+	vec2 initialVelocity = vec2(CORE_FRand(-maxVelocity, maxVelocity), CORE_FRand(-maxVelocity, maxVelocity));
 	movementComponent->SetPosition(intialPosition);
 	movementComponent->SetVelocity(initialVelocity);
 
@@ -37,6 +32,7 @@ Ball::Ball(const char* jsonFilePath)
 
 	RenderComponent* renderComponent = new RenderComponent();
 	vec2 spriteSize = vec2(radius * 2.0f, radius * 2.0f);
+	//renderComponent->SetGfx(CORE_LoadPNG(document["RenderComponent"].FindMember("gfx")->value.GetString(), false));
 	renderComponent->SetSprite(new Sprite(RenderEngine::GetInstance().ballTexture, spriteSize));
 
 	// Order of execution
