@@ -20,6 +20,7 @@ public:
 	const unsigned int NUM_BALLS = 10;	// Max. num balls.
 
 private:
+	const char* jsonFilePath = "data/BallSetup.json";
 	TimeManager* timer;
 };
 

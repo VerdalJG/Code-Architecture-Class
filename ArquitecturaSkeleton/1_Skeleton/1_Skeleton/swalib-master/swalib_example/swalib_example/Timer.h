@@ -28,7 +28,7 @@ private:
 	LARGE_INTEGER previousTickCount;
 	__int64 ticksPerSecond; // PC's tick rate
 	const float TICK_RATE = 1.0f / 60.0f;
-	const float TIME_SCALE = 6.0f;
+	const float TIME_SCALE = 2.0f;
 	const double MAX_ACCUMULATED_TIME = 1.0f / 15.0f;
 
 };

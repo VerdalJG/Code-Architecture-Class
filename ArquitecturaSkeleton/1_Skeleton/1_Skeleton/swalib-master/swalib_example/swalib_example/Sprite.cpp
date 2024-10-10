@@ -1,9 +1,9 @@
 #include "Sprite.h"
 #include "Render.h"
 
-Sprite::Sprite(GLuint textureID, vec2 SpriteSize)
+Sprite::Sprite(const char* filePath, bool screenWrapping, vec2 SpriteSize)
 {
-	texture = textureID;
+	SetTexture(filePath, screenWrapping);
 	SetSize(SpriteSize);
 }
 
@@ -12,8 +12,8 @@ Sprite::~Sprite()
 
 }
 
-void Sprite::SetTexture(const char* FilePath, bool ScreenWrapping)
+void Sprite::SetTexture(const char* filePath, bool screenWrapping)
 {
-	GLuint NewTexture = RenderEngine::GetInstance().LoadTexture(FilePath, ScreenWrapping);
+	GLuint NewTexture = RenderEngine::GetInstance().GetTexture(filePath, screenWrapping);
 	texture = NewTexture;
 }

@@ -5,7 +5,7 @@ class Sprite;
 class Background
 {
 public:
-	Background();
+	Background(const char* filePath, bool screenWrapping);
 	~Background();
 
 	Sprite* sprite;

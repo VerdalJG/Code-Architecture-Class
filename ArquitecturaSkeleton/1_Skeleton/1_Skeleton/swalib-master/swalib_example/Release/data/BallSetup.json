@@ -5,7 +5,7 @@
         "x": 640,
         "y": 480
     },
-    "velocity": 400,
+    "velocity": 300,
     "radius": 16,
     "CollisionComponent": 
     {
@@ -31,6 +31,7 @@
     },
     "RenderComponent": 
     {
-        "texture": "data/tyrian_ball.png"
+        "texture": "data/tyrian_ball.png",
+        "wrapping": false
     }
 }

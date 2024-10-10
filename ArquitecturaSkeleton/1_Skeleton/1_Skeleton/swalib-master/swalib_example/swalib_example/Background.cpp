@@ -2,9 +2,9 @@
 #include "Render.h"
 #include "Sprite.h"
 
-Background::Background()
+Background::Background(const char* filePath, bool screenWrapping)
 {
-	sprite = new Sprite(RenderEngine::GetInstance().backgroundTexture, vec2(128.0f, 128.0f));
+	sprite = new Sprite(filePath, screenWrapping, vec2(128.0f, 128.0f));
 }
 
 Background::~Background()

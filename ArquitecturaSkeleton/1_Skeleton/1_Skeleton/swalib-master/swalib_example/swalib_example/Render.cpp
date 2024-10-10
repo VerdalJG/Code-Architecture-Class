@@ -38,10 +38,8 @@ void RenderEngine::Initialize(TimeManager* _Timer)
 	timer = _Timer;
 	vec2 spriteSize = vec2(128.0f, 128.0f);
 
-	backgroundTexture = LoadTexture("data/circle-bkg-128.png", true);
-	ballTexture = LoadTexture("data/tyrian_ball.png", false);
-
-	background = new Background();
+	// Maybe reading this in a json file could be useful
+	background = new Background("data/circle-bkg-128.png", true);
 }
 
 void RenderEngine::Update()
@@ -137,7 +135,7 @@ void RenderEngine::RenderJSONData()
 				}
 				break;
 			case Type::kArrayType:
-				for (int i = 0; i < value.Size(); i++)
+				for (unsigned int i = 0; i < value.Size(); i++)
 				{
 					valueString += std::to_string(value[i].GetInt());
 				}
@@ -200,15 +198,29 @@ void RenderEngine::RegisterEntity(Entity* entity)
 	entities.push_back(entity);
 }
 
-GLuint RenderEngine::LoadTexture(const char* filePath, bool screenWrapping)
+GLuint RenderEngine::GetTexture(const char* filePath, bool screenWrapping)
 {
-	return CORE_LoadPNG(filePath, screenWrapping);
+	TextureKey key{ filePath, screenWrapping };
+
+	auto iterator = loadedTextures.find(key);
+	if (iterator != loadedTextures.end())
+	{
+		return iterator->second; // Return texture ID
+	}
+
+	GLuint textureID = CORE_LoadPNG(filePath, screenWrapping);
+	
+	loadedTextures[key] = textureID; // Store in loadedTextures
+
+	return textureID;
 }
 
 void RenderEngine::UnloadTextures()
 {
-	CORE_UnloadPNG(ballTexture);
-	CORE_UnloadPNG(backgroundTexture);
+	for (const std::pair<TextureKey, GLuint>& pair : loadedTextures)
+	{
+		CORE_UnloadPNG(pair.second);
+	}
 }
 
 
