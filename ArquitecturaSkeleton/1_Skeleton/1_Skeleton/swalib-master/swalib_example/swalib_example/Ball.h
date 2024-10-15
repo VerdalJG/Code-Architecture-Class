@@ -6,7 +6,7 @@ class Ball : public Entity
 {
 public:
 	Ball();
-	~Ball();
+	~Ball() override;
 
 	virtual void Tick(const float deltaTime) override;
 

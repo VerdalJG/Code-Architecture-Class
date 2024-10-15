@@ -8,6 +8,16 @@
 #include "RenderComponent.h"
 #include "Render.h"
 #include "Entity.h"
+#include "WorldManager.h"
+
+#include <include/rapidjson/rapidjson.h>
+#include <include/rapidjson/document.h>
+#include <include/rapidjson/writer.h>
+#include <include/rapidjson/filereadstream.h>
+#include <include/rapidjson/stringbuffer.h>
+#include <iostream>
+#include <cctype>
+using namespace rapidjson;
 
 
 GameManager& GameManager::GetInstance()
@@ -21,25 +31,19 @@ void GameManager::Slot()
 	timer->UpdateTime();
 	while (timer->ShouldTick())
 	{
-		world->Tick(timer->GetFixedTickRate());
+		Tick(timer->GetFixedTickRate());
 	}
 }
 
 void GameManager::Tick(float deltaTime)
 {
-	
+	World* currentWorld = WorldManager::GetInstance().GetCurrentWorld();
+	currentWorld->Tick(timer->GetFixedTickRate());
 }
 
 void GameManager::Terminate()
 {
-	if (world)
-	{
-		for (Entity* entity : world->GetEntities())
-		{
-			delete(entity);
-		}
-		delete(world);
-	}
+	
 }
 
 
@@ -50,7 +54,7 @@ void GameManager::Initialize(TimeManager* _timer)
 	timer = _timer;
 
 	FILE* file = fopen(jsonFilePath, "rb");
-	char readBuffer[65536];
+	char* readBuffer = new char[65536]; // use heap
 	FileReadStream stream(file, readBuffer, sizeof(readBuffer));
 	Document document;
 	document.ParseStream(stream);
@@ -62,7 +66,7 @@ void GameManager::Initialize(TimeManager* _timer)
 	bool wrapping = document["RenderComponent"].FindMember("wrapping")->value.GetBool();
 
 	fclose(file);
-
+	delete[] readBuffer;
 
 	for (unsigned int i = 0; i < NUM_BALLS; i++)
 	{

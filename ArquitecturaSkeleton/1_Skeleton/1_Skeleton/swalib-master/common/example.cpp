@@ -1,11 +1,13 @@
 #include "../swalib_example/swalib_example/GameManager.h"
 #include "../swalib_example/swalib_example/Render.h"
 #include "../swalib_example/swalib_example/Timer.h"
+#include "../swalib_example//swalib_example/WorldManager.h"
 
 int Main(void)
 {
 	TimeManager* timer = new TimeManager();
 	RenderEngine::GetInstance().Initialize(timer);
+	WorldManager::GetInstance().Initialize();
 	GameManager::GetInstance().Initialize(timer);
 
 	while (!SYS_GottaQuit()) // Controlling a request to terminate an application.

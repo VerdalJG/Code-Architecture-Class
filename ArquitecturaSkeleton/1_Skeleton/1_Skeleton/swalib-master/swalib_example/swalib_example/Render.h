@@ -7,6 +7,7 @@ class TimeManager;
 class Sprite;
 class Entity;
 class Background;
+class Widget;
 
 struct TextureKey
 {
@@ -40,12 +41,14 @@ public:
 	void RenderSprites();
 
 	void RegisterEntity(Entity* entity);
+	void RegisterWidget(Widget* widget);
 	GLuint GetTexture(const char* filePath, bool screenWrapping);
 	void UnloadTextures();
 
 private:
 	std::map<TextureKey, GLuint> loadedTextures;
 	std::vector<Entity*> entities;
+	std::vector<Widget*> widgets;
 	TimeManager* timer;
 	Background* background;
 };

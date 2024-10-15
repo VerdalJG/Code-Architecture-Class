@@ -16,7 +16,7 @@ float CORE_FRand(float from, float to)
 //-----------------------------------------------------------------------------
 // Render a Sprite.
 // p0, p1:	Min and max window position to draw sprite.
-void CORE_RenderSprite(const vec2 &p0, const vec2 &p1, GLuint texid)
+void CORE_RenderSprite(const vec2& p0, const vec2& p1, GLuint texid)
 {
   glBindTexture( GL_TEXTURE_2D, texid );
   glBegin( GL_QUADS );
@@ -26,6 +26,25 @@ void CORE_RenderSprite(const vec2 &p0, const vec2 &p1, GLuint texid)
   glTexCoord2d(0.0,1.0); glVertex2f(p0.x, p1.y);
   glEnd();
 }
+
+// Render a Sprite.
+// p0, p1:	Min and max window position to draw sprite.
+void CORE_RenderSpriteFromSheet(const vec2& p0, const vec2& p1, GLuint texid, vec2 spriteCoordinates, vec2 spriteSize, vec2 sheetSize)
+{
+    // Calculate the normalized texture coordinates for the sprite
+    float u0 = spriteCoordinates.x / sheetSize.x;                  // Left texture coordinate
+    float v0 = spriteCoordinates.y / sheetSize.y;                  // Top texture coordinate
+    float u1 = (spriteCoordinates.x + spriteSize.x) / sheetSize.x; // Right texture coordinate
+    float v1 = (spriteCoordinates.y + spriteSize.y) / sheetSize.y; // Bottom texture coordinate
+    glBindTexture(GL_TEXTURE_2D, texid);
+    glBegin(GL_QUADS);
+    glTexCoord2d(u0, v1); glVertex2f(p0.x, p0.y); // Bottom-left corner
+    glTexCoord2d(u1, v1); glVertex2f(p1.x, p0.y); // Bottom-right corner
+    glTexCoord2d(u1, v0); glVertex2f(p1.x, p1.y); // Top-right corner
+    glTexCoord2d(u0, v0); glVertex2f(p0.x, p1.y); // Top-left corner
+    glEnd();
+}
+
 
 //-----------------------------------------------------------------------------
 // Render a Sprite.

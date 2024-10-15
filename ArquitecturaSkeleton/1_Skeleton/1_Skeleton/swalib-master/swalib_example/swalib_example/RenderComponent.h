@@ -9,7 +9,7 @@ class RenderComponent : public Component
 {
 public:
 	RenderComponent();
-	~RenderComponent();
+	~RenderComponent() override;
 	virtual void Tick(float deltaTime) override;
 	virtual void ReceiveMessage(Message* message) override;
 

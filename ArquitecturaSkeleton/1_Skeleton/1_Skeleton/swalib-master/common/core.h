@@ -55,6 +55,11 @@ void   CORE_UnloadPNG (GLuint texid);
 // Render a Sprite.
 // p0, p1:	Min and max window position to draw sprite.
 void   CORE_RenderSprite(const vec2 &p0, const vec2 &p1, GLuint texid);
+
+// Render a Sprite.
+// p0, p1:	Min and max window position to draw sprite.
+// SpriteCoordinates are from 0 (top left) - 1 (bottom right)
+void   CORE_RenderSpriteFromSheet(const vec2& p0, const vec2& p1, GLuint texid, vec2 spriteCoordinates, vec2 spriteSize, vec2 sheetSize);
 //-----------------------------------------------------------------------------
 // Render a Sprite.
 // pos:	Window position to draw sprite center.

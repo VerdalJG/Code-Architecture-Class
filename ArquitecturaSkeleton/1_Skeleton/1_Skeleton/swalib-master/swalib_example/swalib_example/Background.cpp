@@ -2,9 +2,8 @@
 #include "Render.h"
 #include "Sprite.h"
 
-Background::Background(const char* filePath, bool screenWrapping)
+Background::Background()
 {
-	sprite = new Sprite(filePath, screenWrapping, vec2(128.0f, 128.0f));
 }
 
 Background::~Background()
@@ -13,4 +12,9 @@ Background::~Background()
 	{
 		delete(sprite);
 	}
+}
+
+void Background::SetSprite(const char* filePath, bool screenWrapping)
+{
+	sprite = new Sprite(filePath, screenWrapping, vec2(128.0f, 128.0f));
 }

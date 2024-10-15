@@ -2,15 +2,6 @@
 #include "Globals.h"
 #include "Component.h"
 
-#include <include/rapidjson/rapidjson.h>
-#include <include/rapidjson/document.h>
-#include <include/rapidjson/writer.h>
-#include <include/rapidjson/filereadstream.h>
-#include <include/rapidjson/stringbuffer.h>
-#include <iostream>
-#include <cctype>
-using namespace rapidjson;
-
 class Sprite;
 class World;
 class Component;
@@ -20,7 +11,7 @@ class Entity
 {
 public:
 	Entity();
-	~Entity();
+	virtual ~Entity();
 	virtual void Tick(float deltaTime);
 	void AddComponent(Component* component);
 	

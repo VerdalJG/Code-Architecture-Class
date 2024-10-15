@@ -16,7 +16,6 @@ public:
 	void Terminate();
 
 public:
-	World* world;
 	const unsigned int NUM_BALLS = 10;	// Max. num balls.
 
 private:

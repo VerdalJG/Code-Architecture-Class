@@ -49,7 +49,7 @@ void RenderEngine::Update()
 	RenderTiled(background->sprite);
 	RenderSprites();
 	DisplayTimerValues();
-	RenderJSONData();
+	//RenderJSONData();
 
 	// Exchanges the front and back buffers
 	SYS_Show();
@@ -189,6 +189,7 @@ void RenderEngine::RenderSprites()
 			vec2 position = entity->GetPosition() + renderComponent->GetPositionOffset();
 			vec2 size = sprite->GetSize() * entity->GetScale();
 			CORE_RenderCenteredSprite(position, size, sprite->GetTexture());
+			CORE_RenderSprite()
 		}
 	}
 }
@@ -196,6 +197,11 @@ void RenderEngine::RenderSprites()
 void RenderEngine::RegisterEntity(Entity* entity)
 {
 	entities.push_back(entity);
+}
+
+void RenderEngine::RegisterWidget(Widget* widget)
+{
+	widgets.push_back(widget);
 }
 
 GLuint RenderEngine::GetTexture(const char* filePath, bool screenWrapping)
