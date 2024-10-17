@@ -1,8 +1,9 @@
 #include "Component.h"
 #include "GameManager.h"
+#include "WorldManager.h"
 
 
 World* Component::GetWorld()
 {
-    return GameManager::GetInstance().world;
+    return WorldManager::GetInstance().GetCurrentWorld();
 }

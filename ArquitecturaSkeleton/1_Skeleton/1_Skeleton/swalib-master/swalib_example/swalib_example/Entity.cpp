@@ -3,6 +3,7 @@
 #include "Sprite.h"
 #include "Globals.h"
 #include "Component.h"
+#include "WorldManager.h"
 
 Entity::Entity() :
 	scale(vec2(1, 1)),
@@ -45,7 +46,7 @@ void Entity::BroadcastMessage(Message* message)
 
 World* Entity::GetWorld()
 {
-	return GameManager::GetInstance().world;
+	return WorldManager::GetInstance().GetCurrentWorld();
 }
 
 void Entity::SetPosition(vec2 NewPosition)

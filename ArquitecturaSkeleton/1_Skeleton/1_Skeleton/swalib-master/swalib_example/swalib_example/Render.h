@@ -39,6 +39,7 @@ public:
 	void RenderJSONData();
 	void RenderTiled(Sprite* sprite);
 	void RenderSprites();
+	void RenderUI();
 
 	void RegisterEntity(Entity* entity);
 	void RegisterWidget(Widget* widget);

@@ -4,6 +4,13 @@
 #include "Sprite.h"
 #include "Entity.h"
 #include "Background.h"
+#include "Widget.h"
+#include "TextWidget.h"
+#include "ImageWidget.h"
+#include "CursorWidget.h"
+#include "WorldManager.h"
+#include "World.h"
+
 
 #include <include/rapidjson/rapidjson.h>
 #include <include/rapidjson/document.h>
@@ -37,18 +44,16 @@ void RenderEngine::Initialize(TimeManager* _Timer)
 
 	timer = _Timer;
 	vec2 spriteSize = vec2(128.0f, 128.0f);
-
-	// Maybe reading this in a json file could be useful
-	background = new Background("data/circle-bkg-128.png", true);
 }
 
 void RenderEngine::Update()
 {
 	glClear(GL_COLOR_BUFFER_BIT);	// Clear color buffer to preset values.
 	
-	RenderTiled(background->sprite);
+	RenderTiled(WorldManager::GetInstance().GetCurrentWorld()->GetBackground()->GetSprite());
 	RenderSprites();
-	DisplayTimerValues();
+	RenderUI();
+	//DisplayTimerValues();
 	//RenderJSONData();
 
 	// Exchanges the front and back buffers
@@ -189,7 +194,28 @@ void RenderEngine::RenderSprites()
 			vec2 position = entity->GetPosition() + renderComponent->GetPositionOffset();
 			vec2 size = sprite->GetSize() * entity->GetScale();
 			CORE_RenderCenteredSprite(position, size, sprite->GetTexture());
-			CORE_RenderSprite()
+		}
+	}
+}
+
+void RenderEngine::RenderUI()
+{
+	for (Widget* widget : widgets)
+	{
+		TextWidget* text = dynamic_cast<TextWidget*>(widget);
+		if (text)
+		{
+			char textBuffer[50];
+			snprintf(textBuffer, 50, "%s", text->GetText().c_str());
+			FONT_DrawString(text->GetPosition(), textBuffer);
+		}
+
+		ImageWidget* image = dynamic_cast<ImageWidget*>(widget);
+		if (image)
+		{
+			vec2 position = image->GetPosition();
+			vec2 size = image->GetSprite()->GetSize() * image->GetScale();
+			CORE_RenderCenteredSprite(position, size, image->GetSprite()->GetTexture());
 		}
 	}
 }

@@ -9,7 +9,9 @@ public:
 	static WorldManager& GetInstance();
 	void Initialize();
 	void Terminate();
+	void LoadWorld(int world);
 	void LoadLevel(int level);
+	void LoadMainMenu();
 	World* GetCurrentWorld();
 
 private:
