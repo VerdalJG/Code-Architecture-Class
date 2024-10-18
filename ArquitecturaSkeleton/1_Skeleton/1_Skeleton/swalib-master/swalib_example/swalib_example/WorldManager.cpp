@@ -72,9 +72,10 @@ void WorldManager::LoadMainMenu()
 	CursorWidget* cursor = new CursorWidget();
 	Sprite* cursorSprite = new Sprite("data/BallRed.png", false, vec2(48, 40));
 	cursor->SetSprite(cursorSprite);
-	cursor->AddSelectableWidget(exitText);
 	cursor->AddSelectableWidget(playText);
-	cursor->SetOffset(vec2(50, 0));
+	cursor->AddSelectableWidget(exitText);
+	cursor->SetScale(vec2(0.5f, 0.5f));
+	cursor->SetOffset(vec2(180, 10));
 	world->AddWidget(cursor);
 
 	ImageWidget* gameTitle = new ImageWidget();

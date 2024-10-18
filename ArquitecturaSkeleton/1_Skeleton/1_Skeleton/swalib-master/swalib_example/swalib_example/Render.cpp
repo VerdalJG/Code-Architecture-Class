@@ -217,6 +217,14 @@ void RenderEngine::RenderUI()
 			vec2 size = image->GetSprite()->GetSize() * image->GetScale();
 			CORE_RenderCenteredSprite(position, size, image->GetSprite()->GetTexture());
 		}
+
+		CursorWidget* cursor = dynamic_cast<CursorWidget*>(widget);
+		if (cursor)
+		{
+			vec2 position = cursor->GetPosition();
+			vec2 size = cursor->GetSprite()->GetSize() * cursor->GetScale();
+			CORE_RenderCenteredSprite(position, size, cursor->GetSprite()->GetTexture());
+		}
 	}
 }
 

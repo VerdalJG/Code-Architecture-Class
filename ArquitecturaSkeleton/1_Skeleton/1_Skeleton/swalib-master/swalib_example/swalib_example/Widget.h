@@ -5,6 +5,7 @@ class Widget
 {
 public:
 	Widget();
+	virtual void Tick(float deltaTime) {};
 	virtual ~Widget() = default;
 
 protected:

@@ -4,6 +4,7 @@
 #include "Render.h"
 #include "Entity.h"
 #include "Background.h"
+#include "Widget.h"
 
 
 World::World()
@@ -69,6 +70,11 @@ void World::Tick(float deltaTime)
 	for (Entity* entity : entities)
 	{
 		entity->Tick(deltaTime);
+	}
+
+	for (Widget* widget : widgets)
+	{
+		widget->Tick(deltaTime);
 	}
 }
 

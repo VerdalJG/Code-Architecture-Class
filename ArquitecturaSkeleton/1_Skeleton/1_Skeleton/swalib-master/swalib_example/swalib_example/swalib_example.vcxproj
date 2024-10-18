@@ -138,6 +138,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="ImageWidget.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
     <ClCompile Include="MovementMessage.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ImageWidget.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MovementComponent.h" />
     <ClInclude Include="MovementMessage.h" />
