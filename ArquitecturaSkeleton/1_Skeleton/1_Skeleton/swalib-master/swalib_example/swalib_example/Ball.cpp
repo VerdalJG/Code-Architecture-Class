@@ -1,6 +1,5 @@
 #include "Ball.h"
 #include "Globals.h"
-#include "Render.h"
 #include "World.h"
 #include "Sprite.h"
 

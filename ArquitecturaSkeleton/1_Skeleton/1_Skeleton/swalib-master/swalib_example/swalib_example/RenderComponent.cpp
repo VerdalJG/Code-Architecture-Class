@@ -1,8 +1,10 @@
 #include "RenderComponent.h"
 #include "MovementMessage.h"
+#include "RenderManager.h"
 
 RenderComponent::RenderComponent() :
-	sprite(nullptr)
+	sprite(nullptr),
+	renderMode(RenderMode::Scaled)
 {
 }
 
@@ -10,7 +12,7 @@ RenderComponent::~RenderComponent()
 {
 	if (sprite)
 	{
-		delete(sprite);
+		RenderEngine::GetInstance().UnloadSprite(sprite);
 	}
 }
 

@@ -40,8 +40,10 @@ FontCharDef fontchardefs[MAX_FONT_CHARDEFS];
 // Load fonts.
 void FONT_Init()
 {
+    unsigned int width, height;
+
   // Load texture
-  FONT_Tex = CORE_LoadPNG("data/kromasky.png", false);
+  FONT_Tex = CORE_LoadPNG("data/kromasky.png", false, width, height);
 
   // Preapre coords
   for (int i = 0; i < FONT_ROWS; i++) // One iteration per row

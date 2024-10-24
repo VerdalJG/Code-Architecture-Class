@@ -1,6 +1,8 @@
 #ifndef _CORE_H_
 #define _CORE_H_
 
+
+
 //-----------------------------------------------------------------------------
 typedef unsigned       char byte;
 typedef unsigned short int  word;
@@ -44,7 +46,7 @@ float  CORE_FRand     (float from, float to);
 GLuint CORE_LoadBmp   (const char filename[], bool wrap);
 //-----------------------------------------------------------------------------
 // Load PNG
-GLuint CORE_LoadPNG   (const char filename[], bool wrap);
+GLuint CORE_LoadPNG   (const char filename[], bool wrap, unsigned int& width, unsigned int& height);
 //-----------------------------------------------------------------------------
 // Unload BMP
 void   CORE_UnloadBmp (GLuint texid);
@@ -63,7 +65,7 @@ void   CORE_RenderSpriteFromSheet(const vec2& p0, const vec2& p1, GLuint texid, 
 //-----------------------------------------------------------------------------
 // Render a Sprite.
 // pos:	Window position to draw sprite center.
-void   CORE_RenderCenteredSprite(const vec2 &pos, const vec2 &size, GLuint texid);
+void   CORE_RenderCenteredSprite(const vec2 &pos, const vec2 &size, GLuint texid, const vec2& uvScale);
 //-----------------------------------------------------------------------------
 // Render a Sprite in a window position with rotation in radians.
 void   CORE_RenderCenteredRotatedSprite(const vec2 &pos, const vec2 &size, float angle, GLuint texid, rgba_t color = RGBA(255,255,255,255));

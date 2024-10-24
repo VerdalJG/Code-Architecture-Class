@@ -1,19 +1,18 @@
 #include "Sprite.h"
-#include "Render.h"
+#include "RenderManager.h"]
 
-Sprite::Sprite(const char* filePath, bool screenWrapping, vec2 SpriteSize)
+Sprite::Sprite(const std::string spriteName, const std::string path, const bool wrapping, const vec2 dimensions) :
+	name(spriteName),
+	filePath(path),
+	uvWrapping(wrapping),
+	size(dimensions),
+	referenceCount(0),
+	texture(-1)
 {
-	SetTexture(filePath, screenWrapping);
-	SetSize(SpriteSize);
+	
 }
 
 Sprite::~Sprite()
 {
 
-}
-
-void Sprite::SetTexture(const char* filePath, bool screenWrapping)
-{
-	GLuint NewTexture = RenderEngine::GetInstance().GetTexture(filePath, screenWrapping);
-	texture = NewTexture;
 }

@@ -5,7 +5,9 @@
 class InputManager
 {
 public:
-    static InputManager& Instance();
+    static InputManager& GetInstance();
+
+    void Initialize();
 
     // Movement keys
     bool IsMovingUp() const { return IsKeyHeld('W'); }
@@ -13,19 +15,25 @@ public:
     bool IsMovingLeft() const { return IsKeyHeld('A'); }
     bool IsMovingRight() const { return IsKeyHeld('D'); }
 
+    // UI keys
+    bool UIMovingUp() { return IsKeyPressedThisFrame('W'); }
+    bool UIMovingDown() { return IsKeyPressedThisFrame('S'); }
+
     // Shooting (left click)
-    bool IsShooting() const { return IsKeyHeld(VK_LBUTTON); }
+    bool IsShooting() const { return IsKeyPressedThisFrame(VK_LBUTTON); }
 
     // Confirming (Enter key)
-    bool IsConfirming() const { return IsKeyPressedOnce(VK_RETURN); }
+    bool IsConfirming() { return IsKeyPressedThisFrame(VK_RETURN); }
 
     // Should the game close (Escape key pressed once)
     bool ShouldClose() const { return shouldClose; }
 
+    void UpdateInput();
+
 private:
     // Private constructor (singleton pattern)
     InputManager();
-    void UpdateInput();
+
 
     // Tracks whether the game should close
     bool shouldClose;
@@ -33,14 +41,25 @@ private:
     // Key state tracking
     std::unordered_map<int, bool> currentKeyState;
     std::unordered_map<int, bool> previousKeyState;
+    std::unordered_map<int, bool> keyPressBuffer;  // Buffer to track unprocessed key presses
+
+    std::vector<char> trackedKeys;
 
     // Update the state of a key (called for each relevant key)
-    void UpdateKeyState(int vKey);
+    void UpdateKeyState(int keyID);
 
+    
+
+public: 
     // Check if a key is currently held down (continuous behavior)
-    bool IsKeyHeld(int vKey) const;
+    bool IsKeyHeld(int keyID) const;
 
     // Check if a key was just pressed once (transition from not pressed to pressed)
-    bool IsKeyPressedOnce(int vKey) const;
+    bool IsKeyPressedOnce(int keyID);
+
+    // Clear key buffers once input is processed
+    void ClearKeyPressBuffer();
+
+    bool IsKeyPressedThisFrame(int keyID) const;
 };
 

@@ -23,13 +23,20 @@ void MovementComponent::Tick(float deltaTime)
 
 void MovementComponent::ReceiveMessage(Message* message)
 {
+	// Guard clause
 	CollisionMessage* collisionMessage = dynamic_cast<CollisionMessage*>(message);
 	if (!collisionMessage)
 	{
 		return;
 	}
 
-	if (collisionMessage->collisionType == CollisionType::ComponentCollision)
+	if (collisionMessage)
+	{
+		// Negate previous movement, velocity is handled on a case by case basis
+		position -= previousMovement;
+	}
+
+	/*if (collisionMessage->collisionType == CollisionType::ComponentCollision)
 	{
 		velocity *= -1.0f;
 		position -= previousMovement; 
@@ -45,5 +52,5 @@ void MovementComponent::ReceiveMessage(Message* message)
 			velocity.y *= -1.0f;
 		}
 		position -= previousMovement;
-	}
+	}*/
 }

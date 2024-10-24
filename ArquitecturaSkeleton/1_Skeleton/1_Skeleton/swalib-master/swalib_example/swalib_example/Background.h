@@ -10,10 +10,13 @@ public:
 
 private:
 	Sprite* sprite;
+	bool isTiledBackground = false;
 
 public:
-	Sprite* GetSprite() { return sprite; }
+	Sprite* GetTexture() { return sprite; }
 	void SetSprite(Sprite* newSprite) { sprite = newSprite; }
-	void SetSprite(const char* filePath, bool screenWrapping);
+
+	bool IsTiled() { return isTiledBackground; }
+	void SetBackgroundTiledMode(bool isTiled) { isTiledBackground = isTiled; }
 };
 

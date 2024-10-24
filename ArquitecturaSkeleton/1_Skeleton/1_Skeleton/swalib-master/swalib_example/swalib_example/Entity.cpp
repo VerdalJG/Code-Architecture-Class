@@ -19,14 +19,6 @@ Entity::~Entity()
 	}
 }
 
-void Entity::Tick(float deltaTime)
-{
-	for (Component* component : components)
-	{
-		component->Tick(deltaTime);
-	}
-}
-
 void Entity::AddComponent(Component* component)
 {
 	if (component)
@@ -47,9 +39,4 @@ void Entity::BroadcastMessage(Message* message)
 World* Entity::GetWorld()
 {
 	return WorldManager::GetInstance().GetCurrentWorld();
-}
-
-void Entity::SetPosition(vec2 NewPosition)
-{
-	position = NewPosition;
 }

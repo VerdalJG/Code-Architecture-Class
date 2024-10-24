@@ -1,4 +1,6 @@
 #include "CursorWidget.h"
+#include "ButtonWidget.h"
+#include "RenderManager.h"
 
 CursorWidget::CursorWidget() : 
 	sprite(nullptr)
@@ -25,6 +27,23 @@ void CursorWidget::SelectNextWidget(bool advanceSelection)
 		advanceSelection ? selectedWidget++ : selectedWidget--;
 		selectedWidget %= static_cast<unsigned int>(selectableWidgets.size()); // avoid array out of bounds
 		position = selectableWidgets[selectedWidget]->GetPosition() + offsetFromSelection;
+	}
+}
+
+void CursorWidget::MakeSelection()
+{
+	if (selectableWidgets.size() <= 0)
+	{
+		return;
+	}
+
+	for (Widget* widget : selectableWidgets[selectedWidget]->GetChildrenWidgets())
+	{
+		ButtonWidget* button = dynamic_cast<ButtonWidget*>(widget);
+		if (button)
+		{
+			button->Select();
+		}
 	}
 }
 
@@ -60,7 +79,7 @@ void CursorWidget::SetSprite(Sprite* newSprite)
 {
 	if (sprite)
 	{
-		delete(sprite);
+		RenderEngine::GetInstance().UnloadSprite(sprite);
 	}
 	sprite = newSprite;
 }

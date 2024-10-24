@@ -1,15 +1,19 @@
 #include "World.h"
-#include "Timer.h"
+#include "TimerManager.h"
 #include "Sprite.h"
-#include "Render.h"
+#include "RenderManager.h"
 #include "Entity.h"
 #include "Background.h"
 #include "Widget.h"
+#include "InputManager.h"
+#include "UIManager.h"
+#include "Actor.h"
+#include "Solid.h"
+#include "Player.h"
 
 
 World::World()
 {
-	worldType = WorldType::None;
 	background = new Background();
 }
 
@@ -23,27 +27,49 @@ void World::Terminate()
 	{
 		delete(entity);
 	}
-	for (Widget* widget : widgets)
+
+	UIManager::GetInstance().ResetUI();
+}
+
+void World::AddActor(Actor* actor)
+{
+	if (actor)
 	{
-		delete(widget);
+		actors.push_back(actor);
+		entities.push_back(actor);
+		RenderEngine::GetInstance().RegisterEntity(actor);
 	}
 }
 
-void World::AddEntity(Entity* entity)
+void World::RemoveEntity(Actor* actor)
 {
-	if (entity)
+	if (actor)
 	{
-		entities.push_back(entity);
-		RenderEngine::GetInstance().RegisterEntity(entity);
+		actors.erase(std::remove(actors.begin(), actors.end(), actor), actors.end());
+		entities.erase(std::remove(entities.begin(), entities.end(), actor), entities.end());
+		RenderEngine::GetInstance().RemoveEntity(actor);
+		delete(actor);
 	}
 }
 
-void World::RemoveEntity(Entity* entity)
+void World::AddSolid(Solid* solid)
 {
-	if (entity)
+	if (solid)
 	{
-		entities.erase(std::remove(entities.begin(), entities.end(), entity), entities.end());
-		delete(entity);
+		solids.push_back(solid);
+		entities.push_back(solid);
+		RenderEngine::GetInstance().RegisterEntity(solid);
+	}
+}
+
+void World::RemoveSolid(Solid* solid)
+{
+	if (solid)
+	{
+		solids.erase(std::remove(solids.begin(), solids.end(), solid), solids.end());
+		entities.erase(std::remove(entities.begin(), entities.end(), solid), entities.end());
+		RenderEngine::GetInstance().RemoveEntity(solid);
+		delete(solid);
 	}
 }
 
@@ -51,8 +77,7 @@ void World::AddWidget(Widget* widget)
 {
 	if (widget)
 	{
-		widgets.push_back(widget);
-		RenderEngine::GetInstance().RegisterWidget(widget);
+		UIManager::GetInstance().AddWidget(widget);
 	}
 }
 
@@ -60,21 +85,66 @@ void World::RemoveWidget(Widget* widget)
 {
 	if (widget)
 	{
-		widgets.erase(std::remove(widgets.begin(), widgets.end(), widget), widgets.end());
-		delete(widget);
+		UIManager::GetInstance().RemoveWidget(widget);
 	}
 }
 
 void World::Tick(float deltaTime)
 {
-	for (Entity* entity : entities)
+	for (Actor* actor : actors)
 	{
-		entity->Tick(deltaTime);
+		actor->Tick(deltaTime);
+	}
+}
+
+void World::ProcessInputs()
+{
+	// Get the input manager instance
+	InputManager& inputManager = InputManager::GetInstance();
+
+	// Phase 1: Handle UI input
+	if (UIManager::GetInstance().IsActive())  // Only if UI is active
+	{
+		if (inputManager.UIMovingUp())
+		{
+			UIManager::GetInstance().NavigateUp();
+		}
+		else if (inputManager.UIMovingDown())
+		{
+			UIManager::GetInstance().NavigateDown();
+		}
+		else if (inputManager.IsConfirming())
+		{
+			UIManager::GetInstance().Confirm();
+		}
+		// Return early to prevent processing game input while UI is active.
+		return;
 	}
 
-	for (Widget* widget : widgets)
+	// Phase 2: Handle Game input (if UI didn't process the input)
+
+	// Movement
+	if (inputManager.IsMovingUp())
 	{
-		widget->Tick(deltaTime);
+		player->MoveUp();
+	}
+	if (inputManager.IsMovingDown())
+	{
+		player->MoveDown();
+	}
+	if (inputManager.IsMovingLeft())
+	{
+		player->MoveLeft();
+	}
+	if (inputManager.IsMovingRight())
+	{
+		player->MoveRight();
+	}
+
+	// Shooting
+	if (inputManager.IsShooting())
+	{
+		player->ShootHarpoon();
 	}
 }
 

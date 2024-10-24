@@ -49,17 +49,26 @@ void CORE_RenderSpriteFromSheet(const vec2& p0, const vec2& p1, GLuint texid, ve
 //-----------------------------------------------------------------------------
 // Render a Sprite.
 // pos:	Window position to draw sprite center.
-void CORE_RenderCenteredSprite(const vec2 &pos, const vec2 &size, GLuint texid)
+void CORE_RenderCenteredSprite(const vec2 &pos, const vec2 &size, GLuint texid, const vec2& uvScale)
 {
-  vec2 p0 = pos - (size * .5f);
-  vec2 p1 = pos + (size * .5f);
+  vec2 p0 = pos - (size * 0.5f);
+  vec2 p1 = pos + (size * 0.5f);
 
   glBindTexture( GL_TEXTURE_2D, texid );
   glBegin( GL_QUADS );
-  glTexCoord2d(0.0,0.0); glVertex2f(p0.x, p0.y);
-  glTexCoord2d(1.0,0.0); glVertex2f(p1.x, p0.y);
-  glTexCoord2d(1.0,1.0); glVertex2f(p1.x, p1.y);
-  glTexCoord2d(0.0,1.0); glVertex2f(p0.x, p1.y);
+
+  glTexCoord2d(0.0f, 0.0f); 
+  glVertex2f(p0.x, p0.y);
+
+  glTexCoord2d(uvScale.x, 0.0f);
+  glVertex2f(p1.x, p0.y);
+
+  glTexCoord2d(uvScale.x, uvScale.y);
+  glVertex2f(p1.x, p1.y);
+
+  glTexCoord2d(0.0f, uvScale.y);
+  glVertex2f(p0.x, p1.y);
+
   glEnd();
 }
 
@@ -177,11 +186,10 @@ GLuint CORE_LoadBmp(const char filename[], bool wrap)
 
 //-----------------------------------------------------------------------------
 // Load PNG
-GLuint CORE_LoadPNG(const char filename[], bool wrap)
+GLuint CORE_LoadPNG(const char filename[], bool wrap, unsigned int& width, unsigned int& height)
 {
   // Load and decode image.
   std::vector<unsigned char> image_data;
-  unsigned width, height;
   unsigned error = lodepng::decode(image_data, width, height, filename, LCT_RGBA);
 
   // Blank texture if error

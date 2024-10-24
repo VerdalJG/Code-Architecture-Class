@@ -1,8 +1,8 @@
 #pragma once
 #include "Globals.h"
-#include "Entity.h"
+#include "Actor.h"
 
-class Ball : public Entity
+class Ball : public Actor
 {
 public:
 	Ball();

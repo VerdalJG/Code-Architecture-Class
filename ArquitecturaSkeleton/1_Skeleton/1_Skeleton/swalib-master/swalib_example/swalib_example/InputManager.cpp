@@ -3,10 +3,21 @@
 
 
 // Singleton pattern to access InputManager globally
-InputManager& InputManager::Instance()
+InputManager& InputManager::GetInstance()
 {
     static InputManager instance;
     return instance;
+}
+
+void InputManager::Initialize()
+{
+    trackedKeys.push_back('W');
+    trackedKeys.push_back('S');
+    trackedKeys.push_back('A');
+    trackedKeys.push_back('D');
+    trackedKeys.push_back(VK_LBUTTON);  // Left mouse button
+    trackedKeys.push_back(VK_RETURN);   // Enter
+    trackedKeys.push_back(VK_ESCAPE);   // Escape
 }
 
 InputManager::InputManager() :
@@ -16,19 +27,18 @@ InputManager::InputManager() :
 
 void InputManager::UpdateInput()
 {
-    // Update the current state of each key we care about
-    UpdateKeyState('W');
-    UpdateKeyState('A');
-    UpdateKeyState('S');
-    UpdateKeyState('D');
-    UpdateKeyState(VK_LBUTTON);   // Left mouse button
-    UpdateKeyState(VK_ESCAPE);    // Escape
-    UpdateKeyState(VK_RETURN);    // Enter
-
-    // Check for escape key to close the game
-    if (IsKeyPressedOnce(VK_ESCAPE)) 
+    for (char key : trackedKeys)
     {
-        shouldClose = true;
+        UpdateKeyState(key);
+        if (IsKeyPressedOnce(key))
+        {
+            keyPressBuffer[key] = true;
+            // Check for escape key to close the game
+            if (key == VK_ESCAPE)
+            {
+                shouldClose = true;
+            }
+        }
     }
 }
 
@@ -44,15 +54,32 @@ bool InputManager::IsKeyHeld(int keyID) const
     return iterator != currentKeyState.end() && iterator->second;
 }
 
-bool InputManager::IsKeyPressedOnce(int keyID) const
+bool InputManager::IsKeyPressedOnce(int keyID)
 {
     auto currentKeyIterator = currentKeyState.find(keyID);
     auto previousKeyIterator = previousKeyState.find(keyID);
 
-    if (currentKeyIterator != currentKeyState.end() && previousKeyIterator != previousKeyState.end()) 
+    // New press: not pressed last frame but pressed now
+    if (currentKeyIterator != currentKeyState.end() && previousKeyIterator != previousKeyState.end())
     {
-        // Return true if it was not pressed last frame but is pressed now
-        return !previousKeyIterator->second && currentKeyIterator->second;
+        bool wasPressedLastFrame = previousKeyIterator->second;
+        bool isPressedNow = currentKeyIterator->second;
+
+        if (!wasPressedLastFrame && isPressedNow)
+        {
+            return true;
+        }
     }
     return false;
+}
+
+void InputManager::ClearKeyPressBuffer()
+{
+    keyPressBuffer.clear(); // Clear the buffer after processing inputs
+}
+
+bool InputManager::IsKeyPressedThisFrame(int keyID) const
+{
+    auto iterator = keyPressBuffer.find(keyID);
+    return iterator != keyPressBuffer.end() && iterator->second;
 }

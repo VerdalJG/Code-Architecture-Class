@@ -1,14 +1,16 @@
 #include "GameManager.h"
 #include "Ball.h"
-#include "Timer.h"
+#include "TimerManager.h"
 #include "World.h"
 #include "Sprite.h"
 #include "MovementComponent.h"
 #include "CollisionComponent.h"
 #include "RenderComponent.h"
-#include "Render.h"
+#include "RenderManager.h"
 #include "Entity.h"
 #include "WorldManager.h"
+#include "Globals.h"
+#include "InputManager.h"
 
 #include <include/rapidjson/rapidjson.h>
 #include <include/rapidjson/document.h>
@@ -38,7 +40,10 @@ void GameManager::Slot()
 void GameManager::Tick(float deltaTime)
 {
 	World* currentWorld = WorldManager::GetInstance().GetCurrentWorld();
+	currentWorld->ProcessInputs();
+	InputManager::GetInstance().ClearKeyPressBuffer();
 	currentWorld->Tick(timer->GetFixedTickRate());
+
 }
 
 void GameManager::Terminate()
@@ -46,11 +51,17 @@ void GameManager::Terminate()
 	
 }
 
+void GameManager::ExitGame()
+{
+	// Quit game logic here
+	SYS_Quit();
+}
+
 
 void GameManager::Initialize(TimeManager* _timer)
 {
 	// Init game state.
-	WorldManager::GetInstance().LoadWorld(0);
+	WorldManager::GetInstance().LoadWorld(WorldType::MainMenu);
 	timer = _timer;
 
 	//FILE* file = fopen(jsonFilePath, "rb");

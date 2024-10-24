@@ -207,3 +207,8 @@ bool SYS_MouseButonPressed(int button)
 {
   return GetFocus() == WIN_hWnd && (GetAsyncKeyState(button) & 0x8000) != 0;
 }
+
+void SYS_Quit()
+{
+    WIN_bGottaQuit = true;
+}

@@ -11,6 +11,7 @@ public:
 
 	void AddSelectableWidget(Widget* widget);
 	void SelectNextWidget(bool advanceSelection);
+	void MakeSelection();
 
 protected:
 	virtual void Tick(float deltaTime) override;
@@ -24,13 +25,13 @@ private:
 	const float MAX_SELECTION_HOVER = 10;
 	std::vector<Widget*> selectableWidgets;
 	unsigned int selectedWidget = -1;
-	float accumulatedTime;
+	float accumulatedTime = 0;
 
 public:
 	vec2 GetOffset() { return offsetFromSelection; };
 	void SetOffset(vec2 newOffset);
 
-	Sprite* GetSprite() { return sprite; }
+	Sprite* GetTexture() { return sprite; }
 	void SetSprite(Sprite* newSprite);
 
 	vec2 GetScale() { return scale; }

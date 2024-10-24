@@ -1,5 +1,6 @@
 #include "ImageWidget.h"
 #include "Globals.h"
+#include "RenderManager.h"
 
 ImageWidget::ImageWidget() :
 	sprite(nullptr),
@@ -11,7 +12,7 @@ ImageWidget::~ImageWidget()
 {
 	if (sprite)
 	{
-		delete(sprite);
+		RenderEngine::GetInstance().UnloadSprite(sprite);
 	}
 }
 
@@ -19,7 +20,7 @@ void ImageWidget::SetSprite(Sprite* newSprite)
 {
 	if (sprite)
 	{
-		delete(sprite);
+		RenderEngine::GetInstance().UnloadSprite(sprite);
 	}
 	sprite = newSprite;
 }

@@ -1,6 +1,6 @@
-#include "Render.h"
+#include "RenderManager.h"
 #include "Globals.h"
-#include "Timer.h"
+#include "TimerManager.h"
 #include "Sprite.h"
 #include "Entity.h"
 #include "Background.h"
@@ -43,14 +43,13 @@ void RenderEngine::Initialize(TimeManager* _Timer)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// Blend func. for alpha color.
 
 	timer = _Timer;
-	vec2 spriteSize = vec2(128.0f, 128.0f);
 }
 
 void RenderEngine::Update()
 {
 	glClear(GL_COLOR_BUFFER_BIT);	// Clear color buffer to preset values.
 	
-	RenderTiled(WorldManager::GetInstance().GetCurrentWorld()->GetBackground()->GetSprite());
+	RenderBackground(WorldManager::GetInstance().GetCurrentWorld()->GetBackground());
 	RenderSprites();
 	RenderUI();
 	//DisplayTimerValues();
@@ -159,22 +158,37 @@ void RenderEngine::RenderJSONData()
 void RenderEngine::Terminate()
 {
 	// Unload font.
-	UnloadTextures();
+	UnloadAllSprites();
 	FONT_End();
 	delete(background);
 }
 
-void RenderEngine::RenderTiled(Sprite* sprite)
+void RenderEngine::RenderBackground(Background* background)
 {
-	// Render tiled image
-	int sizeX = sprite->GetSize().x;
-	int sizeY = sprite->GetSize().y;
-
-	for (int i = 0; i <= SCR_WIDTH / sizeX; i++)
+	if (background)
 	{
-		for (int j = 0; j <= SCR_HEIGHT / sizeY; j++) 
+		if (background->IsTiled())
 		{
-			CORE_RenderCenteredSprite(vec2(i * sizeX + sizeX/2, j * sizeY + sizeY/2), vec2(sizeX, sizeY), sprite->GetTexture());
+			Sprite* backgroundSprite = background->GetTexture();
+			// Render tiled image
+			int sizeX = backgroundSprite->GetSize().x;
+			int sizeY = backgroundSprite->GetSize().y;
+
+			for (int i = 0; i <= SCR_WIDTH / sizeX; i++)
+			{
+				for (int j = 0; j <= SCR_HEIGHT / sizeY; j++)
+				{
+					vec2 uvScale = vec2(1.0f, 1.0f);
+					CORE_RenderCenteredSprite(vec2(i * sizeX + sizeX / 2, j * sizeY + sizeY / 2), vec2(sizeX, sizeY), backgroundSprite->GetTexture(), uvScale);
+				}
+			}
+		}
+		else
+		{
+			vec2 position = vec2(SCR_WIDTH / 2, SCR_HEIGHT / 2);
+			vec2 size = background->GetTexture()->GetSize();
+			vec2 uvScale = vec2(1.0f, 1.0f);
+			CORE_RenderCenteredSprite(position, size, background->GetTexture()->GetTexture(), uvScale);
 		}
 	}
 }
@@ -188,12 +202,18 @@ void RenderEngine::RenderSprites()
 		{
 			continue;
 		}
-		Sprite* sprite = renderComponent->GetSprite();
+		Sprite* sprite = renderComponent->GetTexture();
 		if (sprite)
 		{
 			vec2 position = entity->GetPosition() + renderComponent->GetPositionOffset();
-			vec2 size = sprite->GetSize() * entity->GetScale();
-			CORE_RenderCenteredSprite(position, size, sprite->GetTexture());
+			vec2 entitySize = sprite->GetSize() * entity->GetScale();
+			vec2 uvScale = vec2(1.0f, 1.0f);
+
+			if (renderComponent->GetRenderMode() == RenderMode::Tiled)
+			{
+				uvScale = entitySize / sprite->GetSize();
+			}
+			CORE_RenderCenteredSprite(position, entitySize, sprite->GetTexture(), uvScale);
 		}
 	}
 }
@@ -214,16 +234,18 @@ void RenderEngine::RenderUI()
 		if (image)
 		{
 			vec2 position = image->GetPosition();
-			vec2 size = image->GetSprite()->GetSize() * image->GetScale();
-			CORE_RenderCenteredSprite(position, size, image->GetSprite()->GetTexture());
+			vec2 size = image->GetTexture()->GetSize() * image->GetScale();
+			vec2 uvScale = vec2(1.0f, 1.0f);
+			CORE_RenderCenteredSprite(position, size, image->GetTexture()->GetTexture(), uvScale);
 		}
 
 		CursorWidget* cursor = dynamic_cast<CursorWidget*>(widget);
 		if (cursor)
 		{
 			vec2 position = cursor->GetPosition();
-			vec2 size = cursor->GetSprite()->GetSize() * cursor->GetScale();
-			CORE_RenderCenteredSprite(position, size, cursor->GetSprite()->GetTexture());
+			vec2 size = cursor->GetTexture()->GetSize() * cursor->GetScale();
+			vec2 uvScale = vec2(1.0f, 1.0f);
+			CORE_RenderCenteredSprite(position, size, cursor->GetTexture()->GetTexture(), uvScale);
 		}
 	}
 }
@@ -238,28 +260,89 @@ void RenderEngine::RegisterWidget(Widget* widget)
 	widgets.push_back(widget);
 }
 
-GLuint RenderEngine::GetTexture(const char* filePath, bool screenWrapping)
+void RenderEngine::RemoveEntity(Entity* entity)
 {
-	TextureKey key{ filePath, screenWrapping };
-
-	auto iterator = loadedTextures.find(key);
-	if (iterator != loadedTextures.end())
-	{
-		return iterator->second; // Return texture ID
-	}
-
-	GLuint textureID = CORE_LoadPNG(filePath, screenWrapping);
-	
-	loadedTextures[key] = textureID; // Store in loadedTextures
-
-	return textureID;
+	entities.erase(std::remove(entities.begin(), entities.end(), entity), entities.end());
 }
 
-void RenderEngine::UnloadTextures()
+void RenderEngine::RemoveWidget(Widget* widget)
 {
-	for (const std::pair<TextureKey, GLuint>& pair : loadedTextures)
+	widgets.erase(std::remove(widgets.begin(), widgets.end(), widget), widgets.end());
+}
+
+void RenderEngine::ClearWidgets()
+{
+	widgets.clear();
+}
+
+Sprite* RenderEngine::CreateSprite(const std::string& name, const std::string& filePath, const bool& uvWrapping)
+{
+	Sprite* sprite = GetSprite(name, filePath, uvWrapping);
+	if (!sprite)
 	{
-		CORE_UnloadPNG(pair.second);
+		unsigned int width, height;
+		GLuint texture = CORE_LoadPNG(filePath.c_str(), uvWrapping, width, height);
+		sprite = new Sprite(name, filePath, uvWrapping, vec2(width, height));
+		sprite->SetTexture(texture);
+	}
+	sprite->IncrementRef();
+	return sprite;
+}
+
+Sprite* RenderEngine::GetSprite(const std::string& name, const std::string& filePath, const bool& uvWrapping)
+{
+	for (Sprite* sprite : loadedSprites)
+	{
+		if (sprite->GetName() == name && sprite->GetFilePath() == filePath && sprite->GetWrapping() == uvWrapping)
+		{
+			return sprite;
+		}
+	}
+	return nullptr;
+}
+
+void RenderEngine::UnloadSprite(Sprite* sprite)
+{
+	if (!sprite)
+	{
+		return;
+	}
+
+	if (sprite->CanDelete())
+	{
+		CORE_UnloadPNG(sprite->GetTexture());
+		loadedSprites.erase(std::remove(loadedSprites.begin(), loadedSprites.end(), sprite), loadedSprites.end());
+		delete(sprite);
+	}
+}
+
+//GLuint RenderEngine::GetTexture(const char* filePath, bool uvWrapping, vec2& dimensions)
+//{
+//	TextureKey key{ filePath, uvWrapping };
+//
+//	auto iterator = loadedTextures.find(key);
+//	if (iterator != loadedTextures.end())
+//	{
+//		return iterator->second; // Return texture ID
+//	}
+//	unsigned int width, height;
+//
+//	GLuint textureID = CORE_LoadPNG(filePath, uvWrapping, width, height);
+//
+//	dimensions.x = width;
+//	dimensions.y = height;
+//
+//	loadedTextures[key] = textureID; // Store in loadedTextures
+//
+//	return textureID;
+//}
+
+void RenderEngine::UnloadAllSprites()
+{
+	for (Sprite* sprite : loadedSprites)
+	{
+		CORE_UnloadPNG(sprite->GetTexture());
+		delete(sprite);
 	}
 }
 

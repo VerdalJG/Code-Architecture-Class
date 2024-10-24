@@ -62,5 +62,7 @@ ivec2 SYS_MousePos         ();
 // True if button mouse is pressed.
 bool  SYS_MouseButonPressed(int button);
 
+void SYS_Quit();
+
 
 #endif

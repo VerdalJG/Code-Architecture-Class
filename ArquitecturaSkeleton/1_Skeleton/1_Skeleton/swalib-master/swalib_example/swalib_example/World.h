@@ -2,43 +2,41 @@
 #include "Globals.h"
 
 class Entity;
+class Actor;
+class Solid;
 class Sprite;
 class TimeManager; 
 class Background;
 class Widget;
-
-enum class WorldType
-{
-	None,
-	MainMenu,
-	Level1,
-	Level2
-};
+class Player;
 
 class World
 {
 public:
 	World();
 	void Terminate();
-	void AddEntity(Entity* entity);
-	void RemoveEntity(Entity* entity);
+	void AddActor(Actor* actor);
+	void RemoveEntity(Actor* actor);
+
+	void AddSolid(Solid* solid);
+	void RemoveSolid(Solid* solid);
 
 	void AddWidget(Widget* widget);
 	void RemoveWidget(Widget* widget);
+
 	void Tick(float deltaTime);
+	void ProcessInputs();
 
 private:
-	WorldType worldType;
+	std::vector<Solid*> solids;
+	std::vector<Actor*> actors;
 	std::vector<Entity*> entities;
-	std::vector<Widget*> widgets;
-	Background* background; 
+	Background* background;
+	Player* player;
 
 
 public:
 	std::vector<Entity*> GetEntities() { return entities; }
-
-	WorldType GetWorldType() { return worldType; }
-	void SetWorldType(WorldType type) { worldType = type; }
 
 	Background* GetBackground() { return background; }
 	void SetBackground(Background* newBackground);

@@ -37,17 +37,25 @@ public:
 
 	void DisplayTimerValues();
 	void RenderJSONData();
-	void RenderTiled(Sprite* sprite);
+	void RenderBackground(Background* background);
+	//void RenderBackground(Sprite* sprite);
 	void RenderSprites();
 	void RenderUI();
 
 	void RegisterEntity(Entity* entity);
 	void RegisterWidget(Widget* widget);
-	GLuint GetTexture(const char* filePath, bool screenWrapping);
-	void UnloadTextures();
+	void RemoveEntity(Entity* entity);
+	void RemoveWidget(Widget* widget);
+	void ClearWidgets();
+	Sprite* CreateSprite(const std::string& name, const std::string& filePath, const bool& uvWrapping);
+	Sprite* GetSprite(const std::string& name, const std::string& filePath, const bool& uvWrapping);
+	void UnloadSprite(Sprite* sprite);
+	void UnloadAllSprites();
+
+	//GLuint GetTexture(const char* filePath, bool screenWrapping, vec2& dimensions);
 
 private:
-	std::map<TextureKey, GLuint> loadedTextures;
+	std::vector<Sprite*> loadedSprites;
 	std::vector<Entity*> entities;
 	std::vector<Widget*> widgets;
 	TimeManager* timer;

@@ -1,4 +1,4 @@
-#include "Timer.h"
+#include "TimerManager.h"
 
 TimeManager::TimeManager() :
 	fps(0),

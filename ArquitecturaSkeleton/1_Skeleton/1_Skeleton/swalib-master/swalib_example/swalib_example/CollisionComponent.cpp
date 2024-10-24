@@ -19,16 +19,25 @@ void CollisionComponent::CollisionCheck()
 {
 	// Collision detection.
 	World* world = GetWorld();
-	for (Entity* entity : world->GetEntities())
+	for (Entity* otherEntity : world->GetEntities())
 	{
-		CollisionComponent* otherComponent = entity->GetComponent<CollisionComponent>();
-		if (otherComponent && this != otherComponent)
+		if (otherEntity == owner)
+		{
+			continue;
+		}
+
+		CollisionComponent* otherComponent = otherEntity->GetComponent<CollisionComponent>();
+		if (otherComponent)
 		{
 			float limitSquared = (this->GetRadius() + otherComponent->GetRadius()) * (this->GetRadius() + otherComponent->GetRadius());
 			if (vlen2(position - otherComponent->GetPosition()) <= limitSquared)
 			{
 				CollisionMessage message = CollisionMessage(otherComponent);
 				owner->BroadcastMessage(&message);
+				
+				// For specific behavior on collision
+				owner->OnCollide(otherEntity);
+				otherEntity->OnCollide(owner);
 			}
 		}
 	}
