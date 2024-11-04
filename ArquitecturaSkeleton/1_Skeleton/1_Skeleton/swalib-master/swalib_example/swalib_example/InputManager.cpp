@@ -18,6 +18,13 @@ void InputManager::Initialize()
     trackedKeys.push_back(VK_LBUTTON);  // Left mouse button
     trackedKeys.push_back(VK_RETURN);   // Enter
     trackedKeys.push_back(VK_ESCAPE);   // Escape
+
+    for (const char key : trackedKeys)
+    {
+        currentKeyState[key] = false;
+        previousKeyState[key] = false;
+        keyPressBuffer[key] = false;
+    }
 }
 
 InputManager::InputManager() :
@@ -27,6 +34,10 @@ InputManager::InputManager() :
 
 void InputManager::UpdateInput()
 {
+    if (shouldClose)
+    {
+        return;
+    }
     for (char key : trackedKeys)
     {
         UpdateKeyState(key);
@@ -40,6 +51,12 @@ void InputManager::UpdateInput()
             }
         }
     }
+}
+
+bool InputManager::IsKeyReleased(int keyID) const
+{
+    // Check if the key was previously held and is now not held
+    return previousKeyState.at(keyID) && !currentKeyState.at(keyID);
 }
 
 void InputManager::UpdateKeyState(int keyID)
@@ -73,7 +90,7 @@ bool InputManager::IsKeyPressedOnce(int keyID)
     return false;
 }
 
-void InputManager::ClearKeyPressBuffer()
+void InputManager::ClearKeyPressBuffers()
 {
     keyPressBuffer.clear(); // Clear the buffer after processing inputs
 }

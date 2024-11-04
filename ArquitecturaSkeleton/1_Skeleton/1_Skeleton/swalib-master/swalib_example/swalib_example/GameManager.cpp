@@ -40,10 +40,12 @@ void GameManager::Slot()
 void GameManager::Tick(float deltaTime)
 {
 	World* currentWorld = WorldManager::GetInstance().GetCurrentWorld();
-	currentWorld->ProcessInputs();
-	InputManager::GetInstance().ClearKeyPressBuffer();
-	currentWorld->Tick(timer->GetFixedTickRate());
-
+	if (currentWorld)
+	{
+		currentWorld->ProcessInputs();
+		InputManager::GetInstance().ClearKeyPressBuffers();
+		currentWorld->Tick(timer->GetFixedTickRate());
+	}
 }
 
 void GameManager::Terminate()
@@ -97,8 +99,8 @@ void GameManager::Initialize(TimeManager* _timer)
 	//	// Set initial render component values
 	//	RenderComponent* renderComponent = new RenderComponent();
 	//	vec2 spriteSize = vec2(radius * 2.0f, radius * 2.0f);
-	//	Sprite* sprite = new Sprite(spriteFilePath, wrapping, spriteSize);
-	//	renderComponent->SetSprite(sprite);
+	//	Sprite* currentSprite = new Sprite(spriteFilePath, wrapping, spriteSize);
+	//	renderComponent->SetSprite(currentSprite);
 
 	//	ball->AddComponent(movementComponent);
 	//	ball->AddComponent(collisionComponent);

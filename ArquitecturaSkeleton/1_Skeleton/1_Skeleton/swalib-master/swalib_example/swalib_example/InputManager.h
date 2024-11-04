@@ -2,6 +2,8 @@
 #include <windows.h>
 #include <unordered_map>
 
+
+
 class InputManager
 {
 public:
@@ -14,6 +16,11 @@ public:
     bool IsMovingDown() const { return IsKeyHeld('S'); }
     bool IsMovingLeft() const { return IsKeyHeld('A'); }
     bool IsMovingRight() const { return IsKeyHeld('D'); }
+
+    bool IsUpPressed() const { return IsKeyPressedThisFrame('W'); }
+    bool IsDownPressed() const { return IsKeyPressedThisFrame('S'); }
+    bool IsLeftPressed() const { return IsKeyPressedThisFrame('A'); }
+    bool IsRightPressed() const { return IsKeyPressedThisFrame('D'); }
 
     // UI keys
     bool UIMovingUp() { return IsKeyPressedThisFrame('W'); }
@@ -30,6 +37,9 @@ public:
 
     void UpdateInput();
 
+    // Check if a key was just released (transition from pressed to not pressed)
+    bool IsKeyReleased(int keyID) const;
+
 private:
     // Private constructor (singleton pattern)
     InputManager();
@@ -45,10 +55,9 @@ private:
 
     std::vector<char> trackedKeys;
 
+
     // Update the state of a key (called for each relevant key)
     void UpdateKeyState(int keyID);
-
-    
 
 public: 
     // Check if a key is currently held down (continuous behavior)
@@ -58,7 +67,7 @@ public:
     bool IsKeyPressedOnce(int keyID);
 
     // Clear key buffers once input is processed
-    void ClearKeyPressBuffer();
+    void ClearKeyPressBuffers();
 
     bool IsKeyPressedThisFrame(int keyID) const;
 };

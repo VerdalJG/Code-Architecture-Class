@@ -14,7 +14,7 @@ private:
 	vec2 scale;
 
 public:
-	Sprite* GetTexture() { return sprite; }
+	Sprite* GetSprite() { return sprite; }
 	void SetSprite(Sprite* newSprite);
 
 	vec2 GetScale() { return scale; }

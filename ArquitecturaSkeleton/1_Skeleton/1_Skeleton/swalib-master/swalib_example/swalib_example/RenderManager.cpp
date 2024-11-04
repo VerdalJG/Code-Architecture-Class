@@ -10,6 +10,7 @@
 #include "CursorWidget.h"
 #include "WorldManager.h"
 #include "World.h"
+#include "Animation.h"
 
 
 #include <include/rapidjson/rapidjson.h>
@@ -21,13 +22,13 @@
 #include <cctype>
 using namespace rapidjson;
 
-RenderEngine& RenderEngine::GetInstance()
+RenderManager& RenderManager::GetInstance()
 {
-	static RenderEngine instance;
+	static RenderManager instance;
 	return instance;
 }
 
-void RenderEngine::Initialize(TimeManager* _Timer)
+void RenderManager::Initialize(TimeManager* _Timer)
 {
 	FONT_Init();	// Characters and symbols inicialization to draw on screen."data/circle-bkg-128.png", true
 	
@@ -45,21 +46,21 @@ void RenderEngine::Initialize(TimeManager* _Timer)
 	timer = _Timer;
 }
 
-void RenderEngine::Update()
+void RenderManager::Update()
 {
 	glClear(GL_COLOR_BUFFER_BIT);	// Clear color buffer to preset values.
 	
 	RenderBackground(WorldManager::GetInstance().GetCurrentWorld()->GetBackground());
 	RenderSprites();
 	RenderUI();
-	//DisplayTimerValues();
+	DisplayTimerValues();
 	//RenderJSONData();
 
 	// Exchanges the front and back buffers
 	SYS_Show();
 }
 
-void RenderEngine::DisplayTimerValues()
+void RenderManager::DisplayTimerValues()
 {
 	// Buffers for strings below
 	char fpsBuffer[50];
@@ -77,7 +78,7 @@ void RenderEngine::DisplayTimerValues()
 	FONT_DrawString(vec2(SCR_WIDTH - 600, SCR_HEIGHT - 90), logicTimeBuffer);
 }
 
-void RenderEngine::RenderJSONData()
+void RenderManager::RenderJSONData()
 {
 	//Print JSON content
 	FILE* file = fopen("data/Test.json", "rb");
@@ -155,7 +156,7 @@ void RenderEngine::RenderJSONData()
 	}
 }
 
-void RenderEngine::Terminate()
+void RenderManager::Terminate()
 {
 	// Unload font.
 	UnloadAllSprites();
@@ -163,13 +164,13 @@ void RenderEngine::Terminate()
 	delete(background);
 }
 
-void RenderEngine::RenderBackground(Background* background)
+void RenderManager::RenderBackground(Background* background)
 {
 	if (background)
 	{
 		if (background->IsTiled())
 		{
-			Sprite* backgroundSprite = background->GetTexture();
+			Sprite* backgroundSprite = background->GetSprite();
 			// Render tiled image
 			int sizeX = backgroundSprite->GetSize().x;
 			int sizeY = backgroundSprite->GetSize().y;
@@ -179,21 +180,21 @@ void RenderEngine::RenderBackground(Background* background)
 				for (int j = 0; j <= SCR_HEIGHT / sizeY; j++)
 				{
 					vec2 uvScale = vec2(1.0f, 1.0f);
-					CORE_RenderCenteredSprite(vec2(i * sizeX + sizeX / 2, j * sizeY + sizeY / 2), vec2(sizeX, sizeY), backgroundSprite->GetTexture(), uvScale);
+					CORE_RenderCenteredSprite(vec2(i * sizeX + sizeX / 2, j * sizeY + sizeY / 2), vec2(sizeX, sizeY), backgroundSprite->GetTextureID(), uvScale);
 				}
 			}
 		}
 		else
 		{
-			vec2 position = vec2(SCR_WIDTH / 2, SCR_HEIGHT / 2);
-			vec2 size = background->GetTexture()->GetSize();
+			vec2 worldPosition = vec2(SCR_WIDTH / 2, SCR_HEIGHT / 2);
+			vec2 size = background->GetSprite()->GetSize();
 			vec2 uvScale = vec2(1.0f, 1.0f);
-			CORE_RenderCenteredSprite(position, size, background->GetTexture()->GetTexture(), uvScale);
+			CORE_RenderCenteredSprite(worldPosition, size, background->GetSprite()->GetTextureID(), uvScale);
 		}
 	}
 }
 
-void RenderEngine::RenderSprites()
+void RenderManager::RenderSprites()
 {
 	for (Entity* entity : entities)
 	{
@@ -202,23 +203,32 @@ void RenderEngine::RenderSprites()
 		{
 			continue;
 		}
-		Sprite* sprite = renderComponent->GetTexture();
+		Sprite* sprite = renderComponent->GetSprite();
+		
 		if (sprite)
 		{
-			vec2 position = entity->GetPosition() + renderComponent->GetPositionOffset();
-			vec2 entitySize = sprite->GetSize() * entity->GetScale();
+			vec2 worldPosition = entity->GetWorldPosition() + renderComponent->GetPositionOffset();
+			vec2 entitySize = sprite->GetSize() * entity->GetWorldScale();
 			vec2 uvScale = vec2(1.0f, 1.0f);
-
-			if (renderComponent->GetRenderMode() == RenderMode::Tiled)
+			Animation* animation = renderComponent->GetCurrentAnimation();
+			if (animation && animation->GetAnimationMode() == AnimationMode::SpriteSheet)
 			{
-				uvScale = entitySize / sprite->GetSize();
+				UVMapping uvMapping = sprite->GetSubSpriteUVs(animation->GetCurrentFrameNumber());
+				CORE_RenderCenteredSprite(worldPosition, entitySize, sprite->GetTextureID(), uvMapping);	
 			}
-			CORE_RenderCenteredSprite(position, entitySize, sprite->GetTexture(), uvScale);
+			else
+			{
+				if (renderComponent->GetRenderMode() == RenderMode::Tiled)
+				{
+					uvScale = entitySize / sprite->GetSize();
+				}
+				CORE_RenderCenteredSprite(worldPosition, entitySize, sprite->GetTextureID(), uvScale);
+			}
 		}
 	}
 }
 
-void RenderEngine::RenderUI()
+void RenderManager::RenderUI()
 {
 	for (Widget* widget : widgets)
 	{
@@ -227,69 +237,69 @@ void RenderEngine::RenderUI()
 		{
 			char textBuffer[50];
 			snprintf(textBuffer, 50, "%s", text->GetText().c_str());
-			FONT_DrawString(text->GetPosition(), textBuffer);
+			FONT_DrawString(text->GetWorldPosition(), textBuffer);
 		}
 
 		ImageWidget* image = dynamic_cast<ImageWidget*>(widget);
 		if (image)
 		{
-			vec2 position = image->GetPosition();
-			vec2 size = image->GetTexture()->GetSize() * image->GetScale();
+			vec2 worldPosition = image->GetWorldPosition();
+			vec2 size = image->GetSprite()->GetSize() * image->GetScale();
 			vec2 uvScale = vec2(1.0f, 1.0f);
-			CORE_RenderCenteredSprite(position, size, image->GetTexture()->GetTexture(), uvScale);
+			CORE_RenderCenteredSprite(worldPosition, size, image->GetSprite()->GetTextureID(), uvScale);
 		}
 
 		CursorWidget* cursor = dynamic_cast<CursorWidget*>(widget);
 		if (cursor)
 		{
-			vec2 position = cursor->GetPosition();
-			vec2 size = cursor->GetTexture()->GetSize() * cursor->GetScale();
+			vec2 worldPosition = cursor->GetWorldPosition();
+			vec2 size = cursor->GetSprite()->GetSize() * cursor->GetScale();
 			vec2 uvScale = vec2(1.0f, 1.0f);
-			CORE_RenderCenteredSprite(position, size, cursor->GetTexture()->GetTexture(), uvScale);
+			CORE_RenderCenteredSprite(worldPosition, size, cursor->GetSprite()->GetTextureID(), uvScale);
 		}
 	}
 }
 
-void RenderEngine::RegisterEntity(Entity* entity)
+void RenderManager::RegisterEntity(Entity* entity)
 {
 	entities.push_back(entity);
 }
 
-void RenderEngine::RegisterWidget(Widget* widget)
+void RenderManager::RegisterWidget(Widget* widget)
 {
 	widgets.push_back(widget);
 }
 
-void RenderEngine::RemoveEntity(Entity* entity)
+void RenderManager::RemoveEntity(Entity* entity)
 {
 	entities.erase(std::remove(entities.begin(), entities.end(), entity), entities.end());
 }
 
-void RenderEngine::RemoveWidget(Widget* widget)
+void RenderManager::RemoveWidget(Widget* widget)
 {
 	widgets.erase(std::remove(widgets.begin(), widgets.end(), widget), widgets.end());
 }
 
-void RenderEngine::ClearWidgets()
+void RenderManager::ClearWidgets()
 {
 	widgets.clear();
 }
 
-Sprite* RenderEngine::CreateSprite(const std::string& name, const std::string& filePath, const bool& uvWrapping)
+Sprite* RenderManager::LoadSprite(const std::string& name, const std::string& filePath, const bool& uvWrapping)
 {
-	Sprite* sprite = GetSprite(name, filePath, uvWrapping);
+	Sprite* sprite = GetLoadedSprite(name, filePath, uvWrapping);
 	if (!sprite)
 	{
 		unsigned int width, height;
 		GLuint texture = CORE_LoadPNG(filePath.c_str(), uvWrapping, width, height);
 		sprite = new Sprite(name, filePath, uvWrapping, vec2(width, height));
-		sprite->SetTexture(texture);
+		sprite->SetTextureID(texture);
 	}
 	sprite->IncrementRef();
 	return sprite;
 }
 
-Sprite* RenderEngine::GetSprite(const std::string& name, const std::string& filePath, const bool& uvWrapping)
+Sprite* RenderManager::GetLoadedSprite(const std::string& name, const std::string& filePath, const bool& uvWrapping)
 {
 	for (Sprite* sprite : loadedSprites)
 	{
@@ -301,22 +311,24 @@ Sprite* RenderEngine::GetSprite(const std::string& name, const std::string& file
 	return nullptr;
 }
 
-void RenderEngine::UnloadSprite(Sprite* sprite)
+void RenderManager::UnloadSprite(Sprite* sprite)
 {
 	if (!sprite)
 	{
 		return;
 	}
 
+	sprite->DecrementRef();
+
 	if (sprite->CanDelete())
 	{
-		CORE_UnloadPNG(sprite->GetTexture());
+		CORE_UnloadPNG(sprite->GetTextureID());
 		loadedSprites.erase(std::remove(loadedSprites.begin(), loadedSprites.end(), sprite), loadedSprites.end());
 		delete(sprite);
 	}
 }
 
-//GLuint RenderEngine::GetTexture(const char* filePath, bool uvWrapping, vec2& dimensions)
+//GLuint RenderManager::GetTexture(const char* filePath, bool uvWrapping, vec2& dimensions)
 //{
 //	TextureKey key{ filePath, uvWrapping };
 //
@@ -337,11 +349,11 @@ void RenderEngine::UnloadSprite(Sprite* sprite)
 //	return textureID;
 //}
 
-void RenderEngine::UnloadAllSprites()
+void RenderManager::UnloadAllSprites()
 {
 	for (Sprite* sprite : loadedSprites)
 	{
-		CORE_UnloadPNG(sprite->GetTexture());
+		CORE_UnloadPNG(sprite->GetTextureID());
 		delete(sprite);
 	}
 }

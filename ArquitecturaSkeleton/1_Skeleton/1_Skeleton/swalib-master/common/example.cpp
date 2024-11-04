@@ -7,7 +7,7 @@
 int Main(void)
 {
 	TimeManager* timer = new TimeManager();
-	RenderEngine::GetInstance().Initialize(timer);
+	RenderManager::GetInstance().Initialize(timer);
 	WorldManager::GetInstance().Initialize();
 	InputManager::GetInstance().Initialize();
 	GameManager::GetInstance().Initialize(timer);
@@ -16,7 +16,7 @@ int Main(void)
 	{
 		InputManager::GetInstance().UpdateInput(); // Poll inputs at uncapped FPS
 		GameManager::GetInstance().Slot();
-		RenderEngine::GetInstance().Update();
+		RenderManager::GetInstance().Update();
 
 		SYS_Pump();	// Process Windows messages.
 	}
@@ -24,7 +24,7 @@ int Main(void)
 	// End app. Done in reverse order vs initialization
 	GameManager::GetInstance().Terminate();
 	WorldManager::GetInstance().Terminate();
-	RenderEngine::GetInstance().Terminate();
+	RenderManager::GetInstance().Terminate();
 
 	return 0;
 }

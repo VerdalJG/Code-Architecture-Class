@@ -26,7 +26,7 @@ void CursorWidget::SelectNextWidget(bool advanceSelection)
 	{
 		advanceSelection ? selectedWidget++ : selectedWidget--;
 		selectedWidget %= static_cast<unsigned int>(selectableWidgets.size()); // avoid array out of bounds
-		position = selectableWidgets[selectedWidget]->GetPosition() + offsetFromSelection;
+		worldPosition = selectableWidgets[selectedWidget]->GetWorldPosition() + offsetFromSelection;
 	}
 }
 
@@ -59,7 +59,7 @@ void CursorWidget::Tick(float deltaTime)
 	}
 
 	selectionHoveringDistance = MAX_SELECTION_HOVER * sinf(accumulatedTime * 3);
-	position = selectableWidgets[selectedWidget]->GetPosition() + offsetFromSelection + vec2(selectionHoveringDistance, 0);
+	worldPosition = selectableWidgets[selectedWidget]->GetWorldPosition() + offsetFromSelection + vec2(selectionHoveringDistance, 0);
 }
 
 void CursorWidget::SetOffset(vec2 newOffset)
@@ -67,11 +67,11 @@ void CursorWidget::SetOffset(vec2 newOffset)
 	offsetFromSelection = newOffset;
 	if (selectableWidgets.size() > 0)
 	{
-		position = selectableWidgets[selectedWidget]->GetPosition() + offsetFromSelection;
+		worldPosition = selectableWidgets[selectedWidget]->GetWorldPosition() + offsetFromSelection;
 	}
 	else
 	{
-		position = offsetFromSelection;
+		worldPosition = offsetFromSelection;
 	}
 }
 
@@ -79,7 +79,7 @@ void CursorWidget::SetSprite(Sprite* newSprite)
 {
 	if (sprite)
 	{
-		RenderEngine::GetInstance().UnloadSprite(sprite);
+		RenderManager::GetInstance().UnloadSprite(sprite);
 	}
 	sprite = newSprite;
 }

@@ -311,7 +311,7 @@ void lodepng_compress_settings_init(LodePNGCompressSettings* settings);
 
 #ifdef LODEPNG_COMPILE_PNG
 /*
-Color mode of an image. Contains all information required to decode the pixel
+Color type of an image. Contains all information required to decode the pixel
 bits to RGBA colors. This information is the same as used in the PNG file
 format, and is used both for PNG and raw image data in LodePNG.
 */
@@ -387,7 +387,7 @@ In detail, it returns true only if it's a color type with alpha, or has a palett
 or if "key_defined" is true.
 */
 unsigned lodepng_can_have_alpha(const LodePNGColorMode* info);
-/*Returns the byte size of a raw image buffer with given width, height and color mode*/
+/*Returns the byte size of a raw image buffer with given width, height and color type*/
 size_t lodepng_get_raw_size(unsigned w, unsigned h, const LodePNGColorMode* color);
 
 #ifdef LODEPNG_COMPILE_ANCILLARY_CHUNKS
@@ -415,7 +415,7 @@ typedef struct LodePNGInfo
 #ifdef LODEPNG_COMPILE_ANCILLARY_CHUNKS
   /*
   suggested background color chunk (bKGD)
-  This color uses the same color mode as the PNG (except alpha channel), which can be 1-bit to 16-bit.
+  This color uses the same color type as the PNG (except alpha channel), which can be 1-bit to 16-bit.
 
   For greyscale PNGs, r, g and b will all 3 be set to the same. When encoding
   the encoder writes the red one. For palette PNGs: When decoding, the RGB value
@@ -645,7 +645,7 @@ void lodepng_state_copy(LodePNGState* dest, const LodePNGState* source);
 #ifdef LODEPNG_COMPILE_DECODER
 /*
 Same as lodepng_decode_memory, but uses a LodePNGState to allow custom settings and
-getting much more information about the PNG image and color mode.
+getting much more information about the PNG image and color type.
 */
 unsigned lodepng_decode(unsigned char** out, unsigned* w, unsigned* h,
                         LodePNGState* state,
@@ -985,7 +985,7 @@ begin), life-critical systems, ...
 
 The following features are supported by the decoder:
 
-*) decoding of PNGs with any color type, bit depth and interlace mode, to a 24- or 32-bit color raw image,
+*) decoding of PNGs with any color type, bit depth and interlace type, to a 24- or 32-bit color raw image,
    or the same color type as the PNG
 *) encoding of PNGs, from any raw image to 24- or 32-bit color, or the same color type as the raw image
 *) Adam7 interlace and deinterlace for any color type
@@ -1072,7 +1072,7 @@ features.
 
 When using the LodePNGState, it uses the following fields for decoding:
 *) LodePNGInfo info_png: it stores extra information about the PNG (the input) in here
-*) LodePNGColorMode info_raw: here you can say what color mode of the raw image (the output) you want to get
+*) LodePNGColorMode info_raw: here you can say what color type of the raw image (the output) you want to get
 *) LodePNGDecoderSettings decoder: you can specify a few extra settings for the decoder to use
 
 LodePNGInfo info_png
@@ -1163,7 +1163,7 @@ LodePNGEncoderSettings encoder
 
 The following settings are supported (some are in sub-structs):
 *) auto_convert: when this option is enabled, the encoder will
-automatically choose the smallest possible color mode (including color key) that
+automatically choose the smallest possible color type (including color key) that
 can encode the colors of all pixels without information loss.
 *) btype: the block type for LZ77. 0 = uncompressed, 1 = fixed huffman tree,
    2 = dynamic huffman tree (best compression). Should be 2 for proper
@@ -1194,7 +1194,7 @@ color type that gives good compression based on the values of colors and amount
 of colors in the image. It can be configured to let you control it instead as
 well, though.
 
-To be able to do this, LodePNG does conversions from one color mode to another.
+To be able to do this, LodePNG does conversions from one color type to another.
 It can convert from almost any color type to any other color type, except the
 following conversions: RGB to greyscale is not supported, and converting to a
 palette when the palette doesn't have a required color is not supported. This is
@@ -1287,7 +1287,7 @@ Supported color conversions:
 
 If you want no color conversion to be done (e.g. for speed or control):
 -In the encoder, you can make it save a PNG with any color type by giving the
-raw color mode and LodePNGInfo the same color mode, and setting auto_convert to
+raw color type and LodePNGInfo the same color type, and setting auto_convert to
 false.
 -In the decoder, you can make it store the pixel data in the same color type
 as the PNG has, by setting the color_convert setting to false. Settings in
@@ -1627,7 +1627,7 @@ symbol.
     use custom ones in your project without needing to change lodepng's code.
 *) 28 jan 2013: Bugfix with color key.
 *) 27 okt 2012: Tweaks in text chunk keyword length error handling.
-*) 8 okt 2012 (!): Added new filter strategy (entropy) and new auto color mode.
+*) 8 okt 2012 (!): Added new filter strategy (entropy) and new auto color type.
     (no palette). Better deflate tree encoding. New compression tweak settings.
     Faster color conversions while decoding. Some internal cleanups.
 *) 23 sep 2012: Reduced warnings in Visual Studio a little bit.

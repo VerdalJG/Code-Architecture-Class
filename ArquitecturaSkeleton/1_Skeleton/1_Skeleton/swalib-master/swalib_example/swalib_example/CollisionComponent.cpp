@@ -4,18 +4,13 @@
 #include "CollisionMessage.h"
 #include "MovementMessage.h"
 
-CollisionComponent::CollisionComponent()
-	: radius(16.0f)
+CollisionComponent::CollisionComponent() : 
+	type(ColliderType::Unknown),
+	layer(CollisionLayer::Default)
 {
 }
 
 void CollisionComponent::Tick(float deltaTime)
-{
-	CollisionCheck();
-	ScreenLimitCheck();
-}
-
-void CollisionComponent::CollisionCheck()
 {
 	// Collision detection.
 	World* world = GetWorld();
@@ -26,50 +21,79 @@ void CollisionComponent::CollisionCheck()
 			continue;
 		}
 
-		CollisionComponent* otherComponent = otherEntity->GetComponent<CollisionComponent>();
-		if (otherComponent)
+		CollisionComponent* otherCollider = otherEntity->GetComponent<CollisionComponent>();
+
+		if (!otherCollider)
 		{
-			float limitSquared = (this->GetRadius() + otherComponent->GetRadius()) * (this->GetRadius() + otherComponent->GetRadius());
-			if (vlen2(position - otherComponent->GetPosition()) <= limitSquared)
-			{
-				CollisionMessage message = CollisionMessage(otherComponent);
-				owner->BroadcastMessage(&message);
-				
-				// For specific behavior on collision
-				owner->OnCollide(otherEntity);
-				otherEntity->OnCollide(owner);
-			}
+			continue;
+		}
+
+		CollisionLayer otherLayer = otherCollider->GetCollisionLayer();
+
+		// Only proceed with collision check if the layers are set to collide
+		if (world->ShouldCollide(layer, otherLayer)) 
+		{
+			CollisionCheck(this, otherCollider);
 		}
 	}
+	
 }
 
-void CollisionComponent::ScreenLimitCheck()
+void CollisionComponent::CollisionCheck(CollisionComponent* ownerComponent, CollisionComponent* otherComponent)
 {
-	CollisionMessage message;
 	bool collided = false;
+	vec2 collisionNormal;
+	float depthOfIntersection = 0;
 
-	if (position.x + radius > SCR_WIDTH || position.x - radius < 0) 
+	ColliderType otherType = otherComponent->GetColliderType();
+		
+	// Both Circles
+	if (type == ColliderType::Circle && otherType == ColliderType::Circle)
 	{
-		message = CollisionMessage(CollisionDirection::Horizontal);
-		collided = true;
+		collided = CircleCircleCollisionCheck(otherComponent, collisionNormal, depthOfIntersection);
 	}
-	if (position.y + radius > SCR_HEIGHT || position.y - radius < 0) 
+	// Box and Circle
+	else if (type == ColliderType::Circle && otherType == ColliderType::Box || type == ColliderType::Box && otherType == ColliderType::Circle)
 	{
-		message = CollisionMessage(CollisionDirection::Vertical);
-		collided = true;
+		collided = CircleBoxCollisionCheck(otherComponent, collisionNormal, depthOfIntersection);
+	}
+	// Both Boxes
+	else if (type == ColliderType::Box && otherType == ColliderType::Box)
+	{
+		collided = BoxBoxCollisionCheck(otherComponent, collisionNormal, depthOfIntersection);
 	}
 
 	if (collided)
 	{
-		owner->BroadcastMessage(&message);
+		if (isTrigger || otherComponent->IsTrigger())
+		{
+			owner->OnTrigger(otherComponent->owner);
+			otherComponent->owner->OnCollide(owner);
+		}
+		else
+		{
+			CollisionMessage message = CollisionMessage(otherComponent, collisionNormal, depthOfIntersection);
+			owner->BroadcastMessage(&message);
+
+			// For specific behavior on collision
+			owner->OnCollide(otherComponent->owner);
+			otherComponent->owner->OnCollide(owner);
+		}
 	}
+	
 }
+
+void CollisionComponent::OnAttach()
+{
+	worldPosition = owner->GetWorldPosition();
+}
+
 
 void CollisionComponent::ReceiveMessage(Message* message)
 {
 	MovementMessage* movementMessage = dynamic_cast<MovementMessage*>(message);
 	if (movementMessage) 
 	{
-		position = movementMessage->newPosition;
+		worldPosition = movementMessage->newPosition;
 	}
 }

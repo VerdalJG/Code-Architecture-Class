@@ -4,6 +4,7 @@
 
 class Sprite;
 class Message;
+class Animation;
 
 enum class RenderMode 
 {
@@ -15,23 +16,36 @@ class RenderComponent : public Component
 {
 public:
 	RenderComponent();
+	RenderComponent(RenderComponent& copy);
 	~RenderComponent() override;
 	virtual void Tick(float deltaTime) override;
 	virtual void ReceiveMessage(Message* message) override;
+	void AddAnimation(Animation* animation);
 
 private:
-	Sprite* sprite; //Sprite for Render
+	Sprite* currentSprite; //Sprite for Render
 	vec2 positionOffset;
-	RenderMode renderMode;  // Store the render mode (tile or scale)
+	RenderMode renderMode;  // Store the render type (tile or scale)
+
+	Animation* currentAnimation = nullptr;
+	std::vector<Animation*> animations;
 
 public:
-	Sprite* GetTexture() const { return sprite; }
-	void SetSprite(Sprite* newSprite) { sprite = newSprite; }
+	Sprite* GetSprite() const { return currentSprite; }
+	void SetSprite(Sprite* newSprite) { currentSprite = newSprite; }
+
+	Animation* GetCurrentAnimation() const { return currentAnimation; }
+	void SetCurrentAnimation(std::string animationName);
+
+	std::vector<Animation*> GetAllAnimations() { return animations; }
+	void SetAllAnimations(std::vector<Animation*> newAnimations) { animations = newAnimations; }
 
 	vec2 GetPositionOffset() const { return positionOffset; }
 	void SetPositionOffset(vec2 newOffset) { positionOffset = newOffset; }
 
 	RenderMode GetRenderMode() const { return renderMode; }
 	void SetRenderMode(RenderMode newRenderMode) { renderMode = newRenderMode; }
+
+	virtual Component* Clone() override;
 };
 

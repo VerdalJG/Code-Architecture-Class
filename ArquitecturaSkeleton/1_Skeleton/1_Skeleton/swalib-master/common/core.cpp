@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "core.h"
 #include "vector2d.h"
+#include "../../swalib-master/swalib_example/swalib_example/Sprite.h"
 
 // General utility functions.
 
@@ -15,7 +16,7 @@ float CORE_FRand(float from, float to)
 
 //-----------------------------------------------------------------------------
 // Render a Sprite.
-// p0, p1:	Min and max window position to draw sprite.
+// p0, p1:	Min and max window position to draw currentSprite.
 void CORE_RenderSprite(const vec2& p0, const vec2& p1, GLuint texid)
 {
   glBindTexture( GL_TEXTURE_2D, texid );
@@ -28,10 +29,10 @@ void CORE_RenderSprite(const vec2& p0, const vec2& p1, GLuint texid)
 }
 
 // Render a Sprite.
-// p0, p1:	Min and max window position to draw sprite.
+// p0, p1:	Min and max window position to draw currentSprite.
 void CORE_RenderSpriteFromSheet(const vec2& p0, const vec2& p1, GLuint texid, vec2 spriteCoordinates, vec2 spriteSize, vec2 sheetSize)
 {
-    // Calculate the normalized texture coordinates for the sprite
+    // Calculate the normalized texture coordinates for the currentSprite
     float u0 = spriteCoordinates.x / sheetSize.x;                  // Left texture coordinate
     float v0 = spriteCoordinates.y / sheetSize.y;                  // Top texture coordinate
     float u1 = (spriteCoordinates.x + spriteSize.x) / sheetSize.x; // Right texture coordinate
@@ -48,7 +49,7 @@ void CORE_RenderSpriteFromSheet(const vec2& p0, const vec2& p1, GLuint texid, ve
 
 //-----------------------------------------------------------------------------
 // Render a Sprite.
-// pos:	Window position to draw sprite center.
+// pos:	Window position to draw currentSprite center.
 void CORE_RenderCenteredSprite(const vec2 &pos, const vec2 &size, GLuint texid, const vec2& uvScale)
 {
   vec2 p0 = pos - (size * 0.5f);
@@ -70,6 +71,29 @@ void CORE_RenderCenteredSprite(const vec2 &pos, const vec2 &size, GLuint texid, 
   glVertex2f(p0.x, p1.y);
 
   glEnd();
+}
+
+void CORE_RenderCenteredSprite(const vec2& pos, const vec2& size, GLuint texid, const UVMapping& uvs)
+{
+    vec2 p0 = pos - (size * 0.5f);
+    vec2 p1 = pos + (size * 0.5f);
+
+    glBindTexture(GL_TEXTURE_2D, texid);
+    glBegin(GL_QUADS);
+
+    glTexCoord2d(uvs.u0, uvs.v0);
+    glVertex2f(p0.x, p0.y);
+
+    glTexCoord2d(uvs.u1, uvs.v0);
+    glVertex2f(p1.x, p0.y);
+
+    glTexCoord2d(uvs.u1, uvs.v1);
+    glVertex2f(p1.x, p1.y);
+
+    glTexCoord2d(uvs.u0, uvs.v1);
+    glVertex2f(p0.x, p1.y);
+
+    glEnd();
 }
 
 //-----------------------------------------------------------------------------

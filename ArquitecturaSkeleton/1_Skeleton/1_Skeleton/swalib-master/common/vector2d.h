@@ -152,4 +152,9 @@ inline double vang( const vec2& v1, const vec2& v2 )
 	return acos(dot);
 }
 
+inline vec2 vec2clamp(const vec2& value, const vec2& minVec, const vec2& maxVec) 
+{
+	return vec2(max(minVec.x, min(value.x, maxVec.x)), max(minVec.y, min(value.y, maxVec.y)));
+}
+
 #endif

@@ -10,6 +10,6 @@ Background::~Background()
 {
 	if (sprite)
 	{
-		RenderEngine::GetInstance().UnloadSprite(sprite);
+		RenderManager::GetInstance().UnloadSprite(sprite);
 	}
 }

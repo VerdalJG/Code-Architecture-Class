@@ -1,22 +1,8 @@
 #include "CollisionMessage.h"
 
-CollisionMessage::CollisionMessage() : 
-	collidingComponent(nullptr),
-	collisionType(CollisionType::None),
-	collisionDirection(CollisionDirection::None)
+CollisionMessage::CollisionMessage(CollisionComponent* other, vec2 collisionNormal, float depthOfIntersection) :
+	collidingComponent(other),
+	normal(collisionNormal),
+	depth(depthOfIntersection)
 {
-}
-
-CollisionMessage::CollisionMessage(CollisionComponent* other) :
-	collisionDirection(CollisionDirection::None)
-{
-	collisionType = CollisionType::ComponentCollision;
-	collidingComponent = other;
-}
-
-CollisionMessage::CollisionMessage(CollisionDirection direction) :
-	collidingComponent(nullptr)
-{
-	collisionType = CollisionType::ScreenEdgeCollision;
-	collisionDirection = direction;
 }

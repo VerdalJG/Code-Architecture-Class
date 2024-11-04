@@ -3284,9 +3284,9 @@ static void getPixelColorRGBA8(unsigned char* r, unsigned char* g,
 }
 
 /*Similar to getPixelColorRGBA8, but with all the for loops inside of the color
-mode test cases, optimized to convert the colors much faster, when converting
+type test cases, optimized to convert the colors much faster, when converting
 to RGBA or RGB with 8 bit per cannel. buffer must be RGBA or RGB output with
-enough memory, if has_alpha is true the output is RGBA. mode has the color mode
+enough memory, if has_alpha is true the output is RGBA. type has the color type
 of the input buffer.*/
 static void getPixelColorsRGBA8(unsigned char* buffer, size_t numpixels,
                                 unsigned has_alpha, const unsigned char* in,
@@ -3562,7 +3562,7 @@ static unsigned getValueRequiredBits(unsigned char value)
   return 8;
 }
 
-/*profile must already have been inited with mode.
+/*profile must already have been inited with type.
 It's ok to set some parameters of profile to done already.*/
 unsigned lodepng_get_color_profile(LodePNGColorProfile* profile,
                                    const unsigned char* in, unsigned w, unsigned h,
@@ -3758,7 +3758,7 @@ unsigned lodepng_get_color_profile(LodePNGColorProfile* profile,
 /*Automatically chooses color type that gives smallest amount of bits in the
 output image, e.g. grey if there are only greyscale pixels, palette if there
 are less than 256 colors, ...
-Updates values of mode with a potentially smaller color model. mode_out should
+Updates values of type with a potentially smaller color model. mode_out should
 contain the user chosen color model, but will be overwritten with the new chosen one.*/
 unsigned lodepng_auto_choose_color(LodePNGColorMode* mode_out,
                                    const unsigned char* image, unsigned w, unsigned h,
@@ -4749,7 +4749,7 @@ unsigned lodepng_decode(unsigned char** out, unsigned* w, unsigned* h,
     if(!(state->info_raw.colortype == LCT_RGB || state->info_raw.colortype == LCT_RGBA)
        && !(state->info_raw.bitdepth == 8))
     {
-      return 56; /*unsupported color mode conversion*/
+      return 56; /*unsupported color type conversion*/
     }
 
     outsize = lodepng_get_raw_size(*w, *h, &state->info_raw);
@@ -5673,7 +5673,7 @@ unsigned lodepng_encode(unsigned char** out, size_t* outsize,
   }
   if(state->info_png.interlace_method > 1)
   {
-    CERROR_RETURN_ERROR(state->error, 71); /*error: unexisting interlace mode*/
+    CERROR_RETURN_ERROR(state->error, 71); /*error: unexisting interlace type*/
   }
 
   state->error = checkColorValidity(info.color.colortype, info.color.bitdepth);

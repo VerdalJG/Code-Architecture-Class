@@ -13,7 +13,7 @@ private:
 	bool isTiledBackground = false;
 
 public:
-	Sprite* GetTexture() { return sprite; }
+	Sprite* GetSprite() { return sprite; }
 	void SetSprite(Sprite* newSprite) { sprite = newSprite; }
 
 	bool IsTiled() { return isTiledBackground; }

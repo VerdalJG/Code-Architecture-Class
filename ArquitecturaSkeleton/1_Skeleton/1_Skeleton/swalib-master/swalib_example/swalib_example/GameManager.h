@@ -15,13 +15,14 @@ public:
 	void Tick(float deltaTime);
 	void Terminate();
 	void ExitGame();
-
-public:
-	const unsigned int NUM_BALLS = 10;	// Max. num balls.
+	void AddScore() { score += 10; }
+	
 
 private:
 	const char* jsonFilePath = "data/BallSetup.json";
+	int score;
 	TimeManager* timer;
+	
 };
 
 

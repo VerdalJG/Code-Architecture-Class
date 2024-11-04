@@ -21,7 +21,11 @@ public:
 	void LoadGameWorld();
 	void UnloadCurrentWorld();
 	void CreateBorders(World* world);
-	Wall* CreateWall(const std::string& name, const vec2& scale, const vec2& position, const vec2& halfExtents, Sprite* sprite, World* world);
+	void CreatePlayer(World* world);
+	void CreateHarpoon(World* world);
+	void CreateBalls(World* world);
+	Wall* CreateWall(const std::string& name, const vec2& scale, const vec2& worldPosition, Sprite* sprite, World* world);
+	void CreateGameUI(World* world);
 
 	void LoadMainMenu();
 	World* GetCurrentWorld();

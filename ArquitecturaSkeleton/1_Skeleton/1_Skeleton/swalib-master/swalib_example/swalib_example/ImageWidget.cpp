@@ -1,6 +1,7 @@
 #include "ImageWidget.h"
 #include "Globals.h"
 #include "RenderManager.h"
+#include "Sprite.h"
 
 ImageWidget::ImageWidget() :
 	sprite(nullptr),
@@ -12,7 +13,7 @@ ImageWidget::~ImageWidget()
 {
 	if (sprite)
 	{
-		RenderEngine::GetInstance().UnloadSprite(sprite);
+		RenderManager::GetInstance().UnloadSprite(sprite);
 	}
 }
 
@@ -20,7 +21,8 @@ void ImageWidget::SetSprite(Sprite* newSprite)
 {
 	if (sprite)
 	{
-		RenderEngine::GetInstance().UnloadSprite(sprite);
+		RenderManager::GetInstance().UnloadSprite(sprite);
 	}
 	sprite = newSprite;
+	sprite->IncrementRef();
 }

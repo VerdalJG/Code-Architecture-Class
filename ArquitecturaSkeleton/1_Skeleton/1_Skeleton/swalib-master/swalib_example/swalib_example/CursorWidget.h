@@ -31,7 +31,7 @@ public:
 	vec2 GetOffset() { return offsetFromSelection; };
 	void SetOffset(vec2 newOffset);
 
-	Sprite* GetTexture() { return sprite; }
+	Sprite* GetSprite() { return sprite; }
 	void SetSprite(Sprite* newSprite);
 
 	vec2 GetScale() { return scale; }

@@ -13,6 +13,7 @@ typedef unsigned       int  uint;
 
 // Forward definition
 class vec2;
+struct UVMapping;
 
 //-----------------------------------------------------------------------------
 struct rgba_t { byte a, r, g, b; };
@@ -55,17 +56,18 @@ void   CORE_UnloadBmp (GLuint texid);
 void   CORE_UnloadPNG (GLuint texid);
 //-----------------------------------------------------------------------------
 // Render a Sprite.
-// p0, p1:	Min and max window position to draw sprite.
+// p0, p1:	Min and max window position to draw currentSprite.
 void   CORE_RenderSprite(const vec2 &p0, const vec2 &p1, GLuint texid);
 
 // Render a Sprite.
-// p0, p1:	Min and max window position to draw sprite.
+// p0, p1:	Min and max window position to draw currentSprite.
 // SpriteCoordinates are from 0 (top left) - 1 (bottom right)
 void   CORE_RenderSpriteFromSheet(const vec2& p0, const vec2& p1, GLuint texid, vec2 spriteCoordinates, vec2 spriteSize, vec2 sheetSize);
 //-----------------------------------------------------------------------------
 // Render a Sprite.
-// pos:	Window position to draw sprite center.
+// pos:	Window position to draw currentSprite center.
 void   CORE_RenderCenteredSprite(const vec2 &pos, const vec2 &size, GLuint texid, const vec2& uvScale);
+void   CORE_RenderCenteredSprite(const vec2& pos, const vec2& size, GLuint texid, const UVMapping& uvs);
 //-----------------------------------------------------------------------------
 // Render a Sprite in a window position with rotation in radians.
 void   CORE_RenderCenteredRotatedSprite(const vec2 &pos, const vec2 &size, float angle, GLuint texid, rgba_t color = RGBA(255,255,255,255));

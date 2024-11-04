@@ -21,7 +21,7 @@ void UIManager::AddWidget(Widget* widget)
 	if (widget)
 	{
 		widgets.push_back(widget);
-		RenderEngine::GetInstance().RegisterWidget(widget);
+		RenderManager::GetInstance().RegisterWidget(widget);
 	}
 }
 
@@ -30,7 +30,7 @@ void UIManager::RemoveWidget(Widget* widget)
 	if (widget)
 	{
 		widgets.erase(std::remove(widgets.begin(), widgets.end(), widget), widgets.end());
-		RenderEngine::GetInstance().RemoveWidget(widget);
+		RenderManager::GetInstance().RemoveWidget(widget);
 		delete(widget);
 	}
 }
@@ -42,7 +42,7 @@ void UIManager::ResetUI()
 		delete(widget);
 	}
 
-	RenderEngine::GetInstance().ClearWidgets();
+	RenderManager::GetInstance().ClearWidgets();
 	widgets.clear();
 }
 
