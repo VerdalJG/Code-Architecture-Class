@@ -19,21 +19,6 @@ RenderComponent::RenderComponent(RenderComponent& copy)
 
 RenderComponent::~RenderComponent()
 {
-    for (Animation* animation : animations)
-    {
-        Sprite* sprite = animation->GetSpriteSheet();
-        if (sprite)
-        {
-            RenderManager::GetInstance().UnloadSprite(sprite);
-        }
-        else
-        {
-            for (Sprite* animationFrame : animation->GetAnimationFrames())
-            {
-                RenderManager::GetInstance().UnloadSprite(animationFrame);
-            }
-        }
-    }
 }
 
 void RenderComponent::Tick(float deltaTime)

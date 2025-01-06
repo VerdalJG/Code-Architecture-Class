@@ -8,8 +8,4 @@ Background::Background()
 
 Background::~Background()
 {
-	if (sprite)
-	{
-		RenderManager::GetInstance().UnloadSprite(sprite);
-	}
 }

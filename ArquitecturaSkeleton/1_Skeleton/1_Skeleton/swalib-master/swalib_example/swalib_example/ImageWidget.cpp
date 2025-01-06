@@ -11,18 +11,9 @@ ImageWidget::ImageWidget() :
 
 ImageWidget::~ImageWidget()
 {
-	if (sprite)
-	{
-		RenderManager::GetInstance().UnloadSprite(sprite);
-	}
 }
 
 void ImageWidget::SetSprite(Sprite* newSprite)
 {
-	if (sprite)
-	{
-		RenderManager::GetInstance().UnloadSprite(sprite);
-	}
 	sprite = newSprite;
-	sprite->IncrementRef();
 }

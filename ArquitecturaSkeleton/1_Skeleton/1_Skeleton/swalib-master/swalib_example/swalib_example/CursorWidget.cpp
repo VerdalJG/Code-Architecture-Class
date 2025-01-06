@@ -77,9 +77,5 @@ void CursorWidget::SetOffset(vec2 newOffset)
 
 void CursorWidget::SetSprite(Sprite* newSprite)
 {
-	if (sprite)
-	{
-		RenderManager::GetInstance().UnloadSprite(sprite);
-	}
 	sprite = newSprite;
 }

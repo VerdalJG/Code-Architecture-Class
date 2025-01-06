@@ -9,7 +9,7 @@ public:
 	~Background();
 
 private:
-	Sprite* sprite;
+	Sprite* sprite = nullptr;
 	bool isTiledBackground = false;
 
 public:

@@ -47,7 +47,6 @@ public:
 	void RemoveWidget(Widget* widget);
 	void ClearWidgets();
 	Sprite* LoadSprite(const std::string& name, const std::string& filePath, const bool& uvWrapping);
-	void UnloadSprite(Sprite* sprite);
 	void UnloadAllSprites();
 
 	//GLuint GetTexture(const char* filePath, bool screenWrapping, vec2& dimensions);

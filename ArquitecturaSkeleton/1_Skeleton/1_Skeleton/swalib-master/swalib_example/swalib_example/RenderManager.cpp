@@ -158,7 +158,6 @@ void RenderManager::RenderJSONData()
 
 void RenderManager::Terminate()
 {
-	// Unload font.
 	UnloadAllSprites();
 	FONT_End();
 	delete(background);
@@ -287,7 +286,10 @@ void RenderManager::ClearWidgets()
 
 Sprite* RenderManager::LoadSprite(const std::string& name, const std::string& filePath, const bool& uvWrapping)
 {
+	// Check if the sprite is already loaded, if so, use it
 	Sprite* sprite = GetLoadedSprite(name, filePath, uvWrapping);
+
+	// Create new sprite
 	if (!sprite)
 	{
 		unsigned int width, height;
@@ -295,7 +297,6 @@ Sprite* RenderManager::LoadSprite(const std::string& name, const std::string& fi
 		sprite = new Sprite(name, filePath, uvWrapping, vec2(width, height));
 		sprite->SetTextureID(texture);
 	}
-	sprite->IncrementRef();
 	return sprite;
 }
 
@@ -311,44 +312,6 @@ Sprite* RenderManager::GetLoadedSprite(const std::string& name, const std::strin
 	return nullptr;
 }
 
-void RenderManager::UnloadSprite(Sprite* sprite)
-{
-	if (!sprite)
-	{
-		return;
-	}
-
-	sprite->DecrementRef();
-
-	if (sprite->CanDelete())
-	{
-		CORE_UnloadPNG(sprite->GetTextureID());
-		loadedSprites.erase(std::remove(loadedSprites.begin(), loadedSprites.end(), sprite), loadedSprites.end());
-		delete(sprite);
-	}
-}
-
-//GLuint RenderManager::GetTexture(const char* filePath, bool uvWrapping, vec2& dimensions)
-//{
-//	TextureKey key{ filePath, uvWrapping };
-//
-//	auto iterator = loadedTextures.find(key);
-//	if (iterator != loadedTextures.end())
-//	{
-//		return iterator->second; // Return texture ID
-//	}
-//	unsigned int width, height;
-//
-//	GLuint textureID = CORE_LoadPNG(filePath, uvWrapping, width, height);
-//
-//	dimensions.x = width;
-//	dimensions.y = height;
-//
-//	loadedTextures[key] = textureID; // Store in loadedTextures
-//
-//	return textureID;
-//}
-
 void RenderManager::UnloadAllSprites()
 {
 	for (Sprite* sprite : loadedSprites)
@@ -357,7 +320,3 @@ void RenderManager::UnloadAllSprites()
 		delete(sprite);
 	}
 }
-
-
-
-

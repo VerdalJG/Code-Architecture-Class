@@ -25,6 +25,6 @@ int Main(void)
 	GameManager::GetInstance().Terminate();
 	WorldManager::GetInstance().Terminate();
 	RenderManager::GetInstance().Terminate();
-
+	delete timer;
 	return 0;
 }

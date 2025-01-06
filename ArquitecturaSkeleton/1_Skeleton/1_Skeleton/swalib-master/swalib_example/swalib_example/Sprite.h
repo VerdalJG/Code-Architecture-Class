@@ -5,7 +5,6 @@ class RenderManager;
 
 enum class SpriteType
 {
-	None,
 	Individual,
 	SpriteSheet,
 };
@@ -16,10 +15,10 @@ struct UVMapping
 
 	UVMapping()
 	{
-		float u0 = 0;
-		float v0 = 0;
-		float u1 = 0;
-		float v1 = 0;
+		this->u0 = 0;
+		this->v0 = 0;
+		this->u1 = 0;
+		this->v1 = 0;
 	}
 
 	UVMapping(float u0, float v0, float u1, float v1)
@@ -50,7 +49,7 @@ private:
 	bool uvWrapping;
 	GLuint texture;
 	vec2 size;
-	SpriteType type = SpriteType::None;
+	SpriteType type = SpriteType::Individual;
 
 	// Data for memory control
 	int referenceCount = 0;
