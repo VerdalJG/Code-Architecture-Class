@@ -48,6 +48,7 @@ public:
 	void RemoveWidget(Widget* widget);
 
 	void Tick(float deltaTime);
+	void TickMovementComponents(float deltaTime);
 	void ProcessInputs();
 	
 	const float GRAVITY_SCALE = 2.0f;
@@ -62,12 +63,18 @@ private:
 	MoveDirection lastPressedDirection = MoveDirection::None;
 	// Define the matrix using a 2D array of booleans
 	bool collisionMatrix[static_cast<int>(CollisionLayer::NumLayers)][static_cast<int>(CollisionLayer::NumLayers)];
+	bool shouldTerminate = false;
 
 public:
 	std::vector<Entity*> GetEntities() { return entities; }
+
 	void SetPlayer(Player* newPlayer) { player = newPlayer; }
+
 	Background* GetBackground() { return background; }
 	void SetBackground(Background* newBackground);
+
+	void PrepareForTermination() { shouldTerminate = true; }
+	bool ShouldTerminate() { return shouldTerminate; }
 
 	MoveDirection GetLastDirection() { return lastPressedDirection; }
 	void SetLastDirection(MoveDirection newDirection) { lastPressedDirection = newDirection; }
@@ -108,4 +115,16 @@ public:
 		return newActor;
 	}
 };
+
+
+
+
+
+
+
+
+
+
+
+
 

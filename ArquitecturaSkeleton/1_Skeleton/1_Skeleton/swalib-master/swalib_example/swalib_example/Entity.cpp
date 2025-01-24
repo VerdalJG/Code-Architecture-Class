@@ -14,10 +14,15 @@ Entity::Entity() :
 
 Entity::~Entity()
 {
-	for (Component* component : components)
+	for (auto& pair : components)
 	{
-		delete(component);
+		for (Component* component : pair.second)
+		{
+			delete(component);
+		}
+		pair.second.clear();
 	}
+	components.clear();
 }
 
 void Entity::AddComponent(Component* component)
@@ -26,7 +31,12 @@ void Entity::AddComponent(Component* component)
 	{
 		component->owner = this;
 		component->OnAttach();
-		components.push_back(component);
+
+		// Use std::type_index of the component's dynamic type as the key
+		std::type_index type = typeid(*component);
+
+		// Add the component to the corresponding vector in the map
+		components[type].push_back(component);
 	}
 }
 
@@ -38,22 +48,34 @@ void Entity::AddComponents(std::vector<Component*> components)
 		{
 			component->owner = this;
 			component->OnAttach();
-			components.push_back(component);
+
+			// Use std::type_index of the component's dynamic type as the key
+			std::type_index type = typeid(*component);
+
+			// Add the component to the corresponding vector in the map
+			this->components[type].push_back(component);
 		}
 	}
 }
 
 void Entity::BroadcastMessage(Message* message)
 {
-	for (Component* component : components)
+	for (const auto& pair : components)
 	{
-		component->ReceiveMessage(message);
+		for (Component* component : pair.second)
+		{
+			component->ReceiveMessage(message);
+		}
 	}
+
 	for (Entity* child : children)
 	{
-		for (Component* childComponent : child->components)
+		for (const auto& pair : child->components)
 		{
-			childComponent->ReceiveMessage(message);
+			for (Component* childComponent : pair.second) // Iterate over the child's components vector
+			{
+				childComponent->ReceiveMessage(message);
+			}
 		}
 	}
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "Globals.h"
 #include "Component.h"
+#include <unordered_map>
+#include <typeindex>
 
 class Sprite;
 class World;
@@ -29,7 +31,9 @@ protected:
 
 	Entity* parent = nullptr;
 	std::vector<Entity*> children;
-	std::vector<Component*> components;
+
+	// Mapping type id to a vector of components, allowing multiple components of the same type (e.g. box and circle collider)
+	std::unordered_map<std::type_index, std::vector<Component*>> components;
 	std::string name;
 	vec2 localPosition;
 	vec2 worldPosition;
@@ -52,23 +56,30 @@ public:
 	vec2 GetLocalScale() { return localScale; }
 	void SetLocalScale(vec2 newScale);
 
-	std::vector<Component*> GetAllComponents() { return components; }
+	std::vector<Component*> GetAllComponents() 
+	{ 
+		std::vector<Component*> result;
+		for (auto iterator = components.begin(); iterator != components.end(); ++iterator)
+		{
+			const std::vector<Component*>& componentList = iterator->second;
+			result.insert(result.end(), componentList.begin(), componentList.end());
+		}
+
+		return result;
+	}
 
 	bool ShouldDestroy() { return markedForDestruction; }
 
 	std::string GetName() { return name; }
 	void SetName(std::string newName) { name = newName; }
 
-	// Normally game engines do not use RTTI, should use different methods other than dynamic_cast for performance
 	template<typename T>
 	T* GetComponent()
 	{
-		for (Component* component : components)
+		auto iterator = components.find(std::type_index(typeid(T)));
+		if (iterator != components.end())
 		{
-			if (T* derivedComponent = dynamic_cast<T*>(component))
-			{
-				return derivedComponent;
-			}
+			return static_cast<T*>(iterator->second.front());
 		}
 		return nullptr;
 	}
@@ -76,15 +87,12 @@ public:
 	template<typename T>
 	std::vector<T*> GetComponents()
 	{
-		std::vector<T*> result;
-		for (Component* component : components)
+		auto iterator = components.find(std::type_index(typeid(T)));
+		if (iterator != components.end())
 		{
-			if (T* derivedComponent = dynamic_cast<T*>(component))
-			{
-				result.push_back(derivedComponent);
-			}
+			return static_cast<std::vector<T*>>(iterator->second);
 		}
-		return result;
+		return nullptr;
 	}
 };
 

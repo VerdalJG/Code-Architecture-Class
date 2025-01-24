@@ -174,6 +174,11 @@ void World::Tick(float deltaTime)
 	}
 }
 
+void World::TickMovementComponents(float deltaTime)
+{
+
+}
+
 void World::ProcessInputs()
 {
 	// Get the input manager instance

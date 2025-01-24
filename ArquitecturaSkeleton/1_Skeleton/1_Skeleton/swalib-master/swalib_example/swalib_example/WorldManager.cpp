@@ -78,9 +78,7 @@ void WorldManager::UnloadCurrentWorld()
 {
 	if (currentWorld)
 	{
-		currentWorld->Terminate();
-		delete(currentWorld);
-		currentWorld = nullptr;
+		currentWorld->PrepareForTermination();
 	}
 }
 

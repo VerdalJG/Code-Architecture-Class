@@ -44,7 +44,14 @@ void GameManager::Tick(float deltaTime)
 	{
 		currentWorld->ProcessInputs();
 		InputManager::GetInstance().ClearKeyPressBuffers();
-		currentWorld->Tick(timer->GetFixedTickRate());
+		if (!currentWorld->ShouldTerminate())
+		{
+			currentWorld->Tick(timer->GetFixedTickRate());
+		}
+		else
+		{
+			currentWorld->Terminate();
+		}
 	}
 }
 
